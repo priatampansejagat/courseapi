@@ -3,21 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // include('dataseed.php');
 
-class Basecontroller extends CI_Controller {
+class RegisterController extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
 
 		$this->load->helper('url');
-
 		// $this->load->library(['MySession','MyFlash']);
 
 		// $this->load->model(['']);
 		
 	}
 
-	public function index() {
+	public function register() {
 
+		// var_dump($_POST);
 		//LOGIN STATUS FUNCTION======================================
 		// if ($this->mysession->loginStatus() == false) {
 		// 	redirect(base_url().'login','refresh');
@@ -36,9 +36,13 @@ class Basecontroller extends CI_Controller {
 		// 	show_404();
 		// }
 		//LOGIN STATUS FUNCTION======================================
+		// $data_dummy = $this->BaseModel->test();
+		// echo($data_dummy['menu']);
 
-		$data=[];
-		$this->load->view('visitor/home',$data);
+		// $data=[];
+		// $this->load->view('registered/basepage',$data);
+		echo(json_encode($_POST));
+		// echo('hello');
 
 	}
 

@@ -51,10 +51,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 
 
-$route['default_controller'] = 'welcome';
+// $route['contohpath'] = 'registered/Basecontroller/index';
+// $route['visitor'] = 'visitor/Basecontroller/index';
 // $route['404_override'] = '';
 // $route['translate_uri_dashes'] = FALSE;
 
+$route['default_controller'] = 'welcome';
 
-$route['contohpath'] = 'registered/Basecontroller/index';
-$route['visitor'] = 'visitor/Basecontroller/index';
+$route['regissubmit'] = 'account/RegisterController/register';
+$route['login'] = 'account/Basecontroller/index';
+$route['forgpass'] = 'account/Basecontroller/index'; // lupa password
+
