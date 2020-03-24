@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// include('dataseed.php');
+// include('fungsi.php');
 
 class RegisterController extends CI_Controller {
 
@@ -11,38 +11,30 @@ class RegisterController extends CI_Controller {
 		$this->load->helper('url');
 		// $this->load->library(['MySession','MyFlash']);
 
-		// $this->load->model(['']);
+		$this->load->model(['AccountModel']);
 		
 	}
 
 	public function register() {
 
-		// var_dump($_POST);
-		//LOGIN STATUS FUNCTION======================================
-		// if ($this->mysession->loginStatus() == false) {
-		// 	redirect(base_url().'login','refresh');
-		// }
+		// echo(json_encode($_POST));
 
-		// if ($this->mysession->loginGetData('privilege')=='1') {
-			
-		// 	// get data user
-		// 	$selfusername 	=	$this->mysession->loginGetData('username');		
-		// 	$data = $this->loadData();
+		$additional['PoS'] = '';
+		$additional['PoA'] = '';
 
+		$dbResult = $this->AccountModel->registrasi($_POST,$additional);
 
-		// 	$this->load->view('admin/homeView',$data);
+		echo(json_encode($dbResult));
+		
 
-		// }else{
-		// 	show_404();
-		// }
-		//LOGIN STATUS FUNCTION======================================
-		// $data_dummy = $this->BaseModel->test();
-		// echo($data_dummy['menu']);
+	}
 
-		// $data=[];
-		// $this->load->view('registered/basepage',$data);
-		echo(json_encode($_POST));
-		// echo('hello');
+	public function login() {
+
+		$dbResult = $this->AccountModel->login($_POST);
+
+		echo(json_encode($dbResult));
+		
 
 	}
 
