@@ -61,29 +61,29 @@ class AccountModel extends CI_Model {
     }
 
 
-    public function login($dtInput){
+    // public function login($dtInput){
 
-        $this->db->select('*')->from('user')->where('username',$dtInput['uname']);
-    	$count=$this->db->count_all_results();
+    //     $this->db->select('*')->from('user')->where('username',$dtInput['uname']);
+    // 	$count=$this->db->count_all_results();
 
-    	if ($count == 0) {
+    // 	if ($count == 0) {
 
-    		$this->db->select('*');
-	        $this->db->from('user');
-	        $this->db->where('username',$dtInput['uname']);
-	        $selectUser = $this->db->get()->result_array();
+    // 		$this->db->select('*');
+	   //      $this->db->from('user');
+	   //      $this->db->where('username',$dtInput['uname']);
+	   //      $selectUser = $this->db->get()->result_array();
 
-    		$if (hash('sha3-512' , $dtInput['password']) == $selectUser['password']) {
-    			return ['true','Login berhasil'];
-    		}else{
-    			return ['false','Username atau password salah'];
-    		}
+    // 		$if (hash('sha3-512' , $dtInput['password']) == $selectUser['password']) {
+    // 			return ['true','Login berhasil'];
+    // 		}else{
+    // 			return ['false','Username atau password salah'];
+    // 		}
 
-    	}else{
-    		return ['false','Username atau password salah'];
-    	}
+    // 	}else{
+    // 		return ['false','Username atau password salah'];
+    // 	}
 
-    }
+    // }
 
 
 }
