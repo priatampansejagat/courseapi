@@ -28,7 +28,7 @@ class AccountModel extends CI_Model {
     			// echo($dtInput['uname']);
     			$savetodb = array(
 		    						'id'					=> $id,
-		    						'role_id'				=> '2',
+		    						'role_id'				=> '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf',
 		    						'username'				=> $dtInput['uname'],
 		    						'fullname'				=> $dtInput['fullname'],
 		    						'password'				=> hash('sha3-512' , $dtInput['password']),
