@@ -74,7 +74,7 @@ class AccountModel extends CI_Model {
 	        $selectUser = $this->db->get()->result_array();
 
     		$if (hash('sha3-512' , $dtInput['password']) == $selectUser['password']) {
-    			return ['true','Login berhasil',$selectUser];
+    			return ['true','Login berhasil'];
     		}else{
     			return ['false','Username atau password salah'];
     		}
