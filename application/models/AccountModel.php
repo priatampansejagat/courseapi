@@ -36,10 +36,10 @@ class AccountModel extends CI_Model {
 		    						'date_of_birth'			=> $dtInput['date_of_birth'],
 		    						'email'					=> $dtInput['email'],
 		    						'institution'			=> $dtInput['institution'],
-		    						'country'				=> $dtInput['country'].'-'.$dtInput['country_input'],
+		    						'country'				=> $dtInput['country'],
 		    						'phone_number'			=> $dtInput['mobile_number'],
 		    						'profesion'				=> 'inputan belum tersedia',
-		    						'major_of_study'		=> $dtInput['field_of_study'].'-'.$dtInput['study_input'],
+		    						'major_of_study'		=> $dtInput['field_of_study'],
 		    						'status'				=> $dtInput['status'] //'status'				=> $dtInput['status'].' - '.$dtInput['status_input']
 		    		);
 
