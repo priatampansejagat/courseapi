@@ -40,4 +40,9 @@ class RegisterController extends CI_Controller
 
 		echo (json_encode($dbResult));
 	}
+
+	public function register_post()
+	{
+		$data = $this->post('uname');
+	}
 }
