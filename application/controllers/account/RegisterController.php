@@ -17,14 +17,14 @@ class RegisterController extends CI_Controller {
 
 	public function register() {
 
-		// echo(json_encode($_POST));
+		echo(json_encode($_POST));
 
-		$additional['PoS'] = '';
-		$additional['PoA'] = '';
+		// $additional['PoS'] = '';
+		// $additional['PoA'] = '';
 
-		$dbResult = $this->AccountModel->registrasi($_POST,$additional);
+		// $dbResult = $this->AccountModel->registrasi($_POST,$additional);
 
-		echo(json_encode($dbResult));
+		// echo(json_encode($dbResult));
 		
 
 	}
