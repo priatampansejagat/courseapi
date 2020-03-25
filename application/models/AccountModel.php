@@ -13,7 +13,7 @@ class AccountModel extends CI_Model {
 
 
     public function registrasi($dtInput,$dtAdditional){
-
+    	$obj=new stdClass;
     	$id=date('Ymdhi-sa');
     	// echo($id);
 
@@ -45,6 +45,12 @@ class AccountModel extends CI_Model {
 
     			// echo(json_encode($savetodb));
 	    		if ($this->db->insert('user',$savetodb)) {
+
+	    			$myObj->name = "John";
+					$myObj->age = 30;
+					$myObj->city = "New York";
+
+					$myJSON = json_encode($myObj);
 
 	    			$obj->status = 200;
 	    			$obj->data = array(
