@@ -46,12 +46,6 @@ class AccountModel extends CI_Model {
     			// echo(json_encode($savetodb));
 	    		if ($this->db->insert('user',$savetodb)) {
 
-	    			$myObj->name = "John";
-					$myObj->age = 30;
-					$myObj->city = "New York";
-
-					$myJSON = json_encode($myObj);
-
 	    			$obj->status = 200;
 	    			$obj->data = array(
 	    					'proc'		=> 'true',
