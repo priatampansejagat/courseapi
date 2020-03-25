@@ -47,7 +47,7 @@ class AccountModel extends CI_Model {
 	    		if ($this->db->insert('user',$savetodb)) {
 	    			$dtReturn = array(
 	    					'status'		=> 200,
-	    					'date'			=> array(
+	    					'data'			=> array(
 	    											'proc'		=> 'true',
 	    											'message'	=>	'Proses berhasil'
 	    										)	
@@ -56,7 +56,7 @@ class AccountModel extends CI_Model {
 	    		}else{
 	    			$dtReturn = array(
 	    					'status'		=> 500,
-	    					'date'			=> array(
+	    					'data'			=> array(
 	    											'proc'		=> 'false',
 	    											'message'	=>	'Gagal menyimpan, silahkan menghubungi admin'
 	    										)	
@@ -67,7 +67,7 @@ class AccountModel extends CI_Model {
     		}else{
     			$dtReturn = array(
 	    					'status'		=> 200,
-	    					'date'			=> array(
+	    					'data'			=> array(
 	    											'proc'		=> 'false',
 	    											'message'	=>	'Username tidak tersedia'
 	    										)	
