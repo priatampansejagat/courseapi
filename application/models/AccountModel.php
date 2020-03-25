@@ -51,6 +51,7 @@ class AccountModel extends CI_Model {
 	    					'proc'		=> 'true',
 	    					'message'	=> 'Proses berhasil'
 	    			);
+	    			$obj->dataInput = $dtInput;
 	    			
 	    			return $obj;
 	    		}else{
@@ -59,6 +60,8 @@ class AccountModel extends CI_Model {
 	    					'proc'		=> 'false',
 	    					'message'	=> 'Gagal menyimpan, silahkan menghubungi admin'
 	    			);
+	    			$obj->dataInput = $dtInput;
+
 	    			
 	    			return $obj;
 	    		}
@@ -70,6 +73,8 @@ class AccountModel extends CI_Model {
 	    					'proc'		=> 'false',
 	    					'message'	=> 'Username tidak tersedia'
 	    			);
+	    			$obj->dataInput = $dtInput;
+	    			
 	    			
 	    			return $obj;
     		}
