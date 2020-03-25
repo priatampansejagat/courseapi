@@ -45,13 +45,34 @@ class AccountModel extends CI_Model {
 
     			// echo(json_encode($savetodb));
 	    		if ($this->db->insert('user',$savetodb)) {
-	    			return ['true','Proses berhasil'];
+	    			$dtReturn = array(
+	    					'status'		=> 200,
+	    					'date'			=> array(
+	    											'proc'		=> 'true',
+	    											'message'	=>	'Proses berhasil'
+	    										)	
+	    			);
+	    			return [$dtReturn];
 	    		}else{
-	    			return ['false','Gagal menyimpan, silahkan menghubungi admin'];
+	    			$dtReturn = array(
+	    					'status'		=> 500,
+	    					'date'			=> array(
+	    											'proc'		=> 'false',
+	    											'message'	=>	'Gagal menyimpan, silahkan menghubungi admin'
+	    										)	
+	    			);
+	    			return [$dtReturn];
 	    		}
 
     		}else{
-    			return ['false','Username tidak tersedia'];
+    			$dtReturn = array(
+	    					'status'		=> 200,
+	    					'date'			=> array(
+	    											'proc'		=> 'false',
+	    											'message'	=>	'Username tidak tersedia'
+	    										)	
+	    			);
+	    			return [$dtReturn];
     		}
 
     	}else{
