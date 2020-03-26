@@ -20,14 +20,15 @@ class RegisterController extends CI_Controller {
 		$jsonPOST = file_get_contents('php://input');
 		$dataReceived = json_decode($jsonPOST,true);
 
-		echo(json_encode($dataReceived));
+		// echo(json_encode($dataReceived));
+		var_dump($dataReceived)
 
-		// $additional['PoS'] = '';
-		// $additional['PoA'] = '';
+		$additional['PoS'] = '';
+		$additional['PoA'] = '';
 
-		// $dbResult = $this->AccountModel->registrasi($_POST,$additional);
+		$dbResult = $this->AccountModel->registrasi($dataReceived,$additional);
 
-		// echo(json_encode($dbResult));
+		echo(json_encode($dbResult));
 		
 
 	}
