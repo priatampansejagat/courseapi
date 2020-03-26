@@ -21,7 +21,7 @@ class RegisterController extends CI_Controller {
 		$dataReceived = json_decode($jsonPOST,true);
 
 		// echo(json_encode($dataReceived));
-		var_dump($dataReceived)
+		var_dump($dataReceived);
 
 		$additional['PoS'] = '';
 		$additional['PoA'] = '';
