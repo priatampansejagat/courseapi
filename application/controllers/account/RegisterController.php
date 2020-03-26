@@ -17,10 +17,9 @@ class RegisterController extends CI_Controller {
 
 	public function register() {
 
-		$jsonPOST = file_get_contents('php://input');
-		$dataReceived = json_decode($jsonPOST,true);
-
-		echo(json_encode($dataReceived));
+		$obj->status = 200;
+		$obj->data = $_POST;
+		echo(json_encode($obj));
 
 		// $additional['PoS'] = '';
 		// $additional['PoA'] = '';
