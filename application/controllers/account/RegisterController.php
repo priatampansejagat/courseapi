@@ -19,18 +19,16 @@ class RegisterController extends CI_Controller
 	public function register()
 	{
 
-		$obj->status = 200;
-		$obj->data = $_POST;
-		echo (json_encode($obj));
+		$jsonPOST = file_get_contents('php://input');
+		$dataReceived = json_decode($jsonPOST, true);
 
-		// $additional['PoS'] = '';
-		// $additional['PoA'] = '';
+		// echo(json_encode($dataReceived));
 
-		// $dbResult = $this->AccountModel->registrasi($_POST,$additional);
+		$additional['PoS'] = '';
+		$additional['PoA'] = '';
+		$dbResult = $this->AccountModel->registrasi($dataReceived, $additional);
 
-		// echo(json_encode($dbResult));
-
-
+		echo (json_encode($dbResult));
 	}
 
 	public function login()
