@@ -59,6 +59,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 
 $route['regissubmit'] = 'account/RegisterController/register';
-$route['login'] = 'account/Basecontroller/index';
-$route['forgpass'] = 'account/Basecontroller/index'; // lupa password
+$route['login'] = 'account/RegisterController/login';
+$route['forgpass'] = 'account/RegisterController/index'; // lupa password
 
