@@ -61,7 +61,6 @@ class RegisterController extends CI_Controller
 				'message'	=> $message,
 				'content'	=> $content
 		);
-		$obj->dataInput = $dtInput;
 		
 		echo (json_encode($obj));
 	}
@@ -74,7 +73,6 @@ class RegisterController extends CI_Controller
 				'message'	=> $message,
 				'content'	=> $content
 		);
-		$obj->dataInput = $dtInput;
 		
 		echo (json_encode($obj));
 	}
