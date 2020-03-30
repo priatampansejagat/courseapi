@@ -13,7 +13,7 @@ class BasicQuery extends CI_Model {
     	
     	 $this->db->select('*')->from($table)->where($conditionArr);
     	 $query = $this->db->get();
-    	 return $query;
+    	 return $query->row_array();
 
     }
 
