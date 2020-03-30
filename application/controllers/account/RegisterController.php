@@ -41,6 +41,7 @@ class RegisterController extends CI_Controller
 		$dbResult = $this->BasicQuery->selectAll('user',$selectCondition);
 
 		if (count($dbResult) != 0 || $dbResult != null ) {
+			echo(json_encode($dbResult));
 			$selectedResult = $dbResult[0];
 			if ($selectedResult['password'] == hash('sha3-512' , $dataReceived['password'])) {
 				$this->unameTrue('Login berhasil', $selectedResult);
