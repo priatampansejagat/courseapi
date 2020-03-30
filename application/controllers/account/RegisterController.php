@@ -39,9 +39,9 @@ class RegisterController extends CI_Controller
 
 		$selectCondition = array('username' => $dataReceived['username']);
 		$dbResult = $this->BasicQuery->selectAll('user',$selectCondition);
-
+		
 		if (count($dbResult) != 0 || $dbResult != null ) {
-			if ($dbResult['password'] == $dataReceived['password']) {
+			if ($dbResult['password'] == hash('sha3-512' , $dataReceived['password'])) {
 				$this->unameTrue('Login berhasil', $dbResult);
 			}else{
 				$this->unameFalse('Username atau password salah');
