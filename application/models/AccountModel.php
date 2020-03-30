@@ -5,11 +5,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class AccountModel extends CI_Model {
 
     public function __construct(){
-            parent::__construct();
+            // parent::__construct();
             $this->load->database();
-            $this->default = $this->load->database('default', TRUE);
+            // $this->default = $this->load->database('default', TRUE);
     }
-
 
 
     public function registrasi($dtInput,$dtAdditional){
@@ -74,7 +73,7 @@ class AccountModel extends CI_Model {
 	    					'message'	=> 'Username tidak tersedia'
 	    			);
 	    			$obj->dataInput = $dtInput;
-	    			
+
 	    			
 	    			return $obj;
     		}

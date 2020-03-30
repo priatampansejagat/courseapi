@@ -13,7 +13,7 @@ class RegisterController extends CI_Controller
 		$this->load->helper('url');
 		// $this->load->library(['MySession','MyFlash']);
 
-		$this->load->model(['AccountModel']);
+		$this->load->model(['AccountModel', 'BasicQuery']);
 	}
 
 	public function register()
@@ -34,13 +34,47 @@ class RegisterController extends CI_Controller
 	public function login()
 	{
 
-		$dbResult = $this->AccountModel->login($_POST);
+		$jsonPOST = file_get_contents('php://input');
+		$dataReceived = json_decode($jsonPOST, true);
 
-		echo (json_encode($dbResult));
+		$selectCondition = array('username' => $dataReceived['username']);
+		$dbResult = $this->BasicQuery->selectAll('user',$selectCondition);
+
+		if (count($dbResult) != 0 || $dbResult != null ) {
+			if ($dbResult['password'] == $dataReceived['password']) {
+				$this->unameTrue('Login berhasil', $dbResult);
+			}else{
+				$this->unameFalse('Username atau password salah');
+			}
+		}else{
+			$this->unameFalse('Username atau password salah');
+		}
+
 	}
 
-	public function register_post()
-	{
-		$data = $this->post('uname');
+	public function unameTrue($message, $content = null){
+		$obj->status = 200;
+		$obj->data = array(
+				'proc'		=> 'true',
+				'message'	=> $message,
+				'content'	=> $content
+		);
+		$obj->dataInput = $dtInput;
+		
+		echo (json_encode($obj));
 	}
+
+	public function unameFalse($message, $content = null){
+		$obj->status = 500;
+		$obj->data = array(
+				'proc'		=> 'false',
+				'message'	=> $message,
+				'content'	=> $content
+		);
+		$obj->dataInput = $dtInput;
+		
+		echo (json_encode($obj));
+	}
+
+	
 }
