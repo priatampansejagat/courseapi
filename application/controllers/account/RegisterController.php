@@ -54,6 +54,7 @@ class RegisterController extends CI_Controller
 	}
 
 	public function unameTrue($message, $content = null){
+		$obj=new stdClass;
 		$obj->status = 200;
 		$obj->data = array(
 				'proc'		=> 'true',
@@ -66,6 +67,7 @@ class RegisterController extends CI_Controller
 	}
 
 	public function unameFalse($message, $content = null){
+		$obj=new stdClass;
 		$obj->status = 500;
 		$obj->data = array(
 				'proc'		=> 'false',
