@@ -43,17 +43,39 @@ class RegisterController extends CI_Controller
 		if (count($dbResult) != 0 || $dbResult != null ) {
 			// echo(json_encode($dbResult));
 			if ($dbResult['password'] == hash('sha3-512' , $dataReceived['password'])) {
-				$this->unameTrue('Login berhasil', $dbResult);
+				
+				// menentukan role
+				if ($dbResult['role_id'] == '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf') {
+					
+					$dbResult['role_id'] = 'murid';
+
+				}else if ($dbResult['role_id'] == 'fdd38312da2d5ddc4b90a49aaa2bcf52d586572db5ce37cb2630799476aa13e4') {
+				
+					$dbResult['role_id'] = 'admin';
+				
+				}else if ($dbResult['role_id'] == 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b') {
+				
+					$dbResult['role_id'] = 'guru';
+				
+				}
+				 unset($dbResult['id']);
+				 unset($dbResult['password']);
+				 unset($dbResult['deleted']);
+				 unset($dbResult['created_at']);
+				 unset($dbResult['updated_at']);
+
+				$this->success('Login berhasil', $dbResult);
+
 			}else{
-				$this->unameFalse('Username atau password salah');
+				$this->failed('Username atau password salah');
 			}
 		}else{
-			$this->unameFalse('Username atau password salah');
+			$this->failed('Username atau password salah');
 		}
 
 	}
 
-	public function unameTrue($message, $content = null){
+	public function success($message, $content = null){
 		$obj=new stdClass;
 		$obj->status = 200;
 		$obj->data = array(
@@ -65,7 +87,7 @@ class RegisterController extends CI_Controller
 		echo (json_encode($obj));
 	}
 
-	public function unameFalse($message, $content = null){
+	public function failed($message, $content = null){
 		$obj=new stdClass;
 		$obj->status = 500;
 		$obj->data = array(
