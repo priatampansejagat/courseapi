@@ -21,8 +21,10 @@ class AccountModel extends CI_Model {
 
     	if ($count == 0) {
 
+    		$dtInput['mantankampret']=$id;
     		$this->db->select('*')->from('user')->where('username',$dtInput['uname']);
     		$countuname=$this->db->count_all_results();
+
     		if ($countuname == 0) {
     			// echo($dtInput['uname']);
     			$savetodb = array(

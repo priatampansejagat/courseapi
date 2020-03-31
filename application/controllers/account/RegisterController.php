@@ -28,7 +28,20 @@ class RegisterController extends CI_Controller
 		$additional['PoA'] = '';
 		$dbResult = $this->AccountModel->registrasi($dataReceived, $additional);
 
-		echo (json_encode($dbResult));
+		// make directory
+		if ($dbResult->data['proc'] == 'true') {
+			if (mkdir('./uploads/' . $dbResult->dataInput['mantankampret'], 0777, TRUE)) {
+				echo (json_encode($dbResult));
+			}else{
+				$dbResult->status = 500;
+    			$dbResult->data = array(
+    					'proc'		=> 'false',
+    					'message'	=> 'Gagal menyimpan'
+    			);
+    			echo (json_encode($dbResult));
+			}
+		}
+		
 	}
 
 	public function login()
