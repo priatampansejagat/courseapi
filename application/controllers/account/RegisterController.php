@@ -30,7 +30,7 @@ class RegisterController extends CI_Controller
 
 		// make directory
 		if ($dbResult->data['proc'] == 'true') {
-			if (mkdir('./uploads/' . $dbResult->dataInput['mantankampret'], 0777, TRUE)) {
+			if (mkdir('./uploads/members/' . $dbResult->dataInput['mantankampret'], 0777, TRUE)) {
 				echo (json_encode($dbResult));
 			}else{
 				$dbResult->status = 500;
