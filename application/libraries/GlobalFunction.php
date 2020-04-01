@@ -3,11 +3,18 @@
 
 class GlobalFungsi{
 
-	public function front_end_url(){
+	public function url(){
 		$http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
 		$finalUrl    = $http . 'research-academy.org'; 
 		return $finalUrl;
 	}
+
+	public function api_url(){
+		// $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
+		$finalUrl    = 'http://temporaryapi.rumahpeneleh.or.id/'; 
+		return $finalUrl;
+	}
+
 	public function saveImg($dir='./', $imgUpload){ //imgUpload adalah name pada form
 		$nameImage=date('Ymdhisa');
 		$target_dir = $dir;

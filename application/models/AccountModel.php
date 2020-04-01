@@ -13,7 +13,7 @@ class AccountModel extends CI_Model {
 
     public function registrasi($dtInput,$dtAdditional){
     	$obj=new stdClass;
-    	$id=date('Ymdhi-sa');
+    	$id=date('Ymdhisa');
     	// echo($id);
 
         $this->db->select('*')->from('user')->where('id',$id);

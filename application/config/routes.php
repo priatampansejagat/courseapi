@@ -60,9 +60,7 @@ $route['default_controller'] = 'welcome';
 
 $route['regissubmit'] = 'account/RegisterController/register';
 $route['login'] = 'account/RegisterController/login';
-$route['s_card'] = 'account/RegisterController/login'; //student card
-$route['ac_member'] = 'account/RegisterController/login'; //academic member
-$route['profile_pic'] = 'account/RegisterController/login';
+$route['regisupdate'] = 'account/RegisterController/update'; 
 
 
 $route['forgpass'] = 'account/RegisterController/index'; // lupa password

@@ -17,6 +17,23 @@ class BasicQuery extends CI_Model {
 
     }
 
+    public function update($table, $condKey, $condVal, $dataUpdate){
+    	$this->db->where($condKey, $condVal);
+		if ($this->db->update($table, $dataUpdate)) {
+			return true;
+		}else{
+			return false;
+		}
+    }
+
+    public function insert($table, $dataArr){
+    	if ($this->db->insert($table, $dataArr)) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+
 }
 
 
