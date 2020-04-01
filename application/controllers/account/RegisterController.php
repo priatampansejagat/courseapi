@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-include('fungsi.php');
+// include('fungsi.php');
 
 class RegisterController extends CI_Controller
 {
@@ -14,7 +14,7 @@ class RegisterController extends CI_Controller
 		$this->load->library(['MySession','GlobalFunction']);
 		$this->load->model(['AccountModel', 'BasicQuery']);
 
-		$this->func= new GlobalFungsi();		
+		// $this->globalfunction= new GlobalFunction();		
 	}
 
 	public function register()
@@ -113,7 +113,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update date_of_birth
@@ -127,7 +127,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update email
@@ -141,7 +141,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update country
@@ -155,7 +155,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update phone_number
@@ -169,7 +169,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update profesion
@@ -183,7 +183,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update institution
@@ -197,7 +197,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update major_of_study
@@ -211,7 +211,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 			// update status
@@ -225,7 +225,7 @@ class RegisterController extends CI_Controller
 
 
 				}
-				
+
 			}
 
 
@@ -238,7 +238,7 @@ class RegisterController extends CI_Controller
 				// update student_card
 				if ($input['student_card'] != '' && $input['student_card'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'student_card');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'student_card');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'student_card' => $public_link_img
@@ -254,7 +254,7 @@ class RegisterController extends CI_Controller
 				// update academic_member
 				if ($input['academic_member'] != '' && $input['academic_member'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'academic_member');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'academic_member');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'academic_member' => $public_link_img
@@ -270,7 +270,7 @@ class RegisterController extends CI_Controller
 				// update proof_of_payment
 				if ($input['proof_of_payment'] != '' && $input['proof_of_payment'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'proof_of_payment');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'proof_of_payment');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'proof_of_payment' => $public_link_img
@@ -286,7 +286,7 @@ class RegisterController extends CI_Controller
 				// update profile_picture
 				if ($input['profile_picture'] != '' && $input['profile_picture'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'profile_picture');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'profile_picture');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'profile_picture' => $public_link_img
@@ -304,7 +304,7 @@ class RegisterController extends CI_Controller
 				// update student_card
 				if ($input['student_card'] != '' && $input['student_card'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'student_card');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'student_card');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'id'			=> date('Ymdhisa'),
@@ -323,7 +323,7 @@ class RegisterController extends CI_Controller
 				// update academic_member
 				if ($input['academic_member'] != '' && $input['academic_member'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'academic_member');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'academic_member');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'id'			=> date('Ymdhisa'),
@@ -342,7 +342,7 @@ class RegisterController extends CI_Controller
 				// update proof_of_payment
 				if ($input['proof_of_payment'] != '' && $input['proof_of_payment'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'proof_of_payment');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'proof_of_payment');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'id'			=> date('Ymdhisa'),
@@ -361,7 +361,7 @@ class RegisterController extends CI_Controller
 				// update profile_picture
 				if ($input['profile_picture'] != '' && $input['profile_picture'] != null) {
 
-					$link_img = $this->func->saveImg('./uploads/members/'.$id.'/' , 'profile_picture');
+					$link_img = $this->globalfunction->saveImg('./uploads/members/'.$id.'/' , 'profile_picture');
 					$public_link_img = $this->globalfunction->api_url() . $link_img;
 					$dataUpdate = array(
 						'id'			=> date('Ymdhisa'),

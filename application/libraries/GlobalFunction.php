@@ -1,7 +1,7 @@
 <?php
 
 
-class GlobalFungsi{
+class GlobalFunction{
 
 	public function url(){
 		$http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
