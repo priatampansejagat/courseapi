@@ -59,28 +59,30 @@ class RegisterController extends CI_Controller
 			if ($dbResult['password'] == hash('sha3-512' , $dataReceived['password'])) {
 				
 				// menentukan role
-				if ($dbResult['role_id'] == '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf') {
+				// if ($dbResult['role_id'] == '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf') {
 					
-					$dbResult['role_id'] = 'murid';
+				// 	$dbResult['role_id'] = 'murid';
 
-				}else if ($dbResult['role_id'] == 'fdd38312da2d5ddc4b90a49aaa2bcf52d586572db5ce37cb2630799476aa13e4') {
+				// }else if ($dbResult['role_id'] == 'fdd38312da2d5ddc4b90a49aaa2bcf52d586572db5ce37cb2630799476aa13e4') {
 				
-					$dbResult['role_id'] = 'admin';
+				// 	$dbResult['role_id'] = 'admin';
 				
-				}else if ($dbResult['role_id'] == 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b') {
+				// }else if ($dbResult['role_id'] == 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b') {
 				
-					$dbResult['role_id'] = 'guru';
+				// 	$dbResult['role_id'] = 'guru';
 				
-				}
+				// }
 
 				$this->mysession->setData('be_id',$dbResult['id']);
 				$this->mysession->setData('be_username',$dbResult['username']);
 
+				$dbResult['j3b5vhj23v5k2b3k52b3k5hb2hv3gh2cjgvhjvhfyuvjbvg2f3u5vjvv'] = $dbResult['role_id'];
 				unset($dbResult['id']);
 				unset($dbResult['password']);
 				unset($dbResult['deleted']);
 				unset($dbResult['created_at']);
 				unset($dbResult['updated_at']);
+				unset($dbResult['role_id']);
 
 				$this->success('Login berhasil', $dbResult);
 
