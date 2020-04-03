@@ -77,7 +77,7 @@ class RegisterController extends CI_Controller
 				$this->mysession->setData('be_username',$dbResult['username']);
 
 				$dbResult['j3b5vhj23v5k2b3k52b3k5hb2hv3gh2cjgvhjvhfyuvjbvg2f3u5vjvv'] = $dbResult['role_id'];
-				unset($dbResult['id']);
+				// unset($dbResult['id']);
 				unset($dbResult['password']);
 				unset($dbResult['deleted']);
 				unset($dbResult['created_at']);
