@@ -54,7 +54,7 @@ class RegisterController extends CI_Controller
 		$selectCondition = array('username' => $dataReceived['username']);
 		$dbResult = $this->BasicQuery->selectAll('user',$selectCondition);
 
-		if (count($dbResult) != 0 && $dbResult != null ) {
+		if ($dbResult != null ) {
 			// echo(json_encode($dbResult));
 			if ($dbResult['password'] == hash('sha3-512' , $dataReceived['password'])) {
 				
@@ -235,7 +235,7 @@ class RegisterController extends CI_Controller
 			// cek kosong atau nggak
 			$selectCondition = array('id_user' => $id);
 			$dbResult = $this->BasicQuery->selectAll('detail_user', $selectCondition);
-			if (count($dbResult) != 0 && $dbResult != null) {
+			if ($dbResult != null) {
 				
 				// update student_card
 				if ($input['student_card'] != '' && $input['student_card'] != null) {
