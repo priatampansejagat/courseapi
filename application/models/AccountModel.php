@@ -55,22 +55,17 @@ class AccountModel extends CI_Model {
     			// echo(json_encode($savetodb));
 	    		if ($this->db->insert('user',$savetodb)) {
 
-	    			$obj->status = 200;
-	    			$obj->data = array(
-	    					'proc'		=> 'true',
-	    					'message'	=> 'Proses berhasil'
-	    			);
-	    			$obj->dataInput = $dtInput;
+                    $obj->status = 200;
+                    $obj->proc = 'true';
+                    $obj->message = 'Proses berhasil';
+	    			$obj->data = $dtInput;
 	    			
 	    			return $obj;
 	    		}else{
 	    			$obj->status = 500;
-	    			$obj->data = array(
-	    					'proc'		=> 'false',
-	    					'message'	=> 'Gagal menyimpan, silahkan menghubungi admin'
-	    			);
-	    			$obj->dataInput = $dtInput;
-
+                    $obj->proc = 'false';
+                    $obj->message = 'Gagal menyimpan, silahkan hubungi admin';
+                    $obj->data = $dtInput;
 	    			
 	    			return $obj;
 	    		}
@@ -78,13 +73,10 @@ class AccountModel extends CI_Model {
     		}else{
 
     				$obj->status = 500;
-	    			$obj->data = array(
-	    					'proc'		=> 'false',
-	    					'message'	=> 'Username tidak tersedia'
-	    			);
-	    			$obj->dataInput = $dtInput;
+                    $obj->proc = 'false';
+                    $obj->message = 'Username telah digunakan';
+                    $obj->data = $dtInput;
 
-	    			
 	    			return $obj;
     		}
 

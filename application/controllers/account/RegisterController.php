@@ -391,23 +391,19 @@ class RegisterController extends CI_Controller
 	public function success($message, $content = null){
 		$obj=new stdClass;
 		$obj->status = 200;
-		$obj->data = array(
-				'proc'		=> 'true',
-				'message'	=> $message,
-				'content'	=> $content
-		);
-		
+		$obj->proc = 'true';
+		$obj->message = $message;
+		$obj->data = $content;
+
 		echo (json_encode($obj));
 	}
 
 	public function failed($message, $content = null){
 		$obj=new stdClass;
 		$obj->status = 500;
-		$obj->data = array(
-				'proc'		=> 'false',
-				'message'	=> $message,
-				'content'	=> $content
-		);
+		$obj->proc = 'false';
+		$obj->message = $message;
+		$obj->data = $content;
 		
 		echo (json_encode($obj));
 	}
