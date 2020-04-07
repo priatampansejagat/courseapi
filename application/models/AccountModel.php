@@ -14,6 +14,14 @@ class AccountModel extends CI_Model {
     public function registrasi($dtInput,$dtAdditional){
     	$obj=new stdClass;
     	$id=date('Ymdhisa');
+    	$role_id = '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf';
+    	if (isset($dtInput['as'])) {
+    		if ($dtInput['as'] == 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b') {
+    			$role_id = 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b';
+    		}else if ($dtInput['as'] == '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf') {
+    			$role_id = '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf';
+    		}
+    	}
     	// echo($id);
 
         $this->db->select('*')->from('user')->where('id',$id);
@@ -29,7 +37,7 @@ class AccountModel extends CI_Model {
     			// echo($dtInput['uname']);
     			$savetodb = array(
 		    						'id'					=> $id,
-		    						'role_id'				=> '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1f636cf',
+		    						'role_id'				=> $role_id,
 		    						'username'				=> $dtInput['uname'],
 		    						'fullname'				=> $dtInput['fullname'],
 		    						'password'				=> hash('sha3-512' , $dtInput['password']),
