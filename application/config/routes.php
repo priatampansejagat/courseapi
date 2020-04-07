@@ -62,6 +62,9 @@ $route['regissubmit'] = 'account/RegisterController/register';
 $route['login'] = 'account/RegisterController/login';
 $route['regisupdate'] = 'account/RegisterController/update'; 
 
-
 $route['forgpass'] = 'account/RegisterController/index'; // lupa password
+
+// datatable
+$route['datatable'] = 'data/DatatableController/get_data'; 
+
 
