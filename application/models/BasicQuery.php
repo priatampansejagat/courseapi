@@ -17,6 +17,14 @@ class BasicQuery extends CI_Model {
 
     }
 
+    public function selectAllResult($table,$conditionArr){
+        
+         $this->db->select('*')->from($table)->where($conditionArr);
+         $query = $this->db->get();
+         return $query->result_array();
+
+    }
+
     public function update($table, $condKey, $condVal, $dataUpdate){
     	$this->db->where($condKey, $condVal);
 		if ($this->db->update($table, $dataUpdate)) {

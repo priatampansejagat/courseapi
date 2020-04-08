@@ -22,10 +22,13 @@ class DatatableController extends CI_Controller
 		$jsonPOST = file_get_contents('php://input');
 		$dataReceived = json_decode($jsonPOST, true);
 
-		$this->success('berhasil', $dataReceived);
-		// if ($dataReceived['request'] == 'mentor') {
-		// 	echo json_encode('berhasil');
-		// }
+		
+		if ($dataReceived['request'] == 'mentor') {
+			$userCond = array('role_id' => AS_MENTOR);
+			$data['mentor'] = $this->BasicQuery->selectAllResult('user',$userCond);
+			
+			$this->success('berhasil', $data['mentor']);
+		}
 		
 	}
 
