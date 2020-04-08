@@ -22,9 +22,12 @@ class RegisterController extends CI_Controller
 		$jsonPOST = file_get_contents('php://input');
 		$dataReceived = json_decode($jsonPOST, true);
 
-		if ($dataReceived['request'] == 'mentor') {
-			echo json_encode('berhasil');
-		}
+		echo json_encode($dataReceived);
+
+
+		// if ($dataReceived['request'] == 'mentor') {
+		// 	echo json_encode('berhasil');
+		// }
 		
 	}
 
