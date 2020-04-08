@@ -64,7 +64,7 @@ class AccountModel extends CI_Model {
 	    		}else{
 	    			$obj->status = 500;
                     $obj->proc = 'false';
-                    $obj->message = 'Gagal menyimpan, silahkan hubungi admin';
+                    $obj->message = 'Gagal menyimpan';
                     $obj->data = $dtInput;
 	    			
 	    			return $obj;

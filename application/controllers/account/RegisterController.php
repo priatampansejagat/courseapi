@@ -30,15 +30,13 @@ class RegisterController extends CI_Controller
 		$dbResult = $this->AccountModel->registrasi($dataReceived, $additional);
 
 		// make directory
-		if ($dbResult->data['proc'] == 'true') {
-			if (mkdir('./uploads/members/' . $dbResult->dataInput['mantankampret'], 0777, TRUE)) {
+		if ($dbResult->proc == 'true') {
+			if (mkdir('./uploads/members/' . $dbResult->data['mantankampret'], 0777, TRUE)) {
 				echo (json_encode($dbResult));
 			}else{
 				$dbResult->status = 500;
-    			$dbResult->data = array(
-    					'proc'		=> 'false',
-    					'message'	=> 'Gagal menyimpan'
-    			);
+    			$dbResult->proc = 'false';
+				$dbResult->message = 'Gagal membuat folder user';
     			echo (json_encode($dbResult));
 			}
 		}
