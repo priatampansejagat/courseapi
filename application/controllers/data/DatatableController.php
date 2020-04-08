@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 // include('fungsi.php');
 
-class RegisterController extends CI_Controller
+class DatatableController extends CI_Controller
 {
 
 	public function __construct()
