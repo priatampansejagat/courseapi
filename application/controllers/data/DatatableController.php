@@ -22,12 +22,16 @@ class DatatableController extends CI_Controller
 		$jsonPOST = file_get_contents('php://input');
 		$dataReceived = json_decode($jsonPOST, true);
 
-		
+
 		if ($dataReceived['request'] == 'mentor') {
 			$userCond = array('role_id' => AS_MENTOR);
-			$data['mentor'] = $this->BasicQuery->selectAllResult('user',$userCond);
-			
-			$this->success('berhasil', $data['mentor']);
+			$dbResult = $this->BasicQuery->selectAllResult('user',$userCond);
+			unset($dbResult['password']);
+			unset($dbResult['deleted']);
+			unset($dbResult['created_at']);
+			unset($dbResult['updated_at']);
+			unset($dbResult['role_id']);
+			$this->success('berhasil', $dbResult);
 		}
 		
 	}
