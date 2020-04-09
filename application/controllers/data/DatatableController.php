@@ -23,15 +23,26 @@ class DatatableController extends CI_Controller
 		$dataReceived = json_decode($jsonPOST, true);
 
 
-		if ($dataReceived['request'] == 'mentor') {
+		if ($dataReceived['ihateapple'] == 'mentor') {
+
 			$userCond = array('role_id' => AS_MENTOR);
 			$dbResult = $this->BasicQuery->selectAllResult('user',$userCond);
-			unset($dbResult['password']);
-			unset($dbResult['deleted']);
-			unset($dbResult['created_at']);
-			unset($dbResult['updated_at']);
-			unset($dbResult['role_id']);
+			
 			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'course') {
+
+			$courseCond = array('status' => 1);
+			$dbResult = $this->BasicQuery->selectAllResult('course',$courseCond);
+
+			foreach ($dbResult as $key => $value) {
+				$userCond = array('id' => $value['mentor_id'],'role_id' => AS_MENTOR);
+				$dbResult[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+			}
+			
+
+			$this->success('berhasil', $dbResult);
+
 		}
 		
 	}
