@@ -26,7 +26,11 @@ class CourseController extends CI_Controller
 		// echo(json_encode($dataReceived));
 		$dataReceived['id'] = 'course_'.date('Ymdhisa');
 		$dataReceived['status'] = 1;
-		$dataReceived['event_id'] = NULL;
+		$dataReceived['event_id'] = 'NULL';
+		$dataReceived['price_promo'] = 'NULL';
+		$dataReceived['redeem_code_required'] = 0;
+		$dataReceived['redeem_code_for'] = 'NULL';
+		$dataReceived['redeem_code'] = 'NULL';
 
 		$dbResult = $this->BasicQuery->insert('course', $dataReceived);
 		if ($dbResult) {
