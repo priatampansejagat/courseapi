@@ -30,9 +30,9 @@ class CourseController extends CI_Controller
 
 		$dbResult = $this->BasicQuery->insert('course', $dataReceived);
 		if ($dbResult) {
-			$this->success("Success");
+			$this->success("Success",$dataReceived);
 		}else{
-			$this->success("Failed");
+			$this->success("Failed",$dataReceived);
 		}
 		
 	}
