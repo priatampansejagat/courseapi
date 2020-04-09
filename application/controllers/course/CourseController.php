@@ -33,10 +33,10 @@ class CourseController extends CI_Controller
 		$dataReceived['redeem_code'] = 'NULL';
 
 		$dbResult = $this->BasicQuery->insert('course', $dataReceived);
-		if ($dbResult) {
+		if ($dbResult == true) {
 			$this->success("Success",$dataReceived);
 		}else{
-			$this->success("Failed",$dataReceived);
+			$this->failed("Failed",$dataReceived);
 		}
 		
 	}
