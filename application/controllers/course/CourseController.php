@@ -17,7 +17,7 @@ class CourseController extends CI_Controller
 		// $this->globalfunction= new GlobalFunction();		
 	}
 
-	public function register()
+	public function create()
 	{
 
 		$jsonPOST = file_get_contents('php://input');
