@@ -34,19 +34,19 @@ class CourseController extends CI_Controller
 
 		$dbResult = $this->BasicQuery->insert('course', $dataReceived);
 		if ($dbResult == true) {
-			$this->success("Success",$dataReceived);
+			$this->success("Success",$dataReceived,'true');
 		}else{
-			$this->failed("Failed",$dataReceived);
+			$this->success("Failed",$dataReceived,'false');
 		}
 		
 	}
 
 	
 
-	public function success($message, $content = null){
+	public function success($message, $content = null, $proc){
 		$obj=new stdClass;
 		$obj->status = 200;
-		$obj->proc = 'true';
+		$obj->proc = $proc;
 		$obj->message = $message;
 		$obj->data = $content;
 
