@@ -59,14 +59,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 
 // account
-$route['regissubmit'] = 'account/RegisterController/register';
-$route['login'] = 'account/RegisterController/login';
-$route['regisupdate'] = 'account/RegisterController/update'; 
+$route['regissubmit'] = 'RegisterController/register';
+$route['login'] = 'RegisterController/login';
+$route['regisupdate'] = 'RegisterController/update'; 
 
-$route['forgpass'] = 'account/RegisterController/index'; // lupa password
+$route['forgpass'] = 'RegisterController/index'; // lupa password
 
 // datatable
-$route['datatable'] = 'data/DatatableController/get_data'; 
+$route['datatable'] = 'DatatableController/get_data'; 
 
 // course
-$route['createcourse'] = 'course/CourseController/create'; 
+$route['createcourse'] = 'CourseController/create'; 
+$route['regiscourse'] = 'CourseController/registration'; 
+
+// payment
+$route['payconfirm'] = 'PaymentController/confirm'; 
+$route['payconfirm_file'] = 'PaymentController/confirm_file'; 
+

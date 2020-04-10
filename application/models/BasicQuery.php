@@ -42,6 +42,14 @@ class BasicQuery extends CI_Model {
     	}
     }
 
+    public function countAllResult($table,$conditionArr){
+        
+         $this->db->select('*')->from($table)->where($conditionArr);
+         $count=$this->db->count_all_results();
+         return $count;
+
+    }
+
 }
 
 

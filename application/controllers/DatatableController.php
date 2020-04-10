@@ -11,8 +11,8 @@ class DatatableController extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('url');
-		$this->load->library(['MySession','GlobalFunction']);
-		$this->load->model(['AccountModel', 'BasicQuery']);
+		// $this->load->library(['MySession']);
+		$this->load->model(['AccountModel']);
 
 		// $this->globalfunction= new GlobalFunction();		
 	}
@@ -40,6 +40,13 @@ class DatatableController extends CI_Controller
 				$dbResult[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 			}
 			
+
+			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'payment_unpaid') {
+
+			$payCond = array('status' => 0, 'id_user', $dataReceived['id_user']);
+			$dbResult = $this->BasicQuery->selectAllResult('payment',$payCond);
 
 			$this->success('berhasil', $dbResult);
 
