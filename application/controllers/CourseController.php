@@ -52,11 +52,11 @@ class CourseController extends CI_Controller
 		$userCond = array('id' => $user_id,'role_id' => AS_STUDENT);
 		$userCount = $this->BasicQuery->countAllResult('user',$userCond);
 		if ($userCount != 0) {
-			$user_data = $this->BasicQuery->selectAllResult('user',$userCond);
+			$user_data = $this->BasicQuery->selectAll('user',$userCond);
 
 			// load data course
 			$courseCond = array('id' => $course_id);
-			$course_data = $this->BasicQuery->selectAllResult('course',$courseCond);
+			$course_data = $this->BasicQuery->selectAll('course',$courseCond);
 
 			// generate payment id
 			$payment_id = 'pay_'.date('Ymdhisa');
