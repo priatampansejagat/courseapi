@@ -11,10 +11,10 @@ class CourseController extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('url');
-		// $this->load->library(['MySession','GlobalFunction']);
+		// $this->load->library(['MySession','globalfunction']);
 		// $this->load->model(['BasicQuery']);
 
-		// $this->globalfunction= new GlobalFunction();		
+		// $this->globalfunction= new globalfunction();		
 	}
 
 	public function create()
@@ -42,7 +42,7 @@ class CourseController extends CI_Controller
 	}
 
 	public function registration(){
-		$dataReceived = $this->GlobalFunction->JSON_POST_asArr();
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data ======================================
 		$user_id = $dataReceived['user_id'];
@@ -107,26 +107,26 @@ class CourseController extends CI_Controller
 												'trans_code'	=> $payment_data['id'],
 												'course'		=> $course_data
 						);
-						$JSON_return = $this->GlobalFunction->return_JSON_success("Success to register",$data_return);
+						$JSON_return = $this->globalfunction->return_JSON_success("Success to register",$data_return);
 						echo $JSON_return;
 
 					}else{
-						$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to register",$payment_data);
+						$JSON_return = $this->globalfunction->return_JSON_failed("Failed to register",$payment_data);
 						echo $JSON_return;
 					}
 
 				}else{
-					$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to register",$payment_data);
+					$JSON_return = $this->globalfunction->return_JSON_failed("Failed to register",$payment_data);
 					echo $JSON_return;
 				}
 
 			}else{
 				$payment_data = $this->BasicQuery->selectAll('payment',$payCond);
-				$JSON_return = $this->GlobalFunction->return_JSON_failed("Menunggu pembayaran",$payment_data);
+				$JSON_return = $this->globalfunction->return_JSON_failed("Menunggu pembayaran",$payment_data);
 				echo $JSON_return;
 			}
 		}else{
-			$JSON_return = $this->GlobalFunction->return_JSON_failed("User tidak terdaftar");
+			$JSON_return = $this->globalfunction->return_JSON_failed("User tidak terdaftar");
 			echo $JSON_return;
 		}
 		
