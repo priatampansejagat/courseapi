@@ -16,7 +16,7 @@ class PaymentController extends CI_Controller
 
 
 	public function confirm(){
-		$dataReceived = $this->GlobalFunction->JSON_POST_asArr();
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data ======================================
 		$payment_id 		= $dataReceived['payment_id'];
@@ -34,11 +34,11 @@ class PaymentController extends CI_Controller
 
 		if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
 
-			$JSON_return = $this->GlobalFunction->return_JSON_success("Success.",$payment_data_update);
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.",$payment_data_update);
 			echo $JSON_return;
 
 		}else{
-			$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to save information", $payment_data);
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
 			echo $JSON_return;
 		}
 
@@ -68,16 +68,16 @@ class PaymentController extends CI_Controller
 
 			if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
 
-				$JSON_return = $this->GlobalFunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
+				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
 				echo $JSON_return;
 				
 			}else{
-				$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to save information", $payment_data);
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
 				echo $JSON_return;
 			}
 
 		}else{
-			$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to upload file",$payment_data);
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file",$payment_data);
 			echo $JSON_return;
 		}
 
@@ -85,7 +85,7 @@ class PaymentController extends CI_Controller
 
 
 	// public function confirm(){
-	// 	$dataReceived = $this->GlobalFunction->JSON_POST_asArr();
+	// 	$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 	// 	// prepare data ======================================
 	// 	$payment_id 		= $dataReceived['payment_id'];
@@ -113,17 +113,17 @@ class PaymentController extends CI_Controller
 
 	// 		if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
 
-	// 			$JSON_return = $this->GlobalFunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
+	// 			$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
 	// 			echo $JSON_return;
 
 	// 		}else{
-	// 			$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to save information", $payment_data);
+	// 			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
 	// 			echo $JSON_return;
 	// 		}
 
 
 	// 	}else{
-	// 		$JSON_return = $this->GlobalFunction->return_JSON_failed("Failed to upload file",$payment_data);
+	// 		$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file",$payment_data);
 	// 		echo $JSON_return;
 	// 	}
 
