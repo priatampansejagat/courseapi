@@ -3,6 +3,12 @@
 
 class GlobalFunction{
 
+	var $CI;
+	public function __construct()
+	{
+		$this->CI =& get_instance();
+	}
+
 	public function url(){
 		$http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
 		$finalUrl    = $http . 'research-academy.org'; 
