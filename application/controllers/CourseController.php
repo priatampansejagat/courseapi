@@ -80,27 +80,27 @@ class CourseController extends CI_Controller
 	} 
 
 	public function video_chapter(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-		    if(!(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!='')){
-		        $_POST['resumableIdentifier']='';
-		    }
-		    $temp_dir = './uploads/courses/temp/'.$_POST['resumableIdentifier'];
+		//     if(!(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!='')){
+		//         $_POST['resumableIdentifier']='';
+		//     }
+		//     $temp_dir = './uploads/courses/temp/'.$_POST['resumableIdentifier'];
 
-		    if(!(isset($_POST['resumableFilename']) && trim($_POST['resumableFilename'])!='')){
-		        $_POST['resumableFilename']='';
-		    }
-		    if(!(isset($_POST['resumableChunkNumber']) && trim($_POST['resumableChunkNumber'])!='')){
-		        $_POST['resumableChunkNumber']='';
-		    }
-		    $chunk_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
+		//     if(!(isset($_POST['resumableFilename']) && trim($_POST['resumableFilename'])!='')){
+		//         $_POST['resumableFilename']='';
+		//     }
+		//     if(!(isset($_POST['resumableChunkNumber']) && trim($_POST['resumableChunkNumber'])!='')){
+		//         $_POST['resumableChunkNumber']='';
+		//     }
+		//     $chunk_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
 		    
-		    if (file_exists($chunk_file)) {
-		         header("HTTP/1.0 200 Ok");
-		       } else {
-		         header("HTTP/1.0 404 Not Found");
-		       }
-		}
+		//     if (file_exists($chunk_file)) {
+		//          header("HTTP/1.0 200 Ok");
+		//        } else {
+		//          header("HTTP/1.0 404 Not Found");
+		//        }
+		// }
 
 		// loop through files and move the chunks to a temporarily created directory
 		if (!empty($_FILES)) foreach ($_FILES as $file) {
