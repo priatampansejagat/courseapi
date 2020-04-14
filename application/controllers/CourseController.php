@@ -80,7 +80,7 @@ class CourseController extends CI_Controller
 	} 
 
 	public function video_chapter(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
 		        $_GET['resumableIdentifier']='';
