@@ -80,12 +80,12 @@ class CourseController extends CI_Controller
 	} 
 
 	public function video_chapter(){
-		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
 		        $_GET['resumableIdentifier']='';
 		    }
-		    $temp_dir = 'temp/'.$_GET['resumableIdentifier'];
+		    $temp_dir = './uploads/courses/temp/'.$_GET['resumableIdentifier'];
 
 		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
 		        $_GET['resumableFilename']='';
@@ -114,7 +114,7 @@ class CourseController extends CI_Controller
 		    // init the destination file (format <filename.ext>.part<#chunk>
 		    // the file is stored in a temporary directory
 		    if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
-		        $temp_dir = 'temp/'.$_POST['resumableIdentifier'];
+		        $temp_dir = './uploads/courses/temp/'.$_POST['resumableIdentifier'];
 		    }
 		    $dest_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
 
