@@ -80,20 +80,20 @@ class CourseController extends CI_Controller
 	} 
 
 	public function video_chapter(){
-		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
-		        $_GET['resumableIdentifier']='';
+		    if(!(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!='')){
+		        $_POST['resumableIdentifier']='';
 		    }
-		    $temp_dir = './uploads/courses/temp/'.$_GET['resumableIdentifier'];
+		    $temp_dir = './uploads/courses/temp/'.$_POST['resumableIdentifier'];
 
-		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
-		        $_GET['resumableFilename']='';
+		    if(!(isset($_POST['resumableFilename']) && trim($_POST['resumableFilename'])!='')){
+		        $_POST['resumableFilename']='';
 		    }
-		    if(!(isset($_GET['resumableChunkNumber']) && trim($_GET['resumableChunkNumber'])!='')){
-		        $_GET['resumableChunkNumber']='';
+		    if(!(isset($_POST['resumableChunkNumber']) && trim($_POST['resumableChunkNumber'])!='')){
+		        $_POST['resumableChunkNumber']='';
 		    }
-		    $chunk_file = $temp_dir.'/'.$_GET['resumableFilename'].'.part'.$_GET['resumableChunkNumber'];
+		    $chunk_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
 		    
 		    if (file_exists($chunk_file)) {
 		         header("HTTP/1.0 200 Ok");
