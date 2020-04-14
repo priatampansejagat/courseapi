@@ -106,16 +106,16 @@ class CourseController extends CI_Controller
 		if (!empty($_FILES)) foreach ($_FILES as $file) {
 
 		    // check the error status
-		    if ($file['error'] != 0) {
+		    // if ($file['error'] != 0) {
 		        // $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
-		        continue;
-		    }
+		        // continue;
+		    // }
 
 		    // init the destination file (format <filename.ext>.part<#chunk>
 		    // the file is stored in a temporary directory
-		    if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
+		    // if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
 		        $temp_dir = './uploads/courses/temp/'.$_POST['resumableIdentifier'];
-		    }
+		    // }
 		    $dest_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
 
 		    // create the temporary directory
