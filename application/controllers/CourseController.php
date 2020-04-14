@@ -43,35 +43,39 @@ class CourseController extends CI_Controller
 
 	public function create_chapter(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
-		$JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);
-		echo $JSON_return;
+		// $JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);
+		// echo $JSON_return;
+
 		// cek sequence
-		// $cekCond = array('course_id' => $dataReceived['course_id'], 'sequence' => $dataReceived['sequence']);
-		// $count_seq = $this->BasicQuery->countAllResult('course_chapter',$cekCond);
-		// if ($count_seq == 0) {
+		$cekCond = array(
+							'course_id' => $dataReceived['course_id'], 
+							'sequence' => $dataReceived['sequence']
+						);
+		$count_seq = $this->BasicQuery->countAllResult('course_chapter',$cekCond);
+		if ($count_seq == 0) {
 
-		// 	$data_insert = array(
-		// 							'id' 			=> 'chapter_'.date('Ymdhisa'),
-		// 							'course_id'		=> $dataReceived['course_id'],
-		// 							'sequence'		=> $dataReceived['sequence'],
-		// 							'tittle'		=> $dataReceived['title'],
-		// 							'description'	=> $dataReceived['description'],
-		// 							'video_link'	=> '#'
-		// 		);
+			$data_insert = array(
+									'id' 			=> 'chapter_'.date('Ymdhisa'),
+									'course_id'		=> $dataReceived['course_id'],
+									'sequence'		=> $dataReceived['sequence'],
+									'tittle'		=> $dataReceived['title'],
+									'description'	=> $dataReceived['description'],
+									'video_link'	=> '#'
+				);
 
-		// 	$dbResult = $this->BasicQuery->insert('course_chapter', $data_insert);
-		// 	if ($dbResult == true) {
-		// 		$JSON_return = $this->globalfunction->return_JSON_success("Success.",$data_insert);
-		// 		echo $JSON_return;
-		// 	}else{
-		// 		$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
-		// 		echo $JSON_return;
-		// 	}
+			$dbResult = $this->BasicQuery->insert('course_chapter', $data_insert);
+			if ($dbResult == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success.",$data_insert);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
+				echo $JSON_return;
+			}
 
-		// }else{
-		// 	$JSON_return = $this->globalfunction->return_JSON_failed("Duplicate Sequence", $dataReceived);
-		// 	echo $JSON_return;
-		// }
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Duplicate Sequence", $dataReceived);
+			echo $JSON_return;
+		}
 
 	} 
 
