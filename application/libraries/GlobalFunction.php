@@ -126,11 +126,11 @@ class GlobalFunction{
 	        if (($fp = fopen($temp_dir.'/'.$fileName, 'w')) !== false) {
 	            for ($i=1; $i<=$total_files; $i++) {
 	                fwrite($fp, file_get_contents($temp_dir.'/'.$fileName.'.part'.$i));
-	                _log('writing chunk '.$i);
+	                // _log('writing chunk '.$i);
 	            }
 	            fclose($fp);
 	        } else {
-	            _log('cannot create the destination file');
+	            // _log('cannot create the destination file');
 	            return false;
 	        }
 
