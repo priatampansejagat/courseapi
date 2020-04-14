@@ -41,6 +41,93 @@ class CourseController extends CI_Controller
 		
 	}
 
+	public function create_chapter(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// cek sequence
+		$cekCond = array('course_id' => $dataReceived['course_id'], 'sequence' => $dataReceived['sequence']);
+		$count_seq = $this->BasicQuery->countAllResult('course_chapter',$cekCond);
+		if ($count_seq == 0) {
+
+			$data_insert = array(
+									'id' 			=> 'chapter_'.date('Ymdhisa'),
+									'course_id'		=> $dataReceived['course_id'],
+									'sequence'		=> $dataReceived['sequence'],
+									'tittle'		=> $dataReceived['title'],
+									'description'	=> $dataReceived['description'],
+									'video_link'	=> '#'
+				);
+
+			$dbResult = $this->BasicQuery->insert('course_chapter', $data_insert);
+			if ($dbResult == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success.",$data_insert);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
+				echo $JSON_return;
+			}
+
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Duplicate Sequence", $dataReceived);
+			echo $JSON_return;
+		}
+
+	} 
+
+	public function video_chapter(){
+		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
+		        $_GET['resumableIdentifier']='';
+		    }
+		    $temp_dir = 'temp/'.$_GET['resumableIdentifier'];
+
+		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
+		        $_GET['resumableFilename']='';
+		    }
+		    if(!(isset($_GET['resumableChunkNumber']) && trim($_GET['resumableChunkNumber'])!='')){
+		        $_GET['resumableChunkNumber']='';
+		    }
+		    $chunk_file = $temp_dir.'/'.$_GET['resumableFilename'].'.part'.$_GET['resumableChunkNumber'];
+		    
+		    if (file_exists($chunk_file)) {
+		         header("HTTP/1.0 200 Ok");
+		       } else {
+		         header("HTTP/1.0 404 Not Found");
+		       }
+		}
+
+		// loop through files and move the chunks to a temporarily created directory
+		if (!empty($_FILES)) foreach ($_FILES as $file) {
+
+		    // check the error status
+		    if ($file['error'] != 0) {
+		        _log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
+		        continue;
+		    }
+
+		    // init the destination file (format <filename.ext>.part<#chunk>
+		    // the file is stored in a temporary directory
+		    if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
+		        $temp_dir = 'temp/'.$_POST['resumableIdentifier'];
+		    }
+		    $dest_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
+
+		    // create the temporary directory
+		    if (!is_dir($temp_dir)) {
+		        mkdir($temp_dir, 0777, true);
+		    }
+
+		    // move the temporary file
+		    if (!move_uploaded_file($file['tmp_name'], $dest_file)) {
+		        _log('Error saving (move_uploaded_file) chunk '.$_POST['resumableChunkNumber'].' for file '.$_POST['resumableFilename']);
+		    } else {
+		        // check if all the parts present, and create the final destination file
+		        createFileFromChunks($temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
+		    }
+		}
+	}
+
 	public function registration(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 

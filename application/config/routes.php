@@ -71,6 +71,8 @@ $route['datatable'] = 'DatatableController/get_data';
 // course
 $route['createcourse'] = 'CourseController/create'; 
 $route['regiscourse'] = 'CourseController/registration'; 
+$route['createchapter'] = 'CourseController/create_chapter'; 
+$route['createchapter_vid'] = 'CourseController/video_chapter'; 
 
 // payment
 $route['payconfirm'] = 'PaymentController/confirm'; 
