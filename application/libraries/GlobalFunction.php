@@ -136,11 +136,11 @@ class GlobalFunction{
 
 	        // rename the temporary directory (to avoid access from other 
 	        // concurrent chunks uploads) and than delete it
-	        if (rename($temp_dir, $temp_dir.'_UNUSED')) {
-	            rrmdir($temp_dir.'_UNUSED');
-	        } else {
-	            rrmdir($temp_dir);
-	        }
+	        // if (rename($temp_dir, $temp_dir.'_UNUSED')) {
+	        //     rrmdir($temp_dir.'_UNUSED');
+	        // } else {
+	        //     rrmdir($temp_dir);
+	        // }
 	    }
 
 	}
