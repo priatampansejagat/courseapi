@@ -107,7 +107,7 @@ class CourseController extends CI_Controller
 
 		    // check the error status
 		    if ($file['error'] != 0) {
-		        _log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
+		        $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
 		        continue;
 		    }
 
@@ -125,7 +125,7 @@ class CourseController extends CI_Controller
 
 		    // move the temporary file
 		    if (!move_uploaded_file($file['tmp_name'], $dest_file)) {
-		        _log('Error saving (move_uploaded_file) chunk '.$_POST['resumableChunkNumber'].' for file '.$_POST['resumableFilename']);
+		        $this->globalfunction->_log('Error saving (move_uploaded_file) chunk '.$_POST['resumableChunkNumber'].' for file '.$_POST['resumableFilename']);
 		    } else {
 		        // check if all the parts present, and create the final destination file
 		        $this->globalfunction->createFileFromChunks($temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
