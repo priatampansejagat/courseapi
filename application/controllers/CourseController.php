@@ -86,27 +86,27 @@ class CourseController extends CI_Controller
 		$this->globalfunction->header_CORS();
 
 		// mkdir('./uploads/courses/temp/', 0777, true);
-		// if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-		//     if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
-		//         $_GET['resumableIdentifier']='';
-		//     }
-		//     $temp_dir = './uploads/courses/temp/'.$_GET['resumableIdentifier'];
+		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
+		        $_GET['resumableIdentifier']='';
+		    }
+		    $temp_dir = './uploads/courses/temp/'.$_GET['resumableIdentifier'];
 
-		//     if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
-		//         $_GET['resumableFilename']='';
-		//     }
-		//     if(!(isset($_GET['resumableChunkNumber']) && trim($_GET['resumableChunkNumber'])!='')){
-		//         $_GET['resumableChunkNumber']='';
-		//     }
-		//     $chunk_file = $temp_dir.'/'.$_GET['resumableFilename'].'.part'.$_GET['resumableChunkNumber'];
+		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
+		        $_GET['resumableFilename']='';
+		    }
+		    if(!(isset($_GET['resumableChunkNumber']) && trim($_GET['resumableChunkNumber'])!='')){
+		        $_GET['resumableChunkNumber']='';
+		    }
+		    $chunk_file = $temp_dir.'/'.$_GET['resumableFilename'].'.part'.$_GET['resumableChunkNumber'];
 		    
-		//     if (file_exists($chunk_file)) {
-		//          header("HTTP/1.0 200 Ok");
-		//        } else {
-		//          header("HTTP/1.0 404 Not Found");
-		//        }
-		// }
+		    if (file_exists($chunk_file)) {
+		         header("HTTP/1.0 200 Ok");
+		       } else {
+		         header("HTTP/1.0 404 Not Found");
+		       }
+		}
 
 		// loop through files and move the chunks to a temporarily created directory
 		if (!empty($_FILES)){
