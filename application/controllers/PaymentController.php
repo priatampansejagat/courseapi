@@ -69,15 +69,18 @@ class PaymentController extends CI_Controller
 			// $public_link_img = BASE_URL_API . $upload[1];
 
 			$updatePayment = $this->BasicQuery->update(
-				'course_chapter',
-				'id',
-				$_POST['chapter_id'],
-				array(
-					'video_link' => BASE_URL_API . $vid_link
-				)
+														'payment',
+														'id',
+														$payment_id,
+														array(
+															'status' => 1,
+															'proof_of_payment' => BASE_URL_API.$upload
+														)
 			);
 
 			if ($updatePayment == true) {
+
+				$payment_data = $this->BasicQuery->selectAll('payment', $payCond);
 
 				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.", $payment_data);
 				echo $JSON_return;
