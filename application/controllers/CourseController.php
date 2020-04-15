@@ -83,7 +83,7 @@ class CourseController extends CI_Controller
 		
 		$this->globalfunction->header_CORS();
 
-		// mkdir('./uploads/courses/temp/', 0777, true);
+		mkdir('./uploads/courses/temp/', 0777, true);
 		// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		//     if(!(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!='')){
