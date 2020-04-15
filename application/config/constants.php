@@ -95,3 +95,6 @@ define('AS_STUDENT', '83bbe0cd25d8cc4b8c076497a57d4b6452e84946b9042dc7983a7806a1
 
 define('DIR_COURSE', './uploads/courses/');
 define('DIR_COURSE_PUBLIC', '/uploads/courses/');
+
+define('DIR_MEMBER', './uploads/members/');
+define('DIR_MEMBER_PUBLIC', '/uploads/members/');
