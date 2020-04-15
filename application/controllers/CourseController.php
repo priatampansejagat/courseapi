@@ -80,10 +80,10 @@ class CourseController extends CI_Controller
 	} 
 
 	public function video_chapter(){
-		header("Access-Control-Allow-Headers: Authorization, Content-Type");
-		header("Access-Control-Allow-Origin: *");
-		header('content-type: application/json; charset=utf-8');
-		// $this->globalfunction->header_CORS();
+		// header("Access-Control-Allow-Headers: Authorization, Content-Type");
+		// header("Access-Control-Allow-Origin: *");
+		// header('content-type: application/json; charset=utf-8');
+		$this->globalfunction->header_CORS();
 
 		mkdir('./uploads/courses/temp/', 0777, true);
 		// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
