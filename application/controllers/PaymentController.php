@@ -80,7 +80,7 @@ class PaymentController extends CI_Controller
 
 			if ($updatePayment == true) {
 
-				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
+				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data);
 				echo $JSON_return;
 				
 			}else{
