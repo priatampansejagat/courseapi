@@ -84,7 +84,16 @@ class CourseController extends CI_Controller
 		$this->globalfunction->header_CORS();
 
 		$dir = DIR_COURSE . $_POST['course_id'] . '/';
-		$this->globalfunction->resumable_upload($dir);
+		$vid_link = $this->globalfunction->resumable_upload($dir);
+
+		$this->BasicQuery->update(
+									'course_chapter',
+									'id', 
+									$_POST['chapter_id'],
+									array(
+											'video_link' => $vid_link
+									)
+								);
 	}
 
 	public function registration(){
