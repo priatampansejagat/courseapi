@@ -15,6 +15,12 @@ class GlobalFunction{
 		return $finalUrl;
 	}
 
+	public function header_CORS(){
+		header("Access-Control-Allow-Headers: Authorization, Content-Type");
+		header("Access-Control-Allow-Origin: *");
+		header('content-type: application/json; charset=utf-8');
+	}
+
 	public function JSON_POST_asArr(){
 		$jsonPOST = file_get_contents('php://input');
 		return json_decode($jsonPOST, true);
