@@ -108,7 +108,7 @@ class CourseController extends CI_Controller
 				
 			    // check the error status
 			    if ($file['error'] != 0) {
-			        $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
+			        // $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
 			        continue;
 			    }
 
