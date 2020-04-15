@@ -95,7 +95,7 @@ class GlobalFunction{
 	    echo $log_str;
 
 	    // log to file
-	    if (($fp = fopen('upload_log.txt', 'a+')) !== false) {
+	    if (($fp = fopen('./upload_log.txt', 'a+')) !== false) {
 	        fputs($fp, $log_str);
 	        fclose($fp);
 	    }
