@@ -85,7 +85,7 @@ class CourseController extends CI_Controller
 
 		$dir = DIR_COURSE . $_POST['course_id'] . '/';
 		$public_dir = DIR_COURSE_PUBLIC . $_POST['course_id'] . '/';
-		
+
 		$vid_link = $this->globalfunction->resumable_upload($dir, $public_dir);
 
 		$this->BasicQuery->update(
@@ -93,7 +93,7 @@ class CourseController extends CI_Controller
 									'id', 
 									$_POST['chapter_id'],
 									array(
-											'video_link' => $vid_link
+											'video_link' => BASE_URL_API.$vid_link
 									)
 								);
 	}
