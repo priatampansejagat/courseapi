@@ -44,6 +44,8 @@ class PaymentController extends CI_Controller
 
 	public function confirm_file()
 	{
+		// header
+		$this->globalfunction->header_CORS();
 
 		// prepare data ======================================
 		$payment_id 		= $_POST['payment_id'];
@@ -53,21 +55,31 @@ class PaymentController extends CI_Controller
 		$payment_data = $this->BasicQuery->selectAll('payment', $payCond);
 
 		// upload bukti transaksi
-		$upload = $this->globalfunction->saveImg('./uploads/members/' . $payment_data['id_user'] . '/', 'payment_proof');
-		if ($upload[0] == true) {
+		$dir = DIR_MEMBER . $payment_data['id_user'] . '/';
+		$public_dir = DIR_MEMBER_PUBLIC . $payment_data['id_user'] . '/';
 
-			$public_link_img = BASE_URL_API . $upload[1];
+		$upload = $this->globalfunction->resumable_upload($dir, $public_dir);
 
-			// update payment
-			$payment_data_update = array(
-				'proof_of_payment'	=> $public_link_img,
-				'status'			=> 1
 
+		// $upload = $this->globalfunction->saveImg('./uploads/members/'.$payment_data['id_user'].'/' , 'payment_proof');
+
+
+		if ($upload != 'false') {
+
+			// $public_link_img = BASE_URL_API . $upload[1];
+
+			$updatePayment = $this->BasicQuery->update(
+				'course_chapter',
+				'id',
+				$_POST['chapter_id'],
+				array(
+					'video_link' => BASE_URL_API . $vid_link
+				)
 			);
 
-			if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
+			if ($updatePayment == true) {
 
-				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.", $payment_data_update);
+				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.", $payment_data);
 				echo $JSON_return;
 			} else {
 				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
