@@ -145,18 +145,17 @@ class GlobalFunction{
 
 	        // rename the temporary directory (to avoid access from other 
 	        // concurrent chunks uploads) and than delete it
-	        if (rename($temp_dir, $temp_dir.'_UNUSED')) {
-	            $this->rrmdir($temp_dir.'_UNUSED');
-	        } else {
-	            $this->rrmdir($temp_dir);
-	        }
+	        // if (rename($temp_dir, $temp_dir.'_UNUSED')) {
+	        //     $this->rrmdir($temp_dir.'_UNUSED');
+	        // } else {
+	        //     $this->rrmdir($temp_dir);
+	        // }
 	    }
 
 	}
 
 	public function resumable_upload($dir){
 		// mkdir('./uploads/courses/temp/', 0777, true);
-		$this->_log('post :'.$_POST['tes']);
 		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
@@ -184,10 +183,10 @@ class GlobalFunction{
 			foreach ($_FILES as $file) {
 				
 			    // // check the error status
-			    // if ($file['error'] != 0) {
+			    if ($file['error'] != 0) {
 			    //     // $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
-			    //     continue;
-			    // }
+			        continue;
+			    }
 
 			    // init the destination file (format <filename.ext>.part<#chunk>
 			    // the file is stored in a temporary directory
