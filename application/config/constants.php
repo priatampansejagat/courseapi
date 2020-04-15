@@ -85,7 +85,8 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-define('BASE_URL_API', 'http://temporaryapi.rumahpeneleh.or.id/');
+// define('BASE_URL_API', 'http://temporaryapi.rumahpeneleh.or.id/');
+define('BASE_URL_API', 'http://api.research-academy.org/');
 
 
 define('AS_MENTOR', 'd730bb9677663feb30d4c4e9d273c7c9c713e4d5b8eebf9218a2f587dd7c5d9b');
