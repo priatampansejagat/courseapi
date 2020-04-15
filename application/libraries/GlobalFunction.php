@@ -118,7 +118,7 @@ class GlobalFunction{
 	    }
 	}
 
-	public function createFileFromChunks($temp_dir, $fileName, $chunkSize, $totalSize,$total_files) {
+	public function createFileFromChunks($dir, $temp_dir, $fileName, $chunkSize, $totalSize,$total_files) {
 
 	    // count all the parts of this file
 	    $total_files_on_server_size = 0;
@@ -132,7 +132,7 @@ class GlobalFunction{
 	    // If the Size of all the chunks on the server is equal to the size of the file uploaded.
 	    if ($total_files_on_server_size >= $totalSize) {
 	    // create the final destination file 
-	        if (($fp = fopen($temp_dir.'/'.$fileName, 'w')) !== false) {
+	        if (($fp = fopen($dir.'/'.$fileName, 'w')) !== false) {
 	            for ($i=1; $i<=$total_files; $i++) {
 	                fwrite($fp, file_get_contents($temp_dir.'/'.$fileName.'.part'.$i));
 	                // _log('writing chunk '.$i);
@@ -145,12 +145,14 @@ class GlobalFunction{
 
 	        // rename the temporary directory (to avoid access from other 
 	        // concurrent chunks uploads) and than delete it
-	        // if (rename($temp_dir, $temp_dir.'_UNUSED')) {
-	        //     $this->rrmdir($temp_dir.'_UNUSED');
-	        // } else {
-	        //     $this->rrmdir($temp_dir);
-	        // }
+	        if (rename($temp_dir, $temp_dir.'_UNUSED')) {
+	            $this->rrmdir($temp_dir.'_UNUSED');
+	        } else {
+	            $this->rrmdir($temp_dir);
+	        }
 	    }
+
+	    return $dir.'/'.$fileName;
 
 	}
 
@@ -161,7 +163,7 @@ class GlobalFunction{
 		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
 		        $_GET['resumableIdentifier']='';
 		    }
-		    $temp_dir = $dir.$_GET['resumableIdentifier'];
+		    $temp_dir = $dir.'temp/'.$_GET['resumableIdentifier'];
 
 		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
 		        $_GET['resumableFilename']='';
@@ -191,7 +193,7 @@ class GlobalFunction{
 			    // init the destination file (format <filename.ext>.part<#chunk>
 			    // the file is stored in a temporary directory
 			    if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
-			        $temp_dir = $dir.$_POST['resumableIdentifier'];
+			        $temp_dir = $dir.'temp/'.$_POST['resumableIdentifier'];
 			    }
 			    $dest_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
 
@@ -203,9 +205,10 @@ class GlobalFunction{
 			    // move the temporary file
 			    if (!move_uploaded_file($file['tmp_name'], $dest_file)) {
 			        // $this->globalfunction->_log('Error saving (move_uploaded_file) chunk '.$_POST['resumableChunkNumber'].' for file '.$_POST['resumableFilename']);
+			        return 'false';
 			    } else {
 			        // check if all the parts present, and create the final destination file
-			        $this->createFileFromChunks($temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
+			        return $this->createFileFromChunks($dir, $temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
 			    }
 			}    
 		}
