@@ -88,7 +88,7 @@ class GlobalFunction{
 		}
 	}
 
-	function _log($str) {
+	public function _log($str) {
 
 	    // log to the output
 	    $log_str = date('d.m.Y').": {$str}\r\n";
@@ -101,7 +101,7 @@ class GlobalFunction{
 	    }
 	}
 
-	function rrmdir($dir) {
+	public function rrmdir($dir) {
 	    if (is_dir($dir)) {
 	        $objects = scandir($dir);
 	        foreach ($objects as $object) {
@@ -118,7 +118,7 @@ class GlobalFunction{
 	    }
 	}
 
-	function createFileFromChunks($temp_dir, $fileName, $chunkSize, $totalSize,$total_files) {
+	public function createFileFromChunks($temp_dir, $fileName, $chunkSize, $totalSize,$total_files) {
 
 	    // count all the parts of this file
 	    $total_files_on_server_size = 0;
@@ -144,7 +144,7 @@ class GlobalFunction{
 	        }
 
 	        // rename the temporary directory (to avoid access from other 
-	        concurrent chunks uploads) and than delete it
+	        // concurrent chunks uploads) and than delete it
 	        if (rename($temp_dir, $temp_dir.'_UNUSED')) {
 	            $this->rrmdir($temp_dir.'_UNUSED');
 	        } else {
@@ -154,7 +154,7 @@ class GlobalFunction{
 
 	}
 
-	function resumable_upload($dir){
+	public function resumable_upload($dir){
 		// mkdir('./uploads/courses/temp/', 0777, true);
 		$this->_log('post :'.$_POST['tes']);
 		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
