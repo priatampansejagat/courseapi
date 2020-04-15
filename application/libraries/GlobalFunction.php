@@ -46,6 +46,9 @@ class GlobalFunction{
 		return (json_encode($obj));
 	}
 
+
+	// UPLOADS HANDLER ======================================================
+
 	public function saveImg($dir='./', $imgUpload){ //imgUpload adalah name pada form
 		$nameImage=date('Ymdhisa');
 		$target_dir = $dir;
@@ -141,14 +144,72 @@ class GlobalFunction{
 	        }
 
 	        // rename the temporary directory (to avoid access from other 
-	        // concurrent chunks uploads) and than delete it
-	        // if (rename($temp_dir, $temp_dir.'_UNUSED')) {
-	        //     rrmdir($temp_dir.'_UNUSED');
-	        // } else {
-	        //     rrmdir($temp_dir);
-	        // }
+	        concurrent chunks uploads) and than delete it
+	        if (rename($temp_dir, $temp_dir.'_UNUSED')) {
+	            $this->rrmdir($temp_dir.'_UNUSED');
+	        } else {
+	            $this->rrmdir($temp_dir);
+	        }
 	    }
 
+	}
+
+	function resumable_upload($dir){
+		// mkdir('./uploads/courses/temp/', 0777, true);
+		$this->_log('post :'.$_POST['tes']);
+		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+		    if(!(isset($_GET['resumableIdentifier']) && trim($_GET['resumableIdentifier'])!='')){
+		        $_GET['resumableIdentifier']='';
+		    }
+		    $temp_dir = $dir.$_GET['resumableIdentifier'];
+
+		    if(!(isset($_GET['resumableFilename']) && trim($_GET['resumableFilename'])!='')){
+		        $_GET['resumableFilename']='';
+		    }
+		    if(!(isset($_GET['resumableChunkNumber']) && trim($_GET['resumableChunkNumber'])!='')){
+		        $_GET['resumableChunkNumber']='';
+		    }
+		    $chunk_file = $temp_dir.'/'.$_GET['resumableFilename'].'.part'.$_GET['resumableChunkNumber'];
+		    
+		    if (file_exists($chunk_file)) {
+		         header("HTTP/1.0 200 Ok");
+		       } else {
+		         header("HTTP/1.0 404 Not Found");
+		       }
+		}
+
+		// loop through files and move the chunks to a temporarily created directory
+		if (!empty($_FILES)){
+			foreach ($_FILES as $file) {
+				
+			    // // check the error status
+			    // if ($file['error'] != 0) {
+			    //     // $this->globalfunction->_log('error '.$file['error'].' in file '.$_POST['resumableFilename']);
+			    //     continue;
+			    // }
+
+			    // init the destination file (format <filename.ext>.part<#chunk>
+			    // the file is stored in a temporary directory
+			    if(isset($_POST['resumableIdentifier']) && trim($_POST['resumableIdentifier'])!=''){
+			        $temp_dir = $dir.$_POST['resumableIdentifier'];
+			    }
+			    $dest_file = $temp_dir.'/'.$_POST['resumableFilename'].'.part'.$_POST['resumableChunkNumber'];
+
+			    // create the temporary directory
+			    if (!is_dir($temp_dir)) {
+			        mkdir($temp_dir, 0777, true);
+			    }
+
+			    // move the temporary file
+			    if (!move_uploaded_file($file['tmp_name'], $dest_file)) {
+			        // $this->globalfunction->_log('Error saving (move_uploaded_file) chunk '.$_POST['resumableChunkNumber'].' for file '.$_POST['resumableFilename']);
+			    } else {
+			        // check if all the parts present, and create the final destination file
+			        $this->createFileFromChunks($temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
+			    }
+			}    
+		}
 	}
 
 }
