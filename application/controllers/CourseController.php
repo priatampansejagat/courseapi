@@ -84,7 +84,9 @@ class CourseController extends CI_Controller
 		$this->globalfunction->header_CORS();
 
 		$dir = DIR_COURSE . $_POST['course_id'] . '/';
-		$vid_link = $this->globalfunction->resumable_upload($dir);
+		$public_dir = DIR_COURSE_PUBLIC . $_POST['course_id'] . '/';
+		
+		$vid_link = $this->globalfunction->resumable_upload($dir, $public_dir);
 
 		$this->BasicQuery->update(
 									'course_chapter',

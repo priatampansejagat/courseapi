@@ -150,13 +150,13 @@ class GlobalFunction{
 	        } else {
 	            $this->rrmdir($temp_dir);
 	        }
-	    }
 
-	    return $dir.'/'.$fileName;
+	        return $fileName;
+	    }
 
 	}
 
-	public function resumable_upload($dir){
+	public function resumable_upload($dir,$public_dir){
 		// mkdir('./uploads/courses/temp/', 0777, true);
 		if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -208,7 +208,9 @@ class GlobalFunction{
 			        return 'false';
 			    } else {
 			        // check if all the parts present, and create the final destination file
-			        return $this->createFileFromChunks($dir, $temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
+			        $finalName = $this->createFileFromChunks($dir, $temp_dir, $_POST['resumableFilename'],$_POST['resumableChunkSize'], $_POST['resumableTotalSize'],$_POST['resumableTotalChunks']);
+
+			        return $public_dir.$finalName;
 			    }
 			}    
 		}
