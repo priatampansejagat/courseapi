@@ -11,11 +11,11 @@ class PaymentController extends CI_Controller
 		parent::__construct();
 
 		$this->load->helper('url');
-		
 	}
 
 
-	public function confirm(){
+	public function confirm()
+	{
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data ======================================
@@ -24,63 +24,59 @@ class PaymentController extends CI_Controller
 
 		// data payment
 		$payCond = array('id' => $payment_id);
-		$payment_data = $this->BasicQuery->selectAll('payment',$payCond);
+		$payment_data = $this->BasicQuery->selectAll('payment', $payCond);
 
 		// update payment
 		$payment_data_update = array(
-								'pay_nominal'		=> $pay_nominal,
-								'status'			=> 0
+			'pay_nominal'		=> $payment_nominal,
+			'status'			=> 0
 		);
 
 		if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
 
-			$JSON_return = $this->globalfunction->return_JSON_success("Success.",$payment_data_update);
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.", $payment_data_update);
 			echo $JSON_return;
-
-		}else{
+		} else {
 			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
 			echo $JSON_return;
 		}
-
 	}
 
-	public function confirm_file(){
+	public function confirm_file()
+	{
 
 		// prepare data ======================================
 		$payment_id 		= $_POST['payment_id'];
 
 		// data payment
 		$payCond = array('id' => $payment_id);
-		$payment_data = $this->BasicQuery->selectAll('payment',$payCond);
+		$payment_data = $this->BasicQuery->selectAll('payment', $payCond);
 
 		// upload bukti transaksi
-		$upload = $this->globalfunction->saveImg('./uploads/members/'.$payment_data['id_user'].'/' , 'payment_proof');
-		if ($upload[0]==true) {
+		$upload = $this->globalfunction->saveImg('./uploads/members/' . $payment_data['id_user'] . '/', 'payment_proof');
+		if ($upload[0] == true) {
 
 			$public_link_img = BASE_URL_API . $upload[1];
-			
+
 			// update payment
 			$payment_data_update = array(
-									'proof_of_payment'	=> $public_link_img,
-									'status'			=> 1
+				'proof_of_payment'	=> $public_link_img,
+				'status'			=> 1
 
 			);
 
 			if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
 
-				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.",$payment_data_update);
+				$JSON_return = $this->globalfunction->return_JSON_success("Upload Success... Please wait for admin approval.", $payment_data_update);
 				echo $JSON_return;
-				
-			}else{
+			} else {
 				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save information", $payment_data);
 				echo $JSON_return;
 			}
-
-		}else{
-			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file",$payment_data);
+		} else {
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file", $payment_data);
 			echo $JSON_return;
 		}
-
 	}
 
 
@@ -102,7 +98,7 @@ class PaymentController extends CI_Controller
 	// 	if ($upload[0]==true) {
 
 	// 		$public_link_img = BASE_URL_API . $upload[1];
-			
+
 	// 		// update payment
 	// 		$payment_data_update = array(
 	// 								'pay_nominal'		=> $pay_nominal,
@@ -130,7 +126,7 @@ class PaymentController extends CI_Controller
 	// }
 
 
-	
 
-	
+
+
 }
