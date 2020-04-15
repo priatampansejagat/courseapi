@@ -83,7 +83,7 @@ class CourseController extends CI_Controller
 		
 		$this->globalfunction->header_CORS();
 
-		$dir = DIR_COURSE + 'temp';
+		$dir = DIR_COURSE . 'temp';
 		$this->globalfunction->resumable_upload($dir);
 	}
 
