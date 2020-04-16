@@ -77,10 +77,10 @@ class DatatableController extends CI_Controller
 				}
 
 				$user_cond = array("id" => $value['user_id']);
-				$dbResult[$key]['detail'] = $this->BasicQuery->selectAllResult('user',$user_cond);
+				$dbResult[$key]['detail'] = $this->BasicQuery->selectAll('user',$user_cond);
 
 				$pay_cond = array("id" => $value['payment_id']);
-				$dbResult[$key]['payment'] = $this->BasicQuery->selectAllResult('payment',$pay_cond);
+				$dbResult[$key]['payment'] = $this->BasicQuery->selectAll('payment',$pay_cond);
 			}
 
 			$this->success('berhasil', $dbResult);
