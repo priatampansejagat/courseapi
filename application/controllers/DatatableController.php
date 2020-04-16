@@ -65,7 +65,7 @@ class DatatableController extends CI_Controller
 		}else if ($dataReceived['ihateapple'] == 'course_member') {
 
 			// course_member
-			$condition = $dataReceived['condition']
+			$condition = $dataReceived['condition'];
 			$dbResult = $this->BasicQuery->selectAllResult('course_member',$condition);
 
 			// user data
