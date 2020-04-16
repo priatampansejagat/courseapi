@@ -85,6 +85,53 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'mycourse') {
+
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+
+			// get course member
+			$courseMemberCond = array('user_id' => $user_id);
+			$dbResult = $this->BasicQuery->selectAllResult('course_member',$courseMemberCond);
+
+			// get detaucourse
+			foreach ($dbResult as $key => $value) {
+				$courseCond = array('id' => $value['course_id']);
+				$dbResult[$key]['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
+
+				// get mentor
+				$userCond = array('id' => $dbResult[$key]['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+				$dbResult[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+			}
+			
+			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'mycourse_room') {
+
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+			$course_id = $dataReceived['course_id'];
+
+			// cek apakah user sudah approved
+			$courseMemberCond = array('user_id' => $user_id, "course_id" => $course_id);
+			$dbResult['course_member'] = $this->BasicQuery->selectAll('course_member',$courseMemberCond);
+			if ($dbResult['course_member']['confirmed'] == 1) {
+
+				$courseCond = array('id' => $course_id);
+				$dbResult['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
+
+				$chapterCond = array('course_id' => $course_id);
+				$dbResult['course_chapter'] = $this->BasicQuery->selectAll('course_chapter',$chapterCond);
+
+				$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+				$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+
+				$this->success('berhasil', $dbResult);
+
+			}else{
+				$this->failed('User not approved by admin',$dbResult);
+			}
+
 		}else if ($dataReceived['ihateapple'] == 'payment_unpaid') {
 
 			$payCond = array('status' => 0, 'id_user' => $dataReceived['id_user']);
