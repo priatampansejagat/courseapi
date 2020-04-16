@@ -62,6 +62,29 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'course_member') {
+
+			// course_member
+			$condition = $dataReceived['condition']
+			$dbResult = $this->BasicQuery->selectAllResult('course_member',$condition);
+
+			// user data
+			foreach ($dbResult as $key => $value) {
+				if ($value['confirmed'] == 0) {
+					$dbResult[$key]['confirmed'] = 'unconfirmed';
+				}else{
+					$dbResult[$key]['confirmed'] = 'confirmed';
+				}
+
+				$user_cond = array("id" => $value['user_id']);
+				$dbResult[$key]['detail'] = $this->BasicQuery->selectAllResult('user',$user_cond);
+
+				$pay_cond = array("id" => $value['payment_id']);
+				$dbResult[$key]['payment'] = $this->BasicQuery->selectAllResult('payment',$pay_cond);
+			}
+
+			$this->success('berhasil', $dbResult);
+
 		}else if ($dataReceived['ihateapple'] == 'payment_unpaid') {
 
 			$payCond = array('status' => 0, 'id_user' => $dataReceived['id_user']);
