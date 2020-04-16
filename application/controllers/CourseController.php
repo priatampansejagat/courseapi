@@ -191,6 +191,27 @@ class CourseController extends CI_Controller
 
 	}
 
+	public function registration_confirm(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$course_member_id=$dataReceived['course_member_id'];
+
+		// update
+		$update_course_member = array(
+			'confirmed'			=> 1
+		);
+
+		if ($this->BasicQuery->update('course_member', 'id', $course_member_id, $update_course_member)) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.");
+			echo $JSON_return;
+		} else {
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to confirm");
+			echo $JSON_return;
+		}
+
+	}
+
 	
 
 	
