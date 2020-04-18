@@ -116,7 +116,7 @@ class DatatableController extends CI_Controller
 
 			// ngecek apakah minta 1 chapter aja atau list chapter
 			if (isset($dataReceived['single_chapter']) && isset($dataReceived['chapter_id'])) {
-				if ($dataReceived['single_chapter']) {
+				if ($dataReceived['single_chapter'] == true) {
 					$single_chapter = true;
 					$chapter_id = $dataReceived['chapter_id'];
 				}
@@ -132,7 +132,7 @@ class DatatableController extends CI_Controller
 
 				// list/semua chapter
 				$chapterCond = array('course_id' => $course_id);
-				
+
 				// single chapter
 				if ($single_chapter == true) {
 					$chapterCond = array('course_id' => $course_id, 'id' => $chapter_id);
