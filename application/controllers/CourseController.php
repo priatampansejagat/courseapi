@@ -211,7 +211,7 @@ class CourseController extends CI_Controller
 			$memberCond = array('id' => $course_member_id);
 			$memberData = $this->BasicQuery->selectAll('course_member',$courseCond);
 
-			if ($this->BasicQuery->update('payment', 'id', $memberData['payment_id'], $update_payment);) {
+			if ($this->BasicQuery->update('payment', 'id', $memberData['payment_id'], $update_payment)) {
 				$JSON_return = $this->globalfunction->return_JSON_success("Success.");
 				echo $JSON_return;
 			}else{
