@@ -93,7 +93,7 @@ class CourseController extends CI_Controller
 									'id', 
 									$_POST['chapter_id'],
 									array(
-											'video_link' => BASE_URL_API.$vid_link
+											'video_link' => base_url().$vid_link
 									)
 								);
 	}
