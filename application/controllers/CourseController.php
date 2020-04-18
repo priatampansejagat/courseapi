@@ -225,6 +225,40 @@ class CourseController extends CI_Controller
 
 	}
 
+	public function registration_decline(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$course_member_id=$dataReceived['course_member_id'];
+
+		// update
+		$update_course_member = array(
+			'confirmed'			=> 0
+		);
+
+		$update_payment = array(
+			'status'			=> 3
+		);
+
+		if ($this->BasicQuery->update('course_member', 'id', $course_member_id, $update_course_member)) {
+
+			$memberCond = array('id' => $course_member_id);
+			$memberData = $this->BasicQuery->selectAll('course_member',$memberCond);
+
+			if ($this->BasicQuery->update('payment', 'id', $memberData['payment_id'], $update_payment)) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success.");
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to decline");
+				echo $JSON_return;
+			}
+		} else {
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to decline");
+			echo $JSON_return;
+		}
+
+	}
+
 	
 
 	
