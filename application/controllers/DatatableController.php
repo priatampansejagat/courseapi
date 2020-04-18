@@ -121,7 +121,7 @@ class DatatableController extends CI_Controller
 				$dbResult['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
 
 				$chapterCond = array('course_id' => $course_id);
-				$dbResult['course_chapter'] = $this->BasicQuery->selectAll('course_chapter',$chapterCond);
+				$dbResult['course_chapter'] = $this->BasicQuery->selectAllResult('course_chapter',$chapterCond);
 
 				$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
 				$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
