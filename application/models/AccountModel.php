@@ -58,7 +58,7 @@ class AccountModel extends CI_Model {
                     $obj->status = 200;
                     $obj->proc = 'true';
                     $obj->message = 'Proses berhasil';
-	    			$obj->data = $dtInput;
+	    			$obj->data = $savetodb;
 	    			
 	    			return $obj;
 	    		}else{

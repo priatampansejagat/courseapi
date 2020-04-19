@@ -74,7 +74,7 @@ class PaymentController extends CI_Controller
 														$payment_id,
 														array(
 															'status' => 1,
-															'proof_of_payment' => BASE_URL_API.$upload
+															'proof_of_payment' => base_url().$upload
 														)
 			);
 
