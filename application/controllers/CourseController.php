@@ -259,6 +259,31 @@ class CourseController extends CI_Controller
 
 	}
 
+	public function cert_upload(){
+		$this->globalfunction->header_CORS();
+
+		if ($_POST['action'] == 'upload_cert') {
+			$dir = DIR_COURSE . $_POST['course_id'] . '/';
+			$public_dir = DIR_COURSE_PUBLIC . $_POST['course_id'] . '/';
+
+			$cert_link = $this->globalfunction->resumable_upload($dir, $public_dir);
+
+			$this->BasicQuery->update(
+									'course',
+									'id', 
+									$_POST['course_id'],
+									array(
+											'certificate' => base_url().$cert_link
+									)
+								);
+		}
+		
+
+		
+
+		
+	}
+
 	
 
 	

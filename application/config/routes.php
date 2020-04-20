@@ -75,6 +75,7 @@ $route['confirm_register'] = 'CourseController/registration_confirm';
 $route['decline_register'] = 'CourseController/registration_decline'; 
 $route['createchapter'] = 'CourseController/create_chapter'; 
 $route['createchapter_vid'] = 'CourseController/video_chapter'; 
+$route['cert_upload'] = 'CourseController/cert_upload'; 
 
 // payment
 $route['payconfirm'] = 'PaymentController/confirm'; 
