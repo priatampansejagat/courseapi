@@ -275,10 +275,31 @@ class CourseController extends CI_Controller
 										'certificate' => base_url().$cert_link
 								)
 							);
-		
+
 	}
 
-	
+	public function cert_delete(){
+
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$course_id = $dataReceived['course_id'];
+
+ 		if ($this->BasicQuery->update(
+								'course',
+								'id', 
+								$course_id,
+								array(
+										'certificate' => '#'
+								)
+							)) {
+ 			$JSON_return = $this->globalfunction->return_JSON_success("Deleted");
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed");
+			echo $JSON_return;
+		}
+	}
 
 	
 
