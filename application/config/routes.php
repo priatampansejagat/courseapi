@@ -82,3 +82,7 @@ $route['cert_delete'] = 'CourseController/cert_delete';
 $route['payconfirm'] = 'PaymentController/confirm'; 
 $route['payconfirm_file'] = 'PaymentController/confirm_file'; 
 
+// Event
+$route['createevent'] = 'EventController/create_event'; 
+
+

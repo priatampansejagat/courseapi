@@ -169,6 +169,13 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'event') {
+
+			$eventCond = array('status' => 1);
+			$dbResult = $this->BasicQuery->selectAllResult('event',$eventCond);
+
+			$this->success('berhasil', $dbResult);
+
 		}
 		
 	}
