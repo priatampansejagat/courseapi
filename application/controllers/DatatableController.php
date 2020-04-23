@@ -176,6 +176,26 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'single_event') {
+
+			$event_id = $dataReceived['event_id'];
+
+			$bridgeCond = array('event_id' => $event_id);
+			$bridge = $this->BasicQuery->selectAllResult('bridge_event_course',$bridgeCond);
+
+			$eventCond = array('id' => $event_id);
+			$dbResult['event_info'] = $this->BasicQuery->selectAll('event',$eventCond);
+
+			foreach ($bridge as $key => $value) {
+				$courseCond = array('id' => $value['course_id']);
+				$dbResult['course_list'][$key] = $this->BasicQuery->selectAll('course',$courseCond);
+
+				$mentorCond = array('id' => $dbResult['course_list'][$key]['mentor_id']);
+				$dbResult['course_list'][$key]['mentor_detail'] = $this->BasicQuery->selectAll('user',$mentorCond);
+			}
+
+			$this->success('berhasil', $dbResult);
+
 		}
 		
 	}
