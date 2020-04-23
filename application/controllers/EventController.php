@@ -14,7 +14,7 @@ class EventController extends CI_Controller
 	}
 
 
-	public function confirm(){
+	public function create_event(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data ======================================
