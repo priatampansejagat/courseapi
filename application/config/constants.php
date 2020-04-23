@@ -98,3 +98,6 @@ define('DIR_COURSE_PUBLIC', 'uploads/courses/');
 
 define('DIR_MEMBER', './uploads/members/');
 define('DIR_MEMBER_PUBLIC', 'uploads/members/');
+
+define('DIR_EVENT', './uploads/events/');
+define('DIR_EVENT_PUBLIC', 'uploads/events/');

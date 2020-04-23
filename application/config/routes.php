@@ -84,5 +84,8 @@ $route['payconfirm_file'] = 'PaymentController/confirm_file';
 
 // Event
 $route['createevent'] = 'EventController/create_event'; 
+$route['add_course_event'] = 'EventController/add_course_event'; 
+$route['add_cover_event'] = 'EventController/add_cover_event'; 
+$route['delete_cover_event'] = 'EventController/cover_delete'; 
 
 
