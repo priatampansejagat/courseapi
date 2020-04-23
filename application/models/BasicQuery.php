@@ -50,6 +50,15 @@ class BasicQuery extends CI_Model {
 
     }
 
+    public function delete($table,$dataArr){
+        
+        if ($this->db->delete($table, $dataArr)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 
 

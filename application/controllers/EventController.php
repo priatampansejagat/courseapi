@@ -102,6 +102,23 @@ class EventController extends CI_Controller
 		}
 	}
 
+	public function bridge_delete(){
+
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$event_id = $dataReceived['event_id'];
+		$course_id = $dataReceived['course_id'];
+
+ 		if ($this->BasicQuery->delete('bridge_event_course', array('course_id' => $course_id, 'event_id' => $event_id))) {
+ 			$JSON_return = $this->globalfunction->return_JSON_success("Deleted");
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed");
+			echo $JSON_return;
+		}
+	}
+
 
 
 }
