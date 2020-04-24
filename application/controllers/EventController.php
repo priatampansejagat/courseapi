@@ -328,7 +328,8 @@ class EventController extends CI_Controller
 								'id', 
 								$id,
 								array(
-										'picture_link' => base_url().$picture_link
+										'picture_link' => base_url().$picture_link,
+										'status'		=> 1
 								)
 							);
 	}
