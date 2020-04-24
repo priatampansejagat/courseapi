@@ -88,5 +88,8 @@ $route['add_course_event'] = 'EventController/add_course_event';
 $route['add_cover_event'] = 'EventController/add_cover_event'; 
 $route['delete_cover_event'] = 'EventController/cover_delete'; 
 $route['delete_bridge_event_course'] = 'EventController/bridge_delete'; 
+$route['regisevent'] = 'EventController/registration'; 
+$route['regisevent_confirm'] = 'EventController/registration_confirm'; 
+$route['regisevent_decline'] = 'EventController/registration_decline'; 
 
 

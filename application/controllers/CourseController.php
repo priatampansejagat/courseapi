@@ -187,11 +187,9 @@ class CourseController extends CI_Controller
 			echo $JSON_return;
 		}
 		
-
-
 	}
 
-	public function registration_confirm(){
+	public function registration_confirm(){ // by admin
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data
@@ -225,7 +223,7 @@ class CourseController extends CI_Controller
 
 	}
 
-	public function registration_decline(){
+	public function registration_decline(){ // by admin
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
 		// prepare data
