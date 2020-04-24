@@ -313,6 +313,7 @@ class EventController extends CI_Controller
 		$this->globalfunction->header_CORS();
 
 		// prepare data
+		$id = $_POST['gallery_id'];
 		$event_id = $_POST['event_id'];
 
 		$dir = DIR_EVENT . $event_id . '/';
@@ -325,9 +326,9 @@ class EventController extends CI_Controller
 		$this->BasicQuery->update(
 								'event_gallery',
 								'id', 
-								$event_id,
+								$id,
 								array(
-										'cover_link' => base_url().$cover_link
+										'cover_link' => base_url().$picture_link
 								)
 							);
 	}
