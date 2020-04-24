@@ -304,7 +304,7 @@ class EventController extends CI_Controller
 			$JSON_return = $this->globalfunction->return_JSON_success("Success.",$insertgallery);
 				echo $JSON_return;
 		}else{
-			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to decline");
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to create");
 			echo $JSON_return;
 		}
 	}
@@ -332,6 +332,30 @@ class EventController extends CI_Controller
 										'status'		=> 1
 								)
 							);
+	}
+
+	public function delete_gallery_event(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$gallery_id = $dataReceived['gallery_id'];
+
+		$dbResult = $this->BasicQuery->update(
+								'event_gallery',
+								'id', 
+								$gallery_id,
+								array(
+										'status'		=> 0
+								)
+							);
+
+		if ($dbResult == true) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.");
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to delete");
+			echo $JSON_return;
+		}
 	}
 
 
