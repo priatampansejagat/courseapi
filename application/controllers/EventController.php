@@ -282,5 +282,56 @@ class EventController extends CI_Controller
 	}
 
 
+	public function create_gallery_event(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare data
+		$event_id 	= $dataReceived['event_id'];
+		$title 		= $dataReceived['title'];
+
+		//process
+		$insertgallery = array(
+								'id' 			=> 'event_gallery_'.date('Ymdhisa'),
+								'event_id' 		=> $event_id,
+								'title' 		=> $title,
+								'picture_link'	=> '#',
+								'status'		=> 0
+
+					);
+		$dbResult = $this->BasicQuery->insert('event_gallery', $insertgallery);
+
+		if ($dbResult == true) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.",$insertgallery);
+				echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to decline");
+			echo $JSON_return;
+		}
+	}
+
+	public function upload_gallery_event(){
+		$this->globalfunction->header_CORS();
+
+		// prepare data
+		$event_id = $_POST['event_id'];
+
+		$dir = DIR_EVENT . $event_id . '/';
+		$public_dir = DIR_EVENT_PUBLIC . $event_id . '/';
+
+		$picture_link = $this->globalfunction->resumable_upload($dir, $public_dir);
+
+
+		
+		$this->BasicQuery->update(
+								'event_gallery',
+								'id', 
+								$event_id,
+								array(
+										'cover_link' => base_url().$cover_link
+								)
+							);
+	}
+
+
 
 }

@@ -91,5 +91,8 @@ $route['delete_bridge_event_course'] = 'EventController/bridge_delete';
 $route['regisevent'] = 'EventController/registration'; 
 $route['regisevent_confirm'] = 'EventController/registration_confirm'; 
 $route['regisevent_decline'] = 'EventController/registration_decline'; 
+$route['create_gallery_event'] = 'EventController/create_gallery_event'; 
+$route['upload_gallery_event'] = 'EventController/upload_gallery_event'; 
+$route['delete_gallery_event'] = 'EventController/delete_gallery_event'; 
 
 

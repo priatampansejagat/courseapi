@@ -196,7 +196,46 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'event_member') {
+
+			// course_member
+			$condition = $dataReceived['condition'];
+			$dbResult = $this->BasicQuery->selectAllResult('event_member',$condition);
+
+			// user data
+			foreach ($dbResult as $key => $value) {
+
+				$user_cond = array("id" => $value['user_id']);
+				$dbResult[$key]['detail'] = $this->BasicQuery->selectAll('user',$user_cond);
+
+				$pay_cond = array("id" => $value['payment_id']);
+				$dbResult[$key]['payment'] = $this->BasicQuery->selectAll('payment',$pay_cond);
+
+				if ($dbResult[$key]['payment']['status'] == 0) {
+					$dbResult[$key]['confirmed'] = 'registered';
+				}else if ($dbResult[$key]['payment']['status'] == 1) {
+					$dbResult[$key]['confirmed'] = 'paid';
+				}else if ($dbResult[$key]['payment']['status'] == 2) {
+					$dbResult[$key]['confirmed'] = 'confirmed';
+				}else{
+					$dbResult[$key]['confirmed'] = 'declined';
+				}
+
+			}
+
+			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'event_gallery') {
+
+			$event_id = $dataReceived['event_id'];
+
+			$galleryCond = array('event_id' => $event_id, 'status' => 1);
+			$dbResult['gallery_list'] = $this->BasicQuery->selectAllResult('event_gallery',$galleryCond);
+
+			$this->success('berhasil', $dbResult);
+
 		}
+
 		
 	}
 
