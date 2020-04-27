@@ -62,6 +62,7 @@ $route['default_controller'] = 'welcome';
 $route['regissubmit'] = 'RegisterController/register';
 $route['login'] = 'RegisterController/login';
 $route['regisupdate'] = 'RegisterController/update'; 
+$route['regisupdate_text'] = 'RegisterController/update_text'; 
 
 $route['forgpass'] = 'RegisterController/index'; // lupa password
 

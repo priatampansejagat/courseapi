@@ -149,6 +149,34 @@ class RegisterController extends CI_Controller
 
 	}
 
+	public function update_text(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$user_id = $dataReceived['user_id'];
+		$action = $dataReceived['action'];
+		$dataUpdate = $dataReceived['data_update'];
+
+		$update_user = false;
+		if ($action = 'biography') {
+			$update_user = $this->BasicQuery->update(
+														'detail_user',
+														'id_user',
+														$user_id,
+														array(
+															'biography' => $dataUpdate
+														)
+				); 
+		}
+
+		if ($update_user == true) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Update Success...", $dataReceived);
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
+			echo $JSON_return;
+		}
+	}
+
 	public function success($message, $content = null){
 		$obj=new stdClass;
 		$obj->status = 200;
