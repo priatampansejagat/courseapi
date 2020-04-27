@@ -31,7 +31,7 @@ class RegisterController extends CI_Controller
 
 		// make directory
 		if ($dbResult->proc == 'true') {
-			mkdir('./uploads/members/' . $dbResult->data['mantankampret'], 0777, TRUE)
+			mkdir('./uploads/members/' . $dbResult->data['mantankampret'], 0777, TRUE);
 
 			if ($this->BasicQuery->insert('detail_user', array(	'id' => 'detailuser_'.date('Ymdhisa'),
 																'id_user' => $dbResult->data['id'],

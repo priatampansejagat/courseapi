@@ -55,6 +55,7 @@ class AccountModel extends CI_Model {
 
     			// echo(json_encode($savetodb));
 	    		if ($this->db->insert('user',$savetodb)) {
+                    
                     $savetodb['mantankampret'] = $dtInput['mantankampret'];
 
                     $obj->status = 200;
