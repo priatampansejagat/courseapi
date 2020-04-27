@@ -31,29 +31,22 @@ class RegisterController extends CI_Controller
 
 		// make directory
 		if ($dbResult->proc == 'true') {
-			if (mkdir('./uploads/members/' . $dbResult->data['mantankampret'], 0777, TRUE)) {
+			mkdir('./uploads/members/' . $dbResult->data['mantankampret'], 0777, TRUE)
 
-				// create data detail user
-				if ($this->BasicQuery->insert('detail_user', array(	'id' => 'detailuser_'.date('Ymdhisa'),
-																	'id_user' => $dbResult->data['id'],
-																	'student_card' => '#',
-																	'academic_member' => '#',
-																	'profile_picture' => '#'
-												))) {
-					echo (json_encode($dbResult));
-				}else{
-					$dbResult->status = 500;
-	    			$dbResult->proc = 'false';
-					$dbResult->message = 'Gagal menyimpan data user';
-	    			echo (json_encode($dbResult));
-				}
-				
+			if ($this->BasicQuery->insert('detail_user', array(	'id' => 'detailuser_'.date('Ymdhisa'),
+																'id_user' => $dbResult->data['id'],
+																'student_card' => '#',
+																'academic_member' => '#',
+																'profile_picture' => '#'
+											))) {
+				echo (json_encode($dbResult));
 			}else{
 				$dbResult->status = 500;
     			$dbResult->proc = 'false';
-				$dbResult->message = 'Gagal membuat folder user';
+				$dbResult->message = 'Gagal menyimpan data user';
     			echo (json_encode($dbResult));
 			}
+				
 		}
 		
 	}
