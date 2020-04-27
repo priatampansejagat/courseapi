@@ -30,6 +30,18 @@ class DatatableController extends CI_Controller
 			
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'single_user') {
+
+			$user_id = $dataReceived['user_id'];
+
+			$userCond = array('id' => $user_id);
+			$dbResult['user'] = $this->BasicQuery->selectAll('user',$userCond);
+
+			$detailCond = array('id_user' => $user_id);
+			$dbResult['user_detail'] = $this->BasicQuery->selectAll('detail_user',$detailCond);
+
+			$this->success('berhasil', $dbResult);
+
 		}else if ($dataReceived['ihateapple'] == 'course') {
 
 			$courseCond = array('status' => 1);
