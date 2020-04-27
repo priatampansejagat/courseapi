@@ -64,7 +64,7 @@ class RegisterController extends CI_Controller
 		$jsonPOST = file_get_contents('php://input');
 		$dataReceived = json_decode($jsonPOST, true);
 
-		$selectCondition = array('username' => $dataReceived['username']);
+		$selectCondition = array('username' => $dataReceived['username'], 'deleted' => ACTIVE);
 		$dbResult = $this->BasicQuery->selectAll('user',$selectCondition);
 
 		if ($dbResult != null ) {

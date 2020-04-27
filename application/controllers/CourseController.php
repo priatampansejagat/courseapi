@@ -197,11 +197,11 @@ class CourseController extends CI_Controller
 
 		// update
 		$update_course_member = array(
-			'confirmed'			=> 1
+			'confirmed'			=> ACTIVE
 		);
 
 		$update_payment = array(
-			'status'			=> 2
+			'status'			=> CONFIRMED
 		);
 
 		if ($this->BasicQuery->update('course_member', 'id', $course_member_id, $update_course_member)) {
@@ -231,11 +231,11 @@ class CourseController extends CI_Controller
 
 		// update
 		$update_course_member = array(
-			'confirmed'			=> 0
+			'confirmed'			=> INACTIVE
 		);
 
 		$update_payment = array(
-			'status'			=> 3
+			'status'			=> DELETED
 		);
 
 		if ($this->BasicQuery->update('course_member', 'id', $course_member_id, $update_course_member)) {

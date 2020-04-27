@@ -29,7 +29,7 @@ class PaymentController extends CI_Controller
 		// update payment
 		$payment_data_update = array(
 			'pay_nominal'		=> $payment_nominal,
-			'status'			=> 0
+			'status'			=> INACTIVE
 		);
 
 		if ($this->BasicQuery->update('payment', 'id', $payment_id, $payment_data_update)) {
@@ -73,7 +73,7 @@ class PaymentController extends CI_Controller
 														'id',
 														$payment_id,
 														array(
-															'status' => 1,
+															'status' => ACTIVE,
 															'proof_of_payment' => base_url().$upload
 														)
 			);

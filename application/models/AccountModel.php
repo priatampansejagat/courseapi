@@ -49,7 +49,8 @@ class AccountModel extends CI_Model {
 		    						'phone_number'			=> $dtInput['mobile_number'],
 		    						'profesion'				=> 'inputan belum tersedia',
 		    						'major_of_study'		=> $dtInput['field_of_study'],
-		    						'status'				=> $dtInput['status'] //'status'				=> $dtInput['status'].' - '.$dtInput['status_input']
+                                    'status'                => $dtInput['status'], 
+		    						'deleted'				=> ACTIVE 
 		    		);
 
     			// echo(json_encode($savetodb));
