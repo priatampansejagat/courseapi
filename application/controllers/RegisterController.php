@@ -35,7 +35,7 @@ class RegisterController extends CI_Controller
 
 				// create data detail user
 				if ($this->BasicQuery->insert('detail_user', array(	'id' => 'detailuser_'.date('Ymdhisa'),
-																	'id_user' => $dbResult['data']['id'],
+																	'id_user' => $dbResult->data['id'],
 																	'student_card' => '#',
 																	'academic_member' => '#',
 																	'profile_picture' => '#'
