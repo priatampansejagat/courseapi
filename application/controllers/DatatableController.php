@@ -63,6 +63,8 @@ class DatatableController extends CI_Controller
 			$userCond = array('id' => $dbResult['mentor_id'],'role_id' => AS_MENTOR);
 			$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 			
+			$userdetailCond = array('id_user' => $dbResult['mentor_id']);
+			$dbResult['mentor']['detail'] = $this->BasicQuery->selectAll('detail_user',$userdetailCond);
 
 			$this->success('berhasil', $dbResult);
 
@@ -204,6 +206,9 @@ class DatatableController extends CI_Controller
 
 				$mentorCond = array('id' => $dbResult['course_list'][$key]['mentor_id']);
 				$dbResult['course_list'][$key]['mentor_detail'] = $this->BasicQuery->selectAll('user',$mentorCond);
+
+				$userdetailCond = array('id_user' => $dbResult['course_list'][$key]['mentor_id']);
+				$dbResult['course_list'][$key]['mentor_detail']['additional'] = $this->BasicQuery->selectAll('detail_user',$userdetailCond);
 			}
 
 			$this->success('berhasil', $dbResult);
