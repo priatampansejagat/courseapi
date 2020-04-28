@@ -147,7 +147,7 @@ class EventController extends CI_Controller
 
 			// process ===========================================
 			// cek payment sudah ada apa belum
-			$payCond = array('id_user' => $user_id, 'payment_id' => $payment_id);
+			$payCond = array('id_user' => $user_id, 'event_id' => $event_id);
 			$payCount = $this->BasicQuery->countAllResult('payment',$payCond);
 			if ($payCount == 0) {
 
