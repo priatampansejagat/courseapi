@@ -41,6 +41,39 @@ class CourseController extends CI_Controller
 		
 	}
 
+	public function delete(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$course_id = $dataReceived['course_id'];
+
+		// Delete course
+		$stat_delete = $this->BasicQuery->update(
+								'course',
+								'id', 
+								$course_id,
+								array(
+										'status' => DELETED
+								)
+							);
+
+		if ($stat_delete == true) {
+			// Delete course pada event
+			$stat_bridge = $this->BasicQuery->delete('bridge_event_course', array('course_id' => $course_id));
+
+			if ($stat_bridge == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
+			}
+			
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+			echo $JSON_return;
+		}
+	}
+
 	public function create_chapter(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 		// $JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);

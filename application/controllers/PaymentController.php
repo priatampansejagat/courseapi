@@ -66,7 +66,7 @@ class PaymentController extends CI_Controller
 
 		if ($upload != 'false') {
 
-			// $public_link_img = BASE_URL_API . $upload[1];
+			 
 
 			$updatePayment = $this->BasicQuery->update(
 														'payment',

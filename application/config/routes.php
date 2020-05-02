@@ -71,6 +71,7 @@ $route['datatable'] = 'DatatableController/get_data';
 
 // course
 $route['createcourse'] = 'CourseController/create'; 
+$route['deletecourse'] = 'CourseController/delete'; 
 $route['regiscourse'] = 'CourseController/registration'; 
 $route['confirm_register'] = 'CourseController/registration_confirm'; 
 $route['decline_register'] = 'CourseController/registration_decline'; 
