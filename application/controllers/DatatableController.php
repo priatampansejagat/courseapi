@@ -251,6 +251,83 @@ class DatatableController extends CI_Controller
 
 			$this->success('berhasil', $dbResult);
 
+		}else if ($dataReceived['ihateapple'] == 'myevent') {
+
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+
+			// get course member
+			$eventMemberCond = array('user_id' => $user_id, 'confirmed' => 1);
+			$dbResult = $this->BasicQuery->selectAllResult('event_member',$eventMemberCond);
+
+			// get data event
+			foreach ($dbResult as $key => $value) {
+				$eventCond = array('id' => $value['event_id']);
+				$dbResult[$key]['event'] = $this->BasicQuery->selectAll('event',$eventCond);
+
+				// get course yang terdaftar pada event
+				// slect bridge terlebih dahulu
+				$bridgeCond = array('event_id' => $value['event_id']);
+				$bridgeDB = $this->BasicQuery->selectAllResult('bridge_event_course',$bridgeCond);
+
+				foreach ($bridgeDB as $bridgeKey => $bridgeValue) {
+					$courseCond = array('id' => $bridgeValue['course_id']);
+					$dbResult[$key]['event']['course'][$bridgeKey] = $this->BasicQuery->selectAll('course',$courseCond);
+
+					// get mentor
+					$userCond = array('id' => $dbResult[$key]['event']['course'][$bridgeKey]['mentor_id'],'role_id' => AS_MENTOR);
+					$dbResult[$key]['event']['course'][$bridgeKey]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+				}
+
+				
+			}
+			
+			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'myevent_room') {
+
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+			$event_id = $dataReceived['event_id'];
+			$course_id = $dataReceived['course_id']; // yg diklik
+			$chapter_id = '';
+			$single_chapter = false;
+
+			// ngecek apakah minta 1 chapter aja atau list chapter
+			if (isset($dataReceived['single_chapter']) && isset($dataReceived['chapter_id'])) {
+				if ($dataReceived['single_chapter'] == true) {
+					$single_chapter = true;
+					$chapter_id = $dataReceived['chapter_id'];
+				}
+			}
+
+			// cek apakah user sudah approved
+			$eventMemberCond = array('user_id' => $user_id, "event_id" => $event_id);
+			$dbResult['event_member'] = $this->BasicQuery->selectAll('event_member',$eventMemberCond);
+			if ($dbResult['event_member']['confirmed'] == 1) {
+
+				$courseCond = array('id' => $course_id);
+				$dbResult['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
+
+				// list/semua chapter
+				$chapterCond = array('course_id' => $course_id);
+
+				// single chapter
+				if ($single_chapter == true) {
+					$chapterCond = array('course_id' => $course_id, 'id' => $chapter_id);
+				}
+				
+				$dbResult['course_chapter'] = $this->BasicQuery->selectAllResult('course_chapter',$chapterCond);
+
+				$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+				$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+
+				$this->success('berhasil', $dbResult);
+
+			}else{
+				$this->failed('User not approved by admin',$dbResult);
+			}
+
 		}
 
 		
