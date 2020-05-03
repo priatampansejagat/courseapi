@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://api.research-academy.org/';
-// $config['base_url'] = 'http://temporaryapi.rumahpeneleh.or.id/';
+// $config['base_url'] = 'http://api.research-academy.org/';
+$config['base_url'] = 'http://temporaryapi.rumahpeneleh.or.id/';
 // $config['base_url'] = 'http://localhost/courseapi/';
 
 // $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
