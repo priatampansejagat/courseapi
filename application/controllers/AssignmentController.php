@@ -64,15 +64,15 @@ class AssignmentController extends CI_Controller
 			}
 
 			if ($dbstat == true) {
-				$JSON_return = $this->globalfunction->return_JSON_success("Success",$data_return);
+				$JSON_return = $this->globalfunction->return_JSON_success("Success",$_POST);
 				echo $JSON_return;
 			}else{
-				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file", $user_id);
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file", $_POST);
 				echo $JSON_return;
 			}
 
 		}else{
-			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file", $user_id);
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to upload file", $_POST);
 			echo $JSON_return;
 		}
 
