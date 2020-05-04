@@ -97,4 +97,6 @@ $route['create_gallery_event'] = 'EventController/create_gallery_event';
 $route['upload_gallery_event'] = 'EventController/upload_gallery_event'; 
 $route['delete_gallery_event'] = 'EventController/delete_gallery_event'; 
 
+// Assignment
+$route['course_assignment'] = 'AssignmentController/course_assignment'; 
 

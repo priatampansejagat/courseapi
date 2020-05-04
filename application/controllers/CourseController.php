@@ -334,6 +334,8 @@ class CourseController extends CI_Controller
 
 	
 
+	
+
 	public function success($message, $content = null, $proc){
 		$obj=new stdClass;
 		$obj->status = 200;
