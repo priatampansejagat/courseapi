@@ -89,9 +89,15 @@ class AssignmentController extends CI_Controller
 		$assignmentCond = array('user_id' => $user_id, 'course_id' => $course_id);
 		$dbResult = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
 
-		$JSON_return = $this->globalfunction->return_JSON_success("Success",$dbResult);
-		echo $JSON_return;
+		if ($dbResult == null) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Success",'null');
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_success("Success",$dbResult);
+			echo $JSON_return;
+		}
 		
+
 	}
 
 	
