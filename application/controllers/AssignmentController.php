@@ -97,7 +97,7 @@ class AssignmentController extends CI_Controller
 		// 	echo $JSON_return;
 		// }
 		
-		$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+		$JSON_return = $this->globalfunction->return_JSON_success("Success",$dbResult);
 		echo $JSON_return;
 
 	}
