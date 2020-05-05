@@ -81,22 +81,24 @@ class AssignmentController extends CI_Controller
 	public function assignment_download(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
-		// prepare data ======================================
-		$user_id = $dataReceived['user_id'];
-		$course_id = $dataReceived['course_id'];
+		// // prepare data ======================================
+		// $user_id = $dataReceived['user_id'];
+		// $course_id = $dataReceived['course_id'];
 
-		// select link assignment
-		$assignmentCond = array('user_id' => $user_id, 'course_id' => $course_id);
-		$dbResult = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
+		// // select link assignment
+		// $assignmentCond = array('user_id' => $user_id, 'course_id' => $course_id);
+		// $dbResult = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
 
-		if ($dbResult == null) {
-			$JSON_return = $this->globalfunction->return_JSON_success("Success",'tes');
-			echo $JSON_return;
-		}else{
-			$JSON_return = $this->globalfunction->return_JSON_success("Success",$dbResult);
-			echo $JSON_return;
-		}
+		// if ($dbResult == null) {
+		// 	$JSON_return = $this->globalfunction->return_JSON_success("Success",'tes');
+		// 	echo $JSON_return;
+		// }else{
+		// 	$JSON_return = $this->globalfunction->return_JSON_success("Success",$dbResult);
+		// 	echo $JSON_return;
+		// }
 		
+		$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+		echo $JSON_return;
 
 	}
 
