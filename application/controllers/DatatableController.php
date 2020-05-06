@@ -328,6 +328,51 @@ class DatatableController extends CI_Controller
 				$this->failed('User not approved by admin',$dbResult);
 			}
 
+		}else if ($dataReceived['ihateapple'] == 'assignment_all') {
+
+			// prepare data
+			$course_id = $dataReceived['course_id'];
+			$data=array();
+
+			/* DATA YANG DIPERLUKAN = ASSIGNMENT DARI COURSE BIASA DAN EVENT */
+
+			// select dulu semua course member 
+			$course_member_cond = array('course_id' => $course_id);
+			$db_coursemember = $this->BasicQuery->selectAllResult('course_member', $course_member_cond);
+
+			// info user
+			foreach ($db_coursemember as $key => $value) {
+				$data['registered_user']['basic'][$key] = $this->BasicQuery->selectAll('user', array('id' => $value['user_id']));
+
+				$assignmentCond = array(	'user_id' => $value['user_id'],
+											'course_id' => $course_id,
+											'event_id' => NULL		
+											);
+				$data['registered_user']['basic'][$key]['assignment'] = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
+			}
+
+			// select dulu semua event member 
+			$bridge = array('course_id' => $course_id);
+			$list_event = array();
+			foreach ($bridge as $key => $value) {
+				$event_member_cond = array('event_id' => $value['event_id']);
+				$db_eventmember = $this->BasicQuery->selectAllResult('event_member', $event_member_cond);
+
+				foreach ($db_eventmember as $keyeventmember => $valueeventmember) {
+					$data['registered_user']['event'][$key]['user'][$keyeventmember] = $this->BasicQuery->selectAll('user', array('id' => $valueeventmember['user_id']));
+
+					$assignmentCond = array(	'user_id' => $value['user_id'],
+												'course_id' => $course_id,
+												'event_id' => NULL		
+											);
+					$data['registered_user']['event'][$key]['user'][$keyeventmember]['assignment'] = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
+				}
+
+				$data['registered_user']['event'][$key]['info'] = $this->BasicQuery->selectAll('event', array('id' => $value['event_id']));
+			}
+
+			$this->success('berhasil', $data);
+
 		}else if ($dataReceived['ihateapple'] == 'cert_status') {
 
 			// // prepare data
