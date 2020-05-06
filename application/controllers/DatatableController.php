@@ -352,7 +352,9 @@ class DatatableController extends CI_Controller
 			}
 
 			// select dulu semua event member 
-			$bridge = array('course_id' => $course_id);
+			$bridgeCond = array('course_id' => $course_id);
+			$bridge = $this->BasicQuery->selectAllResult('bridge_event_course',$bridgeCond);
+
 			$list_event = array();
 			foreach ($bridge as $key => $value) {
 				$event_member_cond = array('event_id' => $value['event_id']);
@@ -361,9 +363,9 @@ class DatatableController extends CI_Controller
 				foreach ($db_eventmember as $keyeventmember => $valueeventmember) {
 					$data['registered_user']['event'][$key]['user'][$keyeventmember] = $this->BasicQuery->selectAll('user', array('id' => $valueeventmember['user_id']));
 
-					$assignmentCond = array(	'user_id' => $value['user_id'],
+					$assignmentCond = array(	'user_id' => $valueeventmember['user_id'],
 												'course_id' => $course_id,
-												'event_id' => NULL		
+												'event_id' => $valueeventmember['event_id']		
 											);
 					$data['registered_user']['event'][$key]['user'][$keyeventmember]['assignment'] = $this->BasicQuery->selectAll('user_assignment', $assignmentCond);
 				}
