@@ -18,7 +18,7 @@ class AssignmentController extends CI_Controller
 
 		// prepare data ======================================
 		$user_id		= $_POST['user_id'];
-		$corse_id		= $_POST['corse_id'];
+		$course_id		= $_POST['course_id'];
 		$event_id		= NULL;
 
 
@@ -35,7 +35,10 @@ class AssignmentController extends CI_Controller
 		if ($upload != 'false') {
 			
 			// cek apakah sudah pernah upload
-			$count_assignment = $this->BasicQuery->countAllResult('user_assignment', array('user_id'));
+			$count_assignment = $this->BasicQuery->countAllResult('user_assignment', array(	'user_id' => $user_id,
+																							'course_id'=> $course_id,
+																							'event_id' => $event_id
+																						));
 
 			$dbstat = false; // cek apakah berhasil updat/insert atau gagal
 			if ($count_assignment == 0) {
@@ -52,7 +55,8 @@ class AssignmentController extends CI_Controller
 				// select 
 				$assignmentData = $this->BasicQuery->selectAll('user_assignment', 
 																				array(	'user_id' => $user_id,
-																						'course_id' => $course_id
+																						'course_id' => $course_id,
+																						'event_id' => $event_id
 																			));
 				$dbstat = $this->BasicQuery->update(	'user_assignment',
 														'id', 

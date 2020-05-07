@@ -101,3 +101,8 @@ $route['delete_gallery_event'] = 'EventController/delete_gallery_event';
 $route['course_assignment'] = 'AssignmentController/course_assignment'; 
 $route['assignment_download'] = 'AssignmentController/assignment_download'; 
 
+// Certificate
+$route['cert_enable'] = 'CertificateController/cert_enable'; 
+$route['cert_disable'] = 'CertificateController/cert_disable'; 
+
+
