@@ -377,47 +377,19 @@ class DatatableController extends CI_Controller
 
 		}else if ($dataReceived['ihateapple'] == 'cert_status') {
 
-			// // prepare data
-			// $user_id = $dataReceived['user_id'];
-			// $event_id = $dataReceived['event_id'];
-			// $course_id = $dataReceived['course_id']; // yg diklik
-			// $chapter_id = '';
-			// $single_chapter = false;
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+			$event_id = $dataReceived['event_id'];
+			$course_id = $dataReceived['course_id']; 
 
-			// // ngecek apakah minta 1 chapter aja atau list chapter
-			// if (isset($dataReceived['single_chapter']) && isset($dataReceived['chapter_id'])) {
-			// 	if ($dataReceived['single_chapter'] == true) {
-			// 		$single_chapter = true;
-			// 		$chapter_id = $dataReceived['chapter_id'];
-			// 	}
-			// }
+			// cek
+			$cert_cond = array(	"user_id" => $user_id,
+								"course_id" => $course_id,
+								"event_id" => $event_id
+							);
+			$dbResult = $this->BasicQuery->selectAll("user_certificate", $cert_cond);
 
-			// // cek apakah user sudah approved
-			// $eventMemberCond = array('user_id' => $user_id, "event_id" => $event_id);
-			// $dbResult['event_member'] = $this->BasicQuery->selectAll('event_member',$eventMemberCond);
-			// if ($dbResult['event_member']['confirmed'] == 1) {
-
-			// 	$courseCond = array('id' => $course_id);
-			// 	$dbResult['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
-
-			// 	// list/semua chapter
-			// 	$chapterCond = array('course_id' => $course_id);
-
-			// 	// single chapter
-			// 	if ($single_chapter == true) {
-			// 		$chapterCond = array('course_id' => $course_id, 'id' => $chapter_id);
-			// 	}
-				
-			// 	$dbResult['course_chapter'] = $this->BasicQuery->selectAllResult('course_chapter',$chapterCond);
-
-			// 	$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
-			// 	$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
-
-			// 	$this->success('berhasil', $dbResult);
-
-			// }else{
-			// 	$this->failed('User not approved by admin',$dbResult);
-			// }
+			$this->success('berhasil', $dbResult);
 
 		}
 
