@@ -113,18 +113,25 @@ class DatatableController extends CI_Controller
 			// get course member
 			$courseMemberCond = array('user_id' => $user_id);
 			$dbResult = $this->BasicQuery->selectAllResult('course_member',$courseMemberCond);
+			$data=array();
 
 			// get detaucourse
 			foreach ($dbResult as $key => $value) {
-				$courseCond = array('id' => $value['course_id']);
-				$dbResult[$key]['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
+				$courseCond = array('id' => $value['course_id'], 'status' => 1);
+				$countCourse = $this->BasicQuery->countAllResult('course',$courseCond);
 
-				// get mentor
-				$userCond = array('id' => $dbResult[$key]['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
-				$dbResult[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+				if ($countCourse != 0) {
+					$data[$key] = $dbResult[$key];
+
+					$data[$key]['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
+
+					// get mentor
+					$userCond = array('id' => $data[$key]['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+					$data[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
+				}
 			}
 			
-			$this->success('berhasil', $dbResult);
+			$this->success('berhasil', $data);
 
 		}else if ($dataReceived['ihateapple'] == 'mycourse_room') {
 
