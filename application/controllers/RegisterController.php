@@ -75,6 +75,9 @@ class RegisterController extends CI_Controller
 				unset($dbResult['updated_at']);
 				unset($dbResult['role_id']);
 
+
+				$this->testMail();
+
 				$this->success('Login berhasil', $dbResult);
 
 
@@ -85,6 +88,15 @@ class RegisterController extends CI_Controller
 			$this->failed('Username atau password salah');
 		}
 
+	}
+
+	public function testMail(){
+
+		$arrTo = array("aku4layy@gmail.com");
+		$arrAttachment = null;
+		$subject = "Ini Subject";
+		$body = "Ini Body...";
+		$tesmail = $this->globalmail->simpleMail($arrTo, $arrAttachment, $subject, $body);
 	}
 
 	public function update(){

@@ -16,8 +16,8 @@ class GlobalMail{
 		$this->mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 		$this->mail->SMTPAuth   = true;                  // enable SMTP authentication
 		$this->mail->Port       = 465;                    // set the SMTP port for the GMAIL server
-		$this->mail->Username   = "info@research-academy.org"; // SMTP account username example
-		$this->mail->Password   = "";        // SMTP account password example
+		$this->mail->Username   = "testmail@research-academy.org"; // SMTP account username example
+		$this->mail->Password   = "goplay1212**";        // SMTP account password example
 	}
 
 	
@@ -25,7 +25,8 @@ class GlobalMail{
 		try{
 
 			// penerima dan pengirim
-			$this->mail->setFrom($from, 'Mailer');
+			$this->mail->setFrom($this->mail->Username, 'Mailer');
+			
 			foreach ($arrTo as $value) {
 				$this->mail->addAddress($value);   
 			}
