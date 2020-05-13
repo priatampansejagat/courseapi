@@ -1,6 +1,6 @@
 <?php
 
-include("./libs/mail/src/PHPMailer.php");
+include("./mail/src/PHPMailer.php");
 class GlobalMail{
 
 	var $CI;
