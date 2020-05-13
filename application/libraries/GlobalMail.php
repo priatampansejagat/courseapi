@@ -32,7 +32,7 @@ class GlobalMail{
 	}
 
 	
-	public function simpleMail($arrTo, $arrAttachment=array(), $subject, $body){
+	public function simpleMail($arrTo, $subject, $body){
 		try{
 
 			// penerima dan pengirim
@@ -41,11 +41,6 @@ class GlobalMail{
 			foreach ($arrTo as $value) {
 				$this->mail->addAddress($value);   
 			}
-
-			foreach ($arrAttachment as $value) {
-				$this->mail->addAttachment($value);
-			}
-
 
 			// content
 			// $this->mail->isHTML(true);                                  // Set email format to HTML
