@@ -26,7 +26,7 @@ class GlobalMail{
 
 			// penerima dan pengirim
 			$this->mail->setFrom($this->mail->Username, 'Mailer');
-			
+
 			foreach ($arrTo as $value) {
 				$this->mail->addAddress($value);   
 			}
@@ -45,7 +45,7 @@ class GlobalMail{
 		    $mail->send();
 
 			return true;
-		}catch{
+		}catch (Exception $e){
 			return false;
 		}
 	}
