@@ -1,6 +1,8 @@
 <?php
 
 // include("./libs/mail/src/PHPMailer.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 class GlobalMail{
 
 	var $CI;
@@ -10,11 +12,11 @@ class GlobalMail{
 		// $this->CI->load->helper(array('path'));
 		// $this->CI->load->file('libs/mail/src/PHPMailer.php');
 
-		// require_once(APPPATH."libraries/mail/src/Exception.php");
-		// require_once(APPPATH."libraries/mail/src/OAuth.php");
+		require_once(APPPATH."libraries/mail/src/Exception.php");
+		require_once(APPPATH."libraries/mail/src/OAuth.php");
 		require_once(APPPATH."libraries/mail/src/PHPMailer.php");
-		// require_once(APPPATH."libraries/mail/src/POP3.php");
-		// require_once(APPPATH."libraries/mail/src/SMTP.php");
+		require_once(APPPATH."libraries/mail/src/POP3.php");
+		require_once(APPPATH."libraries/mail/src/SMTP.php");
 
 		$this->mail = new PHPMailer;
 		// Settings
