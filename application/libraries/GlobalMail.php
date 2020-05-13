@@ -21,7 +21,7 @@ class GlobalMail{
 	}
 
 	
-	public function simpleMail($from, $arrTo, $arrAttachment, $subject, $body){
+	public function simpleMail($arrTo, $arrAttachment, $subject, $body){
 		try{
 
 			// penerima dan pengirim
