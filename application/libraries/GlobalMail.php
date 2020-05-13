@@ -8,7 +8,7 @@ class GlobalMail{
 		$this->CI =& get_instance();
 
 		$this->CI->load->helper(array('path'));
-		$this->CI->load->file('./libs/mail/src/PHPMailer.php');
+		$this->CI->load->file('libs/mail/src/PHPMailer.php');
 
 		$this->mail = new PHPMailer();
 		// Settings
