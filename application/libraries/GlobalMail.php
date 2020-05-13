@@ -18,8 +18,9 @@ class GlobalMail{
 		require_once(APPPATH."libraries/mail/src/POP3.php");
 		require_once(APPPATH."libraries/mail/src/SMTP.php");
 
-		$this->mail = new PHPMailer;
+
 		// Settings
+		$this->mail = new PHPMailer;
 		$this->mail->IsSMTP();
 		$this->mail->CharSet = 'UTF-8';
 
@@ -35,21 +36,20 @@ class GlobalMail{
 	public function simpleMail($arrTo, $subject, $body){
 
 		// penerima dan pengirim
-		$this->mail->setFrom($this->mail->Username, 'Mailer');
+		$this->mail->setFrom($this->mail->Username, 'Research Academy');
 
 		foreach ($arrTo as $value) {
 			$this->mail->addAddress($value);   
 		}
 
 		// content
-		// $this->mail->isHTML(true);                                  // Set email format to HTML
+		$this->mail->isHTML(true);                                  // Set email format to HTML
 	    $this->mail->Subject = $subject;
 	    $this->mail->Body    = $body;
 
 	    // send
 	    if(!$this->mail->send()){
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $this->mail->ErrorInfo;
+            return false;
         }else{
             return true;
         }

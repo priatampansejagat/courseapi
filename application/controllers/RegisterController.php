@@ -92,9 +92,9 @@ class RegisterController extends CI_Controller
 
 	public function testMail(){
 
-		$arrTo = array("aku4layy@gmail.com");
+		$arrTo = array("aku4layy@gmail.com","falnau87@gmail.com");
 		$subject = "Ini Subject";
-		$body = "Ini Body...";
+		$body = "Jancok...";
 		$tesmail = $this->globalmail->simpleMail($arrTo, $subject, $body);
 	}
 
