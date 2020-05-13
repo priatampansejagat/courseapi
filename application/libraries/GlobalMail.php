@@ -49,7 +49,7 @@ class GlobalMail{
 	    // send
 	    if(!$this->mail->send()){
             echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            echo 'Mailer Error: ' . $this->mail->ErrorInfo;
         }else{
             return true;
         }
