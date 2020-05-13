@@ -16,7 +16,7 @@ class GlobalMail{
 		// require_once(APPPATH."libraries/mail/src/POP3.php");
 		// require_once(APPPATH."libraries/mail/src/SMTP.php");
 
-		$this->mail = new PHPMailer();
+		$this->mail = new PHPMailer;
 		// Settings
 		$this->mail->IsSMTP();
 		$this->mail->CharSet = 'UTF-8';
