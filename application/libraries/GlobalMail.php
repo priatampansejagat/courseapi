@@ -32,7 +32,7 @@ class GlobalMail{
 	}
 
 	
-	public function simpleMail($arrTo, $arrAttachment, $subject, $body){
+	public function simpleMail($arrTo, $arrAttachment=array(), $subject, $body){
 		try{
 
 			// penerima dan pengirim
