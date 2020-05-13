@@ -1,12 +1,15 @@
 <?php
 
-include("/mail/src/PHPMailer.php");
+// include("./libs/mail/src/PHPMailer.php");
 class GlobalMail{
 
 	var $CI;
 	public function __construct(){
 		$this->CI =& get_instance();
 
+		$this->load->helper(array('path'));
+		$this->load->file('./libs/mail/src/PHPMailer.php');
+		
 		$this->mail = new PHPMailer();
 		// Settings
 		$this->mail->IsSMTP();
