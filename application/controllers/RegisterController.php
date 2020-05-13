@@ -39,6 +39,13 @@ class RegisterController extends CI_Controller
 																'academic_member' => '#',
 																'profile_picture' => '#'
 											))) {
+
+				// Mailing
+				$arrTo = array($dbResult->data['email']);
+				$subject = "Research Academy : Registration";
+				$body = "Registration Success";
+				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
+
 				echo (json_encode($dbResult));
 			}else{
 				$dbResult->status = 500;
@@ -76,8 +83,6 @@ class RegisterController extends CI_Controller
 				unset($dbResult['role_id']);
 
 
-				$this->testMail();
-
 				$this->success('Login berhasil', $dbResult);
 
 
@@ -92,10 +97,10 @@ class RegisterController extends CI_Controller
 
 	public function testMail(){
 
-		$arrTo = array("aku4layy@gmail.com","falnau87@gmail.com");
+		$arrTo = array("aku4layy@gmail.com");
 		$subject = "Ini Subject";
-		$body = "Jancok...";
-		$tesmail = $this->globalmail->simpleMail($arrTo, $subject, $body);
+		$body = "Message";
+		$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
 	}
 
 	public function update(){
