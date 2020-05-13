@@ -53,7 +53,7 @@ class GlobalMail{
 		    $this->mail->Body    = $body;
 
 		    // send
-		    $mail->send();
+		    $this->mail->send();
 
 			return true;
 		}catch (Exception $e){
