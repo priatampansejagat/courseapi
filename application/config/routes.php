@@ -71,6 +71,7 @@ $route['datatable'] = 'DatatableController/get_data';
 
 // course
 $route['createcourse'] = 'CourseController/create'; 
+$route['updatecourse'] = 'CourseController/update'; 
 $route['deletecourse'] = 'CourseController/delete'; 
 $route['regiscourse'] = 'CourseController/registration'; 
 $route['confirm_register'] = 'CourseController/registration_confirm'; 
@@ -86,6 +87,8 @@ $route['payconfirm_file'] = 'PaymentController/confirm_file';
 
 // Event
 $route['createevent'] = 'EventController/create_event'; 
+$route['updateevent'] = 'EventController/update'; 
+$route['deleteevent'] = 'EventController/delete'; 
 $route['add_course_event'] = 'EventController/add_course_event'; 
 $route['add_cover_event'] = 'EventController/add_cover_event'; 
 $route['delete_cover_event'] = 'EventController/cover_delete'; 

@@ -41,6 +41,20 @@ class CourseController extends CI_Controller
 		
 	}
 
+	public function update(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$id = $dataReceived['id'];
+
+		$dbStat = $this->BasicQuery->update('course','id',$id,$dataReceived);
+
+		if ($dbStat == true) {
+			$this->success("Success",$dataReceived,'true');
+		}else{
+			$this->success("Failed",$dataReceived,'false');
+		}
+	}
+
 	public function delete(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 

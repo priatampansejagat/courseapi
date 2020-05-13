@@ -33,6 +33,53 @@ class EventController extends CI_Controller
 
 	}
 
+	public function update(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$id = $dataReceived['id'];
+
+		$dbStat = $this->BasicQuery->update('event','id',$id,$dataReceived);
+
+		if ($dbStat == true) {
+			$this->success("Success",$dataReceived,'true');
+		}else{
+			$this->success("Failed",$dataReceived,'false');
+		}
+	}
+
+	public function delete(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$event_id = $dataReceived['event_id'];
+
+		// Delete event
+		$stat_delete = $this->BasicQuery->update(
+								'event',
+								'id', 
+								$event_id,
+								array(
+										'status' => DELETED
+								)
+							);
+
+		if ($stat_delete == true) {
+			// Delete event pada bridge
+			$stat_bridge = $this->BasicQuery->delete('bridge_event_course', array('event_id' => $event_id));
+
+			if ($stat_bridge == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
+			}
+			
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+			echo $JSON_return;
+		}
+	}
+
 	public function add_course_event(){
 		$dataReceived = $this->globalfunction->JSON_POST_asArr();
 
