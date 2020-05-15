@@ -44,17 +44,17 @@ class RegisterController extends CI_Controller
 				$arrTo = array($dbResult->data['email']);
 				// $arrTo = array('aku4layy@gmail.com');
 				$subject = "Research Academy : Registration";
-				$body = "<p>Dear <b>".$dbResult->data['fullname']."</b></p><br>".
+				$body = "Dear ".$dbResult->data['fullname']."<br>".
 						"<br><br>".
-						"<p>Thank you for registering at <b>Research-Academy.org.</b> We are very pleased to welcome you to our learning platform.</p><br><br>".
-						"<p>Please note your</p><br>".
-						"<p>Username: ".$dbResult->data["username"]."</p><br>".
-						"<p>Password: ".$dataReceived["password"]."</p><br><br>".
-						"<p>Which you can use as a one key to all events and courses this platform offers.</p><br><br>".
-						"<p>Feel free to explore our events, courses and publications.  </p><br><br>".
-						"<p>If you wish to be one of our <b>research-academy.org</b> instructor, please contact us at <b>info@research-academy.org</b></p><br><br>".
-						"<p>Yours Sincerely,</p><br>".
-						"<p><b>Research-academy.org</b></p>"
+						"Thank you for registering at Research-Academy.org. We are very pleased to welcome you to our learning platform.<br><br>".
+						"Please note your<br>".
+						"Username: ".$dbResult->data["username"]."<br>".
+						"Password: ".$dataReceived["password"]."<br><br>".
+						"Which you can use as a one key to all events and courses this platform offers.<br><br>".
+						"Feel free to explore our events, courses and publications.  <br><br>".
+						"If you wish to be one of our research-academy.org instructor, please contact us at info@research-academy.org<br><br>".
+						"Yours Sincerely,<br>".
+						"Research-academy.org"
 				;
 				// $body = "test2";
 
