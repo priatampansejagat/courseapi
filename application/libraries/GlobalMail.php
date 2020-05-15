@@ -35,7 +35,7 @@ class GlobalMail{
 	
 	public function simpleMail($arrTo, $subject, $body){
 
-		try {
+		// try {
 			// penerima dan pengirim
 			$this->mail->setFrom($this->mail->Username, 'Research Academy');
 
@@ -54,9 +54,9 @@ class GlobalMail{
 	        }else{
 	            return true;
 	        }
-		} catch (Exception $e) {
-			return false;
-		}
+		// } catch (Exception $e) {
+		// 	return false;
+		// }
 		
 
 		
