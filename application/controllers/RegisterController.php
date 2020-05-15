@@ -41,8 +41,8 @@ class RegisterController extends CI_Controller
 											))) {
 
 				// Mailing
-				// $arrTo = array($dbResult->data['email']);
-				$arrTo = array('aku4layy@gmail.com');
+				$arrTo = array($dbResult->data['email']);
+				// $arrTo = array('aku4layy@gmail.com');
 				$subject = "Research Academy : Registration";
 				// $body = "<p>Dear <b>".$dbResult->data['fullname']."</b></p><br>".
 				// 		"<br><br>".
@@ -56,7 +56,7 @@ class RegisterController extends CI_Controller
 				// 		"<p>Yours Sincerely,</p><br>".
 				// 		"<p><b>Research-academy.org</b></p><br><br>"
 				// ;
-				$body = "test";
+				$body = "test2";
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
 
