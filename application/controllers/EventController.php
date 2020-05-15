@@ -245,7 +245,7 @@ class EventController extends CI_Controller
 								"<p>Welcome to ".$event_data['title']." and we hope you may upgrade your research skills.</p><br><br>".
 								"<br>".
 								"<p>Yours Sincerely,</p><br>".
-								"<p><b>Research-academy.org</b></p><br><br>"
+								"<p><b>Research-academy.org</b></p>"
 						;
 
 						$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
@@ -314,7 +314,7 @@ class EventController extends CI_Controller
 </p><br><br>".
 						"<br>".
 						"<p>Yours Sincerely,</p><br>".
-						"<p><b>Research-academy.org</b></p><br><br>"
+						"<p><b>Research-academy.org</b></p>"
 				;
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);

@@ -224,7 +224,7 @@ class CourseController extends CI_Controller
 								"<p>We will notify you once your payment has been verified in order to start the course.</p><br><br>".
 								"<br>".
 								"<p>Yours Sincerely,</p><br>".
-								"<p><b>Research-academy.org</b></p><br><br>"
+								"<p><b>Research-academy.org</b></p>"
 						;
 
 						$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
@@ -293,7 +293,7 @@ class CourseController extends CI_Controller
 </p><br><br>".
 						"<br>".
 						"<p>Yours Sincerely,</p><br>".
-						"<p><b>Research-academy.org</b></p><br><br>"
+						"<p><b>Research-academy.org</b></p>"
 				;
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
