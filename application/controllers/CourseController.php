@@ -219,12 +219,12 @@ class CourseController extends CI_Controller
 						$subject = "Research Academy : Course";
 						$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
 								"<br><br>".
-								"<p>Thank you for registering in the course: ".$course_data['title']." under Research-Academy.org.  </p><br><br>".
+								"<p>Thank you for registering in the course: ".$course_data['title']." under <b>Research Academy.</b>  </p><br><br>".
 								"<p>Please follow the instructions given in the course including the assignments so that you may receive a certificate of completion at the end of the course.</p><br><br>".
 								"<p>We will notify you once your payment has been verified in order to start the course.</p><br><br>".
-								"<br>".
+								"<br><br>".
 								"<p>Yours Sincerely,</p><br>".
-								"<p><b>Research-academy.org</b></p>"
+								"<p><b>Research Academy</b></p>"
 						;
 
 						$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
@@ -288,12 +288,12 @@ class CourseController extends CI_Controller
 				$subject = "Research Academy : Course";
 				$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
 						"<br><br>".
-						"<p>Thank you for registering in the course ".$course_data['title']." under Research-Academy.org. </p><br><br>".
+						"<p>Thank you for registering in the course ".$course_data['title']." under <b>Research Academy.</b> </p><br><br>".
 						"<p>We have verified your payment. You may now proceed to watch our tutorials and complete the assignments. A certificate of completion will be provided once our admin has verified assignments submission.
 </p><br><br>".
-						"<br>".
+						"<br><br>".
 						"<p>Yours Sincerely,</p><br>".
-						"<p><b>Research-academy.org</b></p>"
+						"<p><b>Research Academy</b></p>"
 				;
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);

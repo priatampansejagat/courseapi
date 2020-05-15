@@ -241,11 +241,11 @@ class EventController extends CI_Controller
 						$subject = "Research Academy : Event";
 						$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
 								"<br><br>".
-								"<p>Thank you for registering in the event ".$event_data['title']." under Research-Academy.org. </p><br><br>".
+								"<p>Thank you for registering in the event ".$event_data['title']." under <b>Research Academy.</b> </p><br><br>".
 								"<p>Welcome to ".$event_data['title']." and we hope you may upgrade your research skills.</p><br><br>".
-								"<br>".
+								"<br><br>".
 								"<p>Yours Sincerely,</p><br>".
-								"<p><b>Research-academy.org</b></p>"
+								"<p><b>Research Academy</b></p>"
 						;
 
 						$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
@@ -309,12 +309,12 @@ class EventController extends CI_Controller
 				$subject = "Research Academy : Course";
 				$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
 						"<br><br>".
-						"<p>Thank you for registering in the event ".$event_data['title']." under Research-Academy.org. </p><br><br>".
+						"<p>Thank you for registering in the event ".$event_data['title']." under <b>Research Academy.</b> </p><br><br>".
 						"<p>We have verified your payment. You may now proceed to watch our tutorials and complete the assignments. A certificate of completion will be provided once our admin has verified assignments submission.
 </p><br><br>".
-						"<br>".
+						"<br><br>".
 						"<p>Yours Sincerely,</p><br>".
-						"<p><b>Research-academy.org</b></p>"
+						"<p><b>Research Academy</b></p>"
 				;
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
