@@ -35,24 +35,29 @@ class GlobalMail{
 	
 	public function simpleMail($arrTo, $subject, $body){
 
-		// penerima dan pengirim
-		$this->mail->setFrom($this->mail->Username, 'Research Academy');
+		try {
+			// penerima dan pengirim
+			$this->mail->setFrom($this->mail->Username, 'Research Academy');
 
-		foreach ($arrTo as $value) {
-			$this->mail->addAddress($value);   
+			foreach ($arrTo as $value) {
+				$this->mail->addAddress($value);   
+			}
+
+			// content
+			$this->mail->isHTML(true);                                  // Set email format to HTML
+		    $this->mail->Subject = $subject;
+		    $this->mail->Body    = $body;
+
+		    // send
+		    if(!$this->mail->send()){
+	            return false;
+	        }else{
+	            return true;
+	        }
+		} catch (Exception $e) {
+			return false;
 		}
-
-		// content
-		$this->mail->isHTML(true);                                  // Set email format to HTML
-	    $this->mail->Subject = $subject;
-	    $this->mail->Body    = $body;
-
-	    // send
-	    if(!$this->mail->send()){
-            return false;
-        }else{
-            return true;
-        }
+		
 
 		
 	}
