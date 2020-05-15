@@ -44,12 +44,12 @@ class RegisterController extends CI_Controller
 				$arrTo = array($dbResult->data['email']);
 				// $arrTo = array('aku4layy@gmail.com');
 				$subject = "Research Academy : Registration";
-				$body = "Dear ".$dbResult->data['fullname']."".
+				$body = "Dear ".
 						"".
 						"Thank you for registering at Research-Academy.org. We are very pleased to welcome you to our learning platform.".
 						"Please note your".
-						"Username: ".$dbResult->data["username"]."".
-						"Password: ".$dataReceived["password"]."".
+						"Username: ".
+						"Password: ".
 						"Which you can use as a one key to all events and courses this platform offers.".
 						"Feel free to explore our events, courses and publications.  ".
 						"If you wish to be one of our research-academy.org instructor, please contact us at info@research-academy.org".
