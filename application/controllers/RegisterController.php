@@ -44,18 +44,7 @@ class RegisterController extends CI_Controller
 				$arrTo = array($dbResult->data['email']);
 				// $arrTo = array('aku4layy@gmail.com');
 				$subject = "Research Academy : Registration";
-				$body = "Dear ".
-						"".
-						"Thank you for registering at Research-Academy.org. We are very pleased to welcome you to our learning platform.".
-						"Please note your".
-						"Username: ".
-						"Password: ".
-						"Which you can use as a one key to all events and courses this platform offers.".
-						"Feel free to explore our events, courses and publications.  ".
-						"If you wish to be one of our research-academy.org instructor, please contact us at info@research-academy.org".
-						"Yours Sincerely,".
-						"Research-academy.org"
-				;
+				$body = "Dear ".$dbResult->data['fullname']."<br><br><br>Thank you for registering at Research-Academy.org. We are very pleased to welcome you to our learning platform.<br><br>Please note your<br>Username: ".$dbResult->data["username"]."<br>Password: ".$dataReceived["password"]."<br><br>Which you can use as a one key to all events and courses this platform offers.<br><br>Feel free to explore our events, courses and publications.  <br><br>If you wish to be one of our research-academy.org instructor, please contact us at info@research-academy.org<br><br>Yours Sincerely,<br>Research-academy.org";
 				// $body = "test2";
 
 				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
