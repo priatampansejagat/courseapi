@@ -28,8 +28,8 @@ class GlobalMail{
 		$this->mail->SMTPAuth   = true;                  // enable SMTP authentication
 		$this->mail->SMTPSecure = 'ssl';
 		$this->mail->Port       = 465;                    // set the SMTP port for the GMAIL server
-		$this->mail->Username   = "info@research-academy.org"; // SMTP account username example
-		$this->mail->Password   = "Penelitihandal2024";        // SMTP account password example
+		$this->mail->Username   = "testmail@research-academy.org"; // SMTP account username example
+		$this->mail->Password   = "goplay1212**";        // SMTP account password example
 	}
 
 	
