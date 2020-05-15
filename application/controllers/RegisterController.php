@@ -41,7 +41,8 @@ class RegisterController extends CI_Controller
 											))) {
 
 				// Mailing
-				$arrTo = array($dbResult->data['email']);
+				// $arrTo = array($dbResult->data['email']);
+				$arrTo = array('aku4layy@gmail.com');
 				$subject = "Research Academy : Registration";
 				// $body = "<p>Dear <b>".$dbResult->data['fullname']."</b></p><br>".
 				// 		"<br><br>".
