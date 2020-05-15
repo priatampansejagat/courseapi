@@ -233,6 +233,25 @@ class EventController extends CI_Controller
 												'trans_code'	=> $payment_data['id'],
 												'event'			=> $event_data
 						);
+
+
+
+						// Mailing
+						$arrTo = array($user_data['email']);
+						$subject = "Research Academy : Event";
+						$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
+								"<br><br>".
+								"<p>Thank you for registering in the event ".$event_data['title']." under Research-Academy.org. </p><br><br>".
+								"<p>Welcome to ".$event_data['title']." and we hope you may upgrade your research skills.</p><br><br>".
+								"<br>".
+								"<p>Yours Sincerely,</p><br>".
+								"<p><b>Research-academy.org</b></p><br><br>"
+						;
+
+						$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
+
+
+
 						$JSON_return = $this->globalfunction->return_JSON_success("Success to register",$data_return);
 						echo $JSON_return;
 
@@ -280,6 +299,28 @@ class EventController extends CI_Controller
 			$memberData = $this->BasicQuery->selectAll('event_member',$memberCond);
 
 			if ($this->BasicQuery->update('payment', 'id', $memberData['payment_id'], $update_payment)) {
+
+				// data user and course
+				$user_data = $this->BasicQuery->selectAll('user',array("id" => $memberData['user_id']));
+				$event_data = $this->BasicQuery->selectAll('event',array("id" => $memberData['event_id']));
+				
+				// Mailing
+				$arrTo = array($user_data['email']);
+				$subject = "Research Academy : Course";
+				$body = "<p>Dear <b>".$user_data['fullname']."</b></p><br>".
+						"<br><br>".
+						"<p>Thank you for registering in the course ".$event_data['title']." under Research-Academy.org. </p><br><br>".
+						"<p>We have verified your payment. You may now proceed to watch our tutorials and complete the assignments. A certificate of completion will be provided once our admin has verified assignments submission.
+</p><br><br>".
+						"<br>".
+						"<p>Yours Sincerely,</p><br>".
+						"<p><b>Research-academy.org</b></p><br><br>"
+				;
+
+				$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
+
+
+
 				$JSON_return = $this->globalfunction->return_JSON_success("Success.");
 				echo $JSON_return;
 			}else{
