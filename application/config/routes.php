@@ -66,6 +66,13 @@ $route['regisupdate_text'] = 'RegisterController/update_text';
 
 $route['forgpass'] = 'RegisterController/index'; // lupa password
 
+
+// User
+$route['delete_user'] = 'UserController/delete_user';
+$route['delete_mentor'] = 'UserController/delete_mentor';
+
+
+
 // datatable
 $route['datatable'] = 'DatatableController/get_data'; 
 
@@ -77,6 +84,7 @@ $route['regiscourse'] = 'CourseController/registration';
 $route['confirm_register'] = 'CourseController/registration_confirm'; 
 $route['decline_register'] = 'CourseController/registration_decline'; 
 $route['createchapter'] = 'CourseController/create_chapter'; 
+$route['deletechapter'] = 'CourseController/deletechapter'; 
 $route['createchapter_vid'] = 'CourseController/video_chapter'; 
 $route['cert_upload'] = 'CourseController/cert_upload'; 
 $route['cert_delete'] = 'CourseController/cert_delete'; 

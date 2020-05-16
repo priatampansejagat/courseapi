@@ -25,7 +25,7 @@ class DatatableController extends CI_Controller
 
 		if ($dataReceived['ihateapple'] == 'mentor') {
 
-			$userCond = array('role_id' => AS_MENTOR);
+			$userCond = array('role_id' => AS_MENTOR, 'deleted' => ACTIVE);
 			$dbResult = $this->BasicQuery->selectAllResult('user',$userCond);
 			
 			$this->success('berhasil', $dbResult);
@@ -45,7 +45,16 @@ class DatatableController extends CI_Controller
 		}else if ($dataReceived['ihateapple'] == 'course') {
 
 			$courseCond = array('status' => 1);
+
+			if (isset($dataReceived['role'])) {
+				 if ($dataReceived['role'] == AS_MENTOR){
+					$user_id = $dataReceived['user_id'];
+					$courseCond = array('status' => 1, 'mentor_id' => $user_id);
+				}
+			}
+			
 			$dbResult = $this->BasicQuery->selectAllResult('course',$courseCond);
+			
 
 			foreach ($dbResult as $key => $value) {
 				$userCond = array('id' => $value['mentor_id'],'role_id' => AS_MENTOR);

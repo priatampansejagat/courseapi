@@ -126,6 +126,23 @@ class CourseController extends CI_Controller
 
 	} 
 
+	public function deletechapter(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// Prepare data
+		$chapter_id = $dataReceived['chapter_id'];
+
+		$dbResult = $this->BasicQuery->delete('course_chapter', array('id' => $chapter_id));
+
+		if ($dbResult == true) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Success.",$dataReceived);
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("failed", $dataReceived);
+			echo $JSON_return;
+		}
+	}
+
 	public function video_chapter(){
 		
 		$this->globalfunction->header_CORS();
