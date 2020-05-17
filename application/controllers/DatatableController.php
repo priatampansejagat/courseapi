@@ -52,7 +52,7 @@ class DatatableController extends CI_Controller
 					$courseCond = array('status' => 1, 'mentor_id' => $user_id);
 				}
 			}
-			
+
 			$dbResult = $this->BasicQuery->selectAllResult('course',$courseCond);
 			
 
@@ -406,6 +406,33 @@ class DatatableController extends CI_Controller
 			$dbResult = $this->BasicQuery->selectAll("user_certificate", $cert_cond);
 
 			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'cert_status_ver2') {
+
+			// prepare data
+			$user_id = $dataReceived['user_id'];
+			$event_id = $dataReceived['event_id'];
+			$course_id = $dataReceived['course_id']; 
+
+			// cek
+			$cert_cond = array(	"user_id" => $user_id,
+								"course_id" => $course_id,
+								"event_id" => $event_id
+							);
+			$dbResult = $this->BasicQuery->selectAll("user_certificate", $cert_cond);
+
+			
+
+			if ($dbResult == null) {
+				$this->failed('failed',$dbResult);
+			}else{
+				if ($dbResult['status'] == ACTIVE) {
+					$this->success('success', $dbResult);
+				}else{
+					$this->failed('failed',$dbResult);
+				}
+				
+			}
 
 		}
 
