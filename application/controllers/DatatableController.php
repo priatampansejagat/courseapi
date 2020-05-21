@@ -57,7 +57,7 @@ class DatatableController extends CI_Controller
 			
 
 			foreach ($dbResult as $key => $value) {
-				$userCond = array('id' => $value['mentor_id'],'role_id' => AS_MENTOR);
+				$userCond = array('id' => $value['mentor_id'],'role_id' => AS_MENTOR, 'deleted' => ACTIVE);
 				$dbResult[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 			}
 			
@@ -69,7 +69,7 @@ class DatatableController extends CI_Controller
 			$courseCond = array('id' => $dataReceived['id'], 'status' => 1);
 			$dbResult = $this->BasicQuery->selectAll('course',$courseCond);
 
-			$userCond = array('id' => $dbResult['mentor_id'],'role_id' => AS_MENTOR);
+			$userCond = array('id' => $dbResult['mentor_id'],'role_id' => AS_MENTOR, 'deleted' => ACTIVE);
 			$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 			
 			$userdetailCond = array('id_user' => $dbResult['mentor_id']);
@@ -135,7 +135,7 @@ class DatatableController extends CI_Controller
 					$data[$key]['course_detail'] = $this->BasicQuery->selectAll('course',$courseCond);
 
 					// get mentor
-					$userCond = array('id' => $data[$key]['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+					$userCond = array('id' => $data[$key]['course_detail']['mentor_id'],'role_id' => AS_MENTOR, 'deleted' => ACTIVE);
 					$data[$key]['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 				}
 			}
@@ -176,7 +176,7 @@ class DatatableController extends CI_Controller
 				
 				$dbResult['course_chapter'] = $this->BasicQuery->selectAllResult('course_chapter',$chapterCond);
 
-				$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR);
+				$userCond = array('id' => $dbResult['course_detail']['mentor_id'],'role_id' => AS_MENTOR, 'deleted' => ACTIVE);
 				$dbResult['mentor'] = $this->BasicQuery->selectAll('user',$userCond);
 
 				$this->success('berhasil', $dbResult);
@@ -220,9 +220,9 @@ class DatatableController extends CI_Controller
 				$courseCond = array('id' => $value['course_id']);
 				$dbResult['course_list'][$key] = $this->BasicQuery->selectAll('course',$courseCond);
 
-				$mentorCond = array('id' => $dbResult['course_list'][$key]['mentor_id']);
+				$mentorCond = array('id' => $dbResult['course_list'][$key]['mentor_id'], 'deleted' => ACTIVE);
 				$dbResult['course_list'][$key]['mentor_detail'] = $this->BasicQuery->selectAll('user',$mentorCond);
-
+				
 				$userdetailCond = array('id_user' => $dbResult['course_list'][$key]['mentor_id']);
 				$dbResult['course_list'][$key]['mentor_detail']['additional'] = $this->BasicQuery->selectAll('detail_user',$userdetailCond);
 			}
