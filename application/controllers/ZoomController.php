@@ -25,7 +25,7 @@ class ZoomController extends CI_Controller
 		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		  CURLOPT_CUSTOMREQUEST => "GET",
 		  CURLOPT_HTTPHEADER => array(
-		    "authorization: Bearer 0EnBSIBPyTHM38JAj8mrTWmMXpZ6GUUBjv8Z",
+		    "authorization: Bearer eyJhbGciOiJIUzI1NiJ9",
 		    "content-type: application/json"
 		  ),
 		));
