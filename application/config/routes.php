@@ -117,3 +117,8 @@ $route['cert_enable'] = 'CertificateController/cert_enable';
 $route['cert_disable'] = 'CertificateController/cert_disable'; 
 
 
+// zoom
+$route['zoomtes'] = 'ZoomController/index'; 
+
+
+
