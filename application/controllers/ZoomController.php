@@ -28,7 +28,7 @@ class ZoomController extends CI_Controller
 		            "grant_type" => "authorization_code",
 		            "code" => $_GET['code'],
 		            "redirect_uri" => ZOOM_OAUTH_REDIRECT_URI
-		        ],
+		        ]
 		    ]);
 		 
 		    $token = json_decode($response->getBody()->getContents(), true);
