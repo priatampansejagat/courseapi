@@ -92,6 +92,7 @@ class ZoomController extends CI_Controller
 	        if( 401 == $e->getCode() ) {
 	            $this->refresh_token();
 	            $this->create_meeting();
+	        }    
 	    }
 
 	}
