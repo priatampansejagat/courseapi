@@ -11,7 +11,9 @@ class ZoomController extends CI_Controller
 		parent::__construct();
 		$this->load->helper('url');
 
+		require_once(APPPATH."libraries/guzzle/src/ClientInterface.php");
 		require_once(APPPATH."libraries/guzzle/src/Client.php");
+		require_once(APPPATH."libraries/guzzle/src/ClientTrait.php");
 
 	}
 
