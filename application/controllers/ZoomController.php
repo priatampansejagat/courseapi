@@ -66,7 +66,7 @@ class ZoomController extends CI_Controller
 			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
 			$access_token = $zoomdata['access_token'];
 
-			$url = 'https://zoom.us/v2/users/me/meetings';
+			$url = 'https://zoom.us/v2/users/'.ZOOM_OAUTH_CLIENT_ID.'/meetings';
 			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
 			                "type" => 2,
 			                "start_time" => "2020-05-30T20:00:00",
