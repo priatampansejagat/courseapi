@@ -79,7 +79,7 @@ class ZoomController extends CI_Controller
 			        'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
 			        				"Authorization: Bearer ". $access_token,
 			        'method'  => 'POST',
-			        'content' => http_build_query($data)
+			        'content' => http_build_query(json_encode($data))
 			    )
 			);
 
