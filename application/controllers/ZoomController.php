@@ -22,7 +22,8 @@ class ZoomController extends CI_Controller
 
 		    $options = array(
 			    'http' => array(
-			        'header'  => "Authorization:Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET),
+			        'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
+			        				"Authorization: Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET),
 			        'method'  => 'POST',
 			        'content' => http_build_query($data)
 			    )
@@ -32,7 +33,7 @@ class ZoomController extends CI_Controller
 			$result = file_get_contents($url, true, $context);
 			// $result = file_get_contents('php://input');
 
-			var_dump($fp);
+			var_dump($result);
 
 			
 		    // $token = json_decode($response->getBody()->getContents(), true);
