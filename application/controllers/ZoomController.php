@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-// include('fungsi.php');
+use GuzzleHttp\Client;
 
 class ZoomController extends CI_Controller
 {
@@ -10,35 +10,43 @@ class ZoomController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->helper('url');
+
+		require_once(APPPATH."libraries/guzzle/src/Client.php");
+
 	}
 
 	public function index(){
 
-		$curl = curl_init();
+		try {
+		    $client = new Client(['base_uri' => 'https://zoom.us']);
+		 
+		    $response = $client->request('POST', '/oauth/token', [
+		        "headers" => [
+		            "Authorization" => "Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET)
+		        ],
+		        'form_params' => [
+		            "grant_type" => "authorization_code",
+		            "code" => $_GET['code'],
+		            "redirect_uri" => ZOOM_OAUTH_REDIRECT_URI
+		        ],
+		    ]);
+		 
+		    $token = json_decode($response->getBody()->getContents(), true);
+		 	
+		 	// cek token
+		    $count = $this->BasicQuery->countAllResult('zoom',array());
 
-		curl_setopt_array($curl, array(
-		  CURLOPT_URL => "https://api.zoom.us/v2/users?status=active&page_size=30&page_number=1",
-		  CURLOPT_RETURNTRANSFER => true,
-		  CURLOPT_ENCODING => "",
-		  CURLOPT_MAXREDIRS => 10,
-		  CURLOPT_TIMEOUT => 30,
-		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		  CURLOPT_CUSTOMREQUEST => "GET",
-		  CURLOPT_HTTPHEADER => array(
-		    "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Ikk1eG50aXN6UWF1MDd1amxrR3BhR1EiLCJleHAiOjE1OTA2NjU1MDksImlhdCI6MTU5MDY2MDEwOH0.I6eNRhf6VQTD0Hjtk5-6kjiWD_KP9-5cJZgdVDKAGUQ",
-		    "content-type: application/json"
-		  ),
-		));
+		    if ($count == 0) {
+		    	$dbstat = $this->BasicQuery->insert( 'zoom',$token);
+		    }else{
+		    	$dbstat = $this->BasicQuery->update( 'zoom',
+													'id', 
+													1,
+													$token);
+		    }
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-
-		curl_close($curl);
-
-		if ($err) {
-		  echo "cURL Error #:" . $err;
-		} else {
-		  echo $response;
+		} catch(Exception $e) {
+		    echo $e->getMessage();
 		}
 
 
