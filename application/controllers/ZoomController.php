@@ -11,7 +11,7 @@ class ZoomController extends CI_Controller
 
 	}
 
-	public function index(){
+	public function index(){ //FUNCTION INI BISA JUGA DIKATAKAN LOGIN KARENA MENGAMBIL TOKEN PERTAMA KALI
 
 		try {
 		    $url = 'https://zoom.us/oauth/token';
@@ -32,14 +32,12 @@ class ZoomController extends CI_Controller
 			$context  = stream_context_create($options);
 			$result = file_get_contents($url, true, $context);
 
-			// echo($result);
-
-			
 		    $token = json_decode($result, true);
 		 	
 		 	// cek token
 		    $count = $this->BasicQuery->countAllResult('zoom',array());
 
+		    $dbstat=false;
 		    if ($count == 0) {
 		    	$dbstat = $this->BasicQuery->insert( 'zoom',$token);
 		    }else{
@@ -49,10 +47,100 @@ class ZoomController extends CI_Controller
 													$token);
 		    }
 
+		    if ($dbstat == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
+			}
+
 		} catch(Exception $e) {
 		    echo $e->getMessage();
 		}
+	}
 
+
+	function create_meeting() {
+		try {
+			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+			$access_token = $zoomdata['access_token'];
+
+			$url = 'https://zoom.us/v2/users/me/meetings';
+			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
+			                "type" => 2,
+			                "start_time" => "2020-05-30T20:00:00",
+			                "duration" => "30", // 30 mins
+			                "password" => "162534"
+					        );
+
+			$options = array(
+			    'http' => array(
+			        'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
+			        				"Authorization: Bearer ". $access_token,
+			        'method'  => 'POST',
+			        'content' => http_build_query($data)
+			    )
+			);
+
+			$context  = stream_context_create($options);
+			$result = file_get_contents($url, true, $context);
+
+			echo $result;
+
+		} catch(Exception $e) {
+	        if( 401 == $e->getCode() ) {
+	            $this->refresh_token();
+	            $this->create_meeting();
+	    }
+
+	}
+
+
+	public function refresh_token(){
+		// Get refresh_token
+		$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+		$refresh_token = $zoomdata['refresh_token'];
+
+		// get new token
+		$url = 'https://zoom.us/oauth/token';
+		$data = array( 	"grant_type" => "refresh_token",
+				        "refresh_token" => $refresh_token
+				        );
+		 
+
+	    $options = array(
+		    'http' => array(
+		        'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
+		        				"Authorization: Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET),
+		        'method'  => 'POST',
+		        'content' => http_build_query($data)
+		    )
+		);
+
+		$context  = stream_context_create($options);
+		$result = file_get_contents($url, true, $context);
+
+		$token = json_decode($result, true);
+	 	
+	 	// cek token
+	    $count = $this->BasicQuery->countAllResult('zoom',array());
+
+	    $dbstat=false;
+	    if ($count == 0) {
+	    	$dbstat = $this->BasicQuery->insert( 'zoom',$token);
+	    }else{
+	    	$dbstat = $this->BasicQuery->update( 'zoom',
+												'id', 
+												1,
+												$token);
+	    }
+
+	    if ($dbstat == true) {
+	    	return true;
+	    }else{
+	    	return false;
+	    }
 
 	}
 
