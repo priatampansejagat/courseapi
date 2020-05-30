@@ -76,7 +76,7 @@ class ZoomController extends CI_Controller
 
 			$options = array(
 			    'http' => array(
-			        'header'  => 	"Content-type: multipart/form-data\r\n".
+			        'header'  => 	"Content-type: application/json\r\n".
 			        				"Authorization: Bearer ". base64_encode($access_token),
 			        'method'  => 'POST',
 			        'content' => http_build_query($data)
