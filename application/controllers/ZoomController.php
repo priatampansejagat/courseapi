@@ -30,9 +30,9 @@ class ZoomController extends CI_Controller
 
 			$context  = stream_context_create($options);
 			// $result = file_get_contents($url, false, $context);
+			$result = file_get_contents('php://input');
 
-			var_dump($context) ;
-			// $result;
+			echo $result;
 		    // $token = json_decode($response->getBody()->getContents(), true);
 		 	
 		 	// // cek token
