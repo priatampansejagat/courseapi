@@ -73,13 +73,14 @@ class ZoomController extends CI_Controller
 			                "duration" => "30", // 30 mins
 			                "password" => "162534"
 					        );
+			$json_data = json_encode($data);
 
 			$options = array(
 			    'http' => array(
 			        'header'  => 	"Content-type: application/json\r\n".
 			        				"Authorization: Bearer ". base64_encode($access_token),
 			        'method'  => 'POST',
-			        'content' => http_build_query($data)
+			        'content' => $json_data
 			    )
 			);
 
