@@ -97,7 +97,7 @@ class ZoomController extends CI_Controller
 	}
 
 
-	public function refresh_token(){
+	function refresh_token(){
 		// Get refresh_token
 		$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
 		$refresh_token = $zoomdata['refresh_token'];
