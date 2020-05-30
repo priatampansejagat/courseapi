@@ -14,7 +14,7 @@ class ZoomController extends CI_Controller
 	public function index(){
 
 		try {
-		    $url = 'http://server.com/path/oauth/token';
+		    $url = 'https://zoom.us/oauth/token';
 		    $data = array( 	"grant_type" => "authorization_code",
 				            "code" => $_GET['code'],
 				            "redirect_uri" => ZOOM_OAUTH_REDIRECT_URI);
@@ -32,7 +32,9 @@ class ZoomController extends CI_Controller
 			$result = file_get_contents($url, true, $context);
 			// $result = file_get_contents('php://input');
 
-			var_dump($result);
+			var_dump($fp);
+
+			
 		    // $token = json_decode($response->getBody()->getContents(), true);
 		 	
 		 	// // cek token
