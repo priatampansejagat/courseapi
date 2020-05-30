@@ -30,7 +30,7 @@ class ZoomController extends CI_Controller
 			);
 
 			$context  = stream_context_create($options);
-			$result = file_get_contents($url, true, $context);
+			$result = file_get_contents($url, false, $context);
 
 		    $token = json_decode($result, true);
 		 	
@@ -79,12 +79,12 @@ class ZoomController extends CI_Controller
 			        'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
 			        				"Authorization: Bearer ". $access_token,
 			        'method'  => 'POST',
-			        'content' => http_build_query(json_encode($data))
+			        'content' => http_build_query($data)
 			    )
 			);
 
 			$context  = stream_context_create($options);
-			$result = file_get_contents($url, true, $context);
+			$result = file_get_contents($url, false, $context);
 
 			echo $result;
 
@@ -120,7 +120,7 @@ class ZoomController extends CI_Controller
 		);
 
 		$context  = stream_context_create($options);
-		$result = file_get_contents($url, true, $context);
+		$result = file_get_contents($url, false, $context);
 
 		$token = json_decode($result, true);
 	 	
