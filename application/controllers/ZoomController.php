@@ -65,6 +65,7 @@ class ZoomController extends CI_Controller
 		try {
 			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
 			$access_token = $zoomdata['access_token'];
+			echo json_encode($zoomdata);
 
 			$url = 'https://zoom.us/v2/users/me/meetings';
 			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
