@@ -22,7 +22,7 @@ class ZoomController extends CI_Controller
 
 		    $options = array(
 			    'http' => array(
-			        'header'  => "Authorization" => "Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET),
+			        'header'  => "Authorization:Basic ". base64_encode(ZOOM_OAUTH_CLIENT_ID.':'.ZOOM_OAUTH_CLIENT_SECRET),
 			        'method'  => 'POST',
 			        'content' => http_build_query($data)
 			    )
