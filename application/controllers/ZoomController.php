@@ -32,22 +32,22 @@ class ZoomController extends CI_Controller
 			$context  = stream_context_create($options);
 			$result = file_get_contents($url, true, $context);
 
-			echo($result);
+			// echo($result);
 
 			
-		    // $token = json_decode($response->getBody()->getContents(), true);
+		    $token = json_decode($result, true);
 		 	
-		 	// // cek token
-		  //   $count = $this->BasicQuery->countAllResult('zoom',array());
+		 	// cek token
+		    $count = $this->BasicQuery->countAllResult('zoom',array());
 
-		  //   if ($count == 0) {
-		  //   	$dbstat = $this->BasicQuery->insert( 'zoom',$token);
-		  //   }else{
-		  //   	$dbstat = $this->BasicQuery->update( 'zoom',
-				// 									'id', 
-				// 									1,
-				// 									$token);
-		  //   }
+		    if ($count == 0) {
+		    	$dbstat = $this->BasicQuery->insert( 'zoom',$token);
+		    }else{
+		    	$dbstat = $this->BasicQuery->update( 'zoom',
+													'id', 
+													1,
+													$token);
+		    }
 
 		} catch(Exception $e) {
 		    echo $e->getMessage();
