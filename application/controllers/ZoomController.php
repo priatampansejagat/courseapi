@@ -224,6 +224,7 @@ class ZoomController extends CI_Controller
 	            $this->refresh_token();
 	            $this->create_meeting();
 	        }    
+	        echo $e->getMessage();
 	    }		
 	}
 
