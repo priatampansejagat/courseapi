@@ -118,9 +118,10 @@ $route['cert_disable'] = 'CertificateController/cert_disable';
 
 
 // zoom
-// $route['zoomtes'] = 'ZoomController/index'; 
 $route['zoomoauthtoken'] = 'ZoomController/index'; 
+$route['zoomactivate'] = 'ZoomController/activate_token'; 
 $route['zoomcreatemeeting'] = 'ZoomController/create_meeting'; 
+$route['zoomdeletemeeting'] = 'ZoomController/delete_meeting'; 
 
 
 

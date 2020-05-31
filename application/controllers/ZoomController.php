@@ -60,46 +60,59 @@ class ZoomController extends CI_Controller
 		}
 	}
 
+	function activate_token(){
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://zoom.us/oauth/authorize",
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 30,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "GET",
+			  CURLOPT_POSTFIELDS => array(
+			  								'response_type'	=> 'code',
+			  								'client_id'		=> ZOOM_OAUTH_CLIENT_ID,
+			  								'redirect_uri'  => ZOOM_OAUTH_REDIRECT_URI
+			  								),
+			  CURLOPT_HTTPHEADER => array(
+			    "content-type: application/x-www-form-urlencoded\r\n"
+			  ),
+			));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+	}
 
 	function create_meeting() {
 		try {
+			// prepare data
+			$dataReceived = $this->globalfunction->JSON_POST_asArr();
+			$event_id = null;
+			$course_id = null;
+			$topic = $dataReceived['topic'];
+			$start_time = $dataReceived['start_time'];
+			$duration = $dataReceived['duration'];
+			$password = $dataReceived['password'];
+
+			if (isset($dataReceived['course_id'])) {
+				$course_id = $dataReceived['course_id'];
+			}
+			if (isset($dataReceived['event_id'])){
+				$event_id = $dataReceived['event_id'];
+			}
+
 			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
 			$access_token = $zoomdata['access_token'];
-			// // echo json_encode($zoomdata);
-
-			// $url = 'https://api.zoom.us/v2/users/me/meetings';
-			// $data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
-			//                 "type" => 2,
-			//                 "start_time" => "2020-05-30T20:00:00",
-			//                 "duration" => "30", // 30 mins
-			//                 "password" => "162534"
-			// 		        );
-			// $json_data = json_encode($data);
-
-			// $options = array(
-			//     'http' => array(
-			//         'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
-			//         				"Authorization: Bearer ". base64_encode($access_token),
-			//         'method'  => 'POST',
-			//         'content' => $json_data
-			//     )
-			// );
-
-			// $context  = stream_context_create($options);
-			// $result = file_get_contents($url, false, $context);
-
-			// echo $result;
-
-
-
 
 			$curl = curl_init();
-
-			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
+			$data = array( 	"topic" => $topic,
 			                "type" => 2,
-			                "start_time" => "2020-05-30T20:00:00",
-			                "duration" => "30", // 30 mins
-			                "password" => "162534"
+			                "start_time" => $start_time,
+			                "duration" => $duration, // 30 mins
+			                "password" => $password
 					        );
 
 			$data_json = json_encode($data);
@@ -125,9 +138,35 @@ class ZoomController extends CI_Controller
 			curl_close($curl);
 
 			if ($err) {
-			  echo "cURL Error #:" . $err;
+			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
 			} else {
-			  echo $response;
+				// Simpan data ke DB
+				$data_meeting = array(
+										'id' => 'zoommeeting_'.date('Ymdhisa'),
+										'response'	=> $response,
+										'course_id'	=> $course_id,
+										'event_id'	=> $event_id,
+										'join_url'	=> $response['join_url'],
+										'start_url'	=> $response['start_url'],
+										'topic'	 	=> $topic,
+										'start_time' => $start_time,
+										'duration' 	=> $duration,
+										'password' 	=> $password,
+										'type' 		=> 2,
+										'status'	=> ACTIVE
+
+				);
+				$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data);
+
+				if ($dbstat == true) {
+					$JSON_return = $this->globalfunction->return_JSON_success("Success",$data_meeting);
+					echo $JSON_return;
+				}else{
+					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+					echo $JSON_return;
+				}
+			  	
 			}
 
 
@@ -141,6 +180,69 @@ class ZoomController extends CI_Controller
 	    }
 
 	}
+
+	function delete_meeting(){
+
+		try{
+			$dataReceived = $this->globalfunction->JSON_POST_asArr();
+			$event_id = null;
+			$course_id = null;
+
+			if (isset($dataReceived['course_id'])) {
+				$course_id = $dataReceived['course_id'];
+			}
+			if (isset($dataReceived['event_id'])){
+				$event_id = $dataReceived['event_id'];
+			}
+
+			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+			$access_token = $zoomdata['access_token'];
+
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				  CURLOPT_URL => "https://api.zoom.us/v2/meetings/".$meeting_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "DELETE",
+				  CURLOPT_HTTPHEADER => array(
+				    "authorization: Bearer ".$access_token,
+				    "content-type: application/json"
+				  ),
+				));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
+			} else {
+				$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
+				$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+
+				if ($dbstat == true) {
+					$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+					echo $JSON_return;
+				}else{
+					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+					echo $JSON_return;
+				}
+			}
+		
+		} catch(Exception $e) {
+	        if( 401 == $e->getCode() ) {
+	            $this->refresh_token();
+	            $this->create_meeting();
+	        }    
+	    }		
+	}
+
+
 
 
 	function refresh_token(){
