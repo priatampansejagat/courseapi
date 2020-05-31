@@ -154,9 +154,6 @@ class ZoomController extends CI_Controller
 			  	
 			}
 
-
-
-
 		} catch(Exception $e) {
 	        if( 401 == $e->getCode() ) {
 	            $this->refresh_token();
