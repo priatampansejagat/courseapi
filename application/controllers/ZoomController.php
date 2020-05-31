@@ -48,11 +48,9 @@ class ZoomController extends CI_Controller
 		    }
 
 		    if ($dbstat == true) {
-				$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
-				echo $JSON_return;
+				echo "<script type='text/javascript'> window.close(); </script>";
 			}else{
-				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
-				echo $JSON_return;
+				echo "Failed";
 			}
 
 		} catch(Exception $e) {
@@ -61,49 +59,6 @@ class ZoomController extends CI_Controller
 	}
 
 	function activate_token(){
-		// $curl = curl_init();
-		// curl_setopt_array($curl, array(
-		// 	  CURLOPT_URL => "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI,
-		// 	  CURLOPT_RETURNTRANSFER => true,
-		// 	  CURLOPT_ENCODING => "",
-		// 	  CURLOPT_MAXREDIRS => 10,
-		// 	  CURLOPT_TIMEOUT => 30,
-		// 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		// 	  CURLOPT_CUSTOMREQUEST => "GET",
-		// 	  CURLOPT_HTTPHEADER => array(
-		// 	    "content-type: application/x-www-form-urlencoded\r\n"
-		// 	  )
-		// 	));
-
-		// $response = curl_exec($curl);
-		// $err = curl_error($curl);
-
-		// curl_close($curl);
-		// if ($err) {
-		//   	echo "cURL Error #:" . $err;
-		// } 
-
-
-		// try {
-		//     $url = "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI;
-		//     // $data = array( 	"grant_type" => "authorization_code",
-		// 		  //           "code" => $_GET['code'],
-		// 		  //           "redirect_uri" => ZOOM_OAUTH_REDIRECT_URI);
-		 
-
-		//     $options = array(
-		// 	    'http' => array(
-		// 	        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-		// 	        'method'  => 'GET'
-		// 	    )
-		// 	);
-
-		// 	$context  = stream_context_create($options);
-		// 	$result = file_get_contents($url, false, $context);
-
-		// } catch(Exception $e) {
-		//     echo $e->getMessage();
-		// }	
 
 		// create a new cURL resource
 		$ch = curl_init();
