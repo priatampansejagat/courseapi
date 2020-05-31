@@ -444,9 +444,9 @@ class DatatableController extends CI_Controller
 								"event_id" => $event_id
 							);
 
-			$cout_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
-			if ($cout_zoom == 0) {
-				$this->failed('no data',$dbResult);
+			$count_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
+			if ($count_zoom == 0) {
+				$this->failed('no data',null);
 			}else{
 				$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
 				$this->success('success', $dbResult['join_url']);
@@ -462,9 +462,9 @@ class DatatableController extends CI_Controller
 								"event_id" => $event_id
 							);
 
-			$cout_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
-			if ($cout_zoom == 0) {
-				$this->failed('no data',null);
+			$count_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
+			if ($count_zoom == 0) {
+				$this->success('no data',null);
 			}else{
 				$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
 				$this->success('success', $dbResult);
