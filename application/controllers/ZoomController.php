@@ -71,7 +71,7 @@ class ZoomController extends CI_Controller
 	}
 
 	function create_meeting() {
-		try {
+		// try {
 			// prepare data
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = null;
@@ -157,18 +157,18 @@ class ZoomController extends CI_Controller
 
 
 
-		} catch(Exception $e) {
-	        if( 401 == $e->getCode() ) {
-	            $this->refresh_token();
-	            $this->create_meeting();
-	        }    
-	    }
+		// } catch(Exception $e) {
+	 //        if( 401 == $e->getCode() ) {
+	 //            $this->refresh_token();
+	 //            $this->create_meeting();
+	 //        }    
+	 //    }
 
 	}
 
 	function delete_meeting(){
 
-		// try{
+		try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = null;
 			$course_id = null;
@@ -219,13 +219,13 @@ class ZoomController extends CI_Controller
 				}
 			}
 		
-		// } catch(Exception $e) {
-	 //        if( 401 == $e->getCode() ) {
-	 //            $this->refresh_token();
-	 //            $this->create_meeting();
-	 //        }    
-	 //        echo $e->getMessage();
-	 //    }		
+		} catch(Exception $e) {
+	        if( 401 == $e->getCode() ) {
+	            $this->refresh_token();
+	            $this->create_meeting();
+	        }    
+	        echo $e->getMessage();
+	    }		
 	}
 
 
