@@ -126,13 +126,14 @@ class ZoomController extends CI_Controller
 				echo $JSON_return;
 			} else {
 				// Simpan data ke DB
+				$response_decode = json_decode($response,true);
 				$data_meeting = array(
 										'id' => 'zoommeeting_'.date('Ymdhisa'),
 										'response'	=> $response,
 										'course_id'	=> $course_id,
 										'event_id'	=> $event_id,
-										'join_url'	=> $response['join_url'],
-										'start_url'	=> $response['start_url'],
+										'join_url'	=> $response_decode['join_url'],
+										'start_url'	=> $response_decode['start_url'],
 										'topic'	 	=> $topic,
 										'start_time' => $start_time,
 										'duration' 	=> $duration,
