@@ -95,6 +95,15 @@ class ZoomController extends CI_Controller
 
 			$curl = curl_init();
 
+			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
+			                "type" => 2,
+			                "start_time" => "2020-05-30T20:00:00",
+			                "duration" => "30", // 30 mins
+			                "password" => "162534"
+					        );
+
+			$data_json = json_encode($data);
+
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => "https://api.zoom.us/v2/users/me/meetings",
 			  CURLOPT_RETURNTRANSFER => true,
@@ -103,11 +112,7 @@ class ZoomController extends CI_Controller
 			  CURLOPT_TIMEOUT => 30,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "POST",
-			  CURLOPT_POSTFIELDS => "{	topic:PERCOBAAN ZOOM 13th,
-						                type : 2,
-						                start_time:2020-05-31T20:00:00,
-						                duration:30 ,
-						                password:162534}",
+			  CURLOPT_POSTFIELDS => $data_json,
 			  CURLOPT_HTTPHEADER => array(
 			    "authorization: Bearer ".$access_token,
 			    "content-type: application/json"
