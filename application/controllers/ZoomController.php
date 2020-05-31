@@ -65,30 +65,68 @@ class ZoomController extends CI_Controller
 		try {
 			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
 			$access_token = $zoomdata['access_token'];
-			// echo json_encode($zoomdata);
+			// // echo json_encode($zoomdata);
 
-			$url = 'https://api.zoom.us/v2/users/me/meetings';
-			$data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
-			                "type" => 2,
-			                "start_time" => "2020-05-30T20:00:00",
-			                "duration" => "30", // 30 mins
-			                "password" => "162534"
-					        );
-			$json_data = json_encode($data);
+			// $url = 'https://api.zoom.us/v2/users/me/meetings';
+			// $data = array( 	"topic" => "PERCOBAAN ZOOM 13th",
+			//                 "type" => 2,
+			//                 "start_time" => "2020-05-30T20:00:00",
+			//                 "duration" => "30", // 30 mins
+			//                 "password" => "162534"
+			// 		        );
+			// $json_data = json_encode($data);
 
-			$options = array(
-			    'http' => array(
-			        'header'  => 	"Content-type: application/json\r\n".
-			        				"Authorization: Bearer ". base64_encode($access_token),
-			        'method'  => 'POST',
-			        'content' => $json_data
-			    )
-			);
+			// $options = array(
+			//     'http' => array(
+			//         'header'  => 	"Content-type: application/x-www-form-urlencoded\r\n".
+			//         				"Authorization: Bearer ". base64_encode($access_token),
+			//         'method'  => 'POST',
+			//         'content' => $json_data
+			//     )
+			// );
 
-			$context  = stream_context_create($options);
-			$result = file_get_contents($url, false, $context);
+			// $context  = stream_context_create($options);
+			// $result = file_get_contents($url, false, $context);
 
-			echo $result;
+			// echo $result;
+
+
+
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://api.zoom.us/v2/users/me/meetings",
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 30,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "POST",
+			  CURLOPT_POSTFIELDS => "{	topic:PERCOBAAN ZOOM 13th,
+						                type : 2,
+						                start_time:2020-05-31T20:00:00,
+						                duration:30 ,
+						                password:162534}",
+			  CURLOPT_HTTPHEADER => array(
+			    "authorization: Bearer ".$access_token,
+			    "content-type: application/json"
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  echo $response;
+			}
+
+
+
 
 		} catch(Exception $e) {
 	        if( 401 == $e->getCode() ) {
