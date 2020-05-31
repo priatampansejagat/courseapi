@@ -71,7 +71,7 @@ class ZoomController extends CI_Controller
 	}
 
 	function create_meeting() {
-		try {
+		// try {
 			// prepare data
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = null;
@@ -142,7 +142,7 @@ class ZoomController extends CI_Controller
 										'status'	=> ACTIVE
 
 				);
-				$dbstat =true;
+				$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data_meeting);
 
 				if ($dbstat == true) {
 					$JSON_return = $this->globalfunction->return_JSON_success("Success",$data_meeting);
@@ -157,13 +157,13 @@ class ZoomController extends CI_Controller
 
 
 
-		} catch(Exception $e) {
-	        if( 401 == $e->getCode() ) {
-	            $this->refresh_token();
-	            $this->create_meeting();
-	        }    
-	        echo $e->getMessage();
-	    }
+		// } catch(Exception $e) {
+	 //        if( 401 == $e->getCode() ) {
+	 //            $this->refresh_token();
+	 //            $this->create_meeting();
+	 //        }    
+	 //        echo $e->getMessage();
+	 //    }
 
 	}
 
