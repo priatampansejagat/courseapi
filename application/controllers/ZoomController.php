@@ -171,8 +171,8 @@ class ZoomController extends CI_Controller
 
 		try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
-			$event_id = null;
-			$course_id = null;
+			$event_id = '';
+			$course_id = '';
 
 			if (isset($dataReceived['course_id'])) {
 				$course_id = $dataReceived['course_id'];
