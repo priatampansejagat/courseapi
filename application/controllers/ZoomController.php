@@ -74,8 +74,8 @@ class ZoomController extends CI_Controller
 		// try {
 			// prepare data
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
-			$event_id = null;
-			$course_id = null;
+			$event_id = "";
+			$course_id = "";
 			$topic = $dataReceived['topic'];
 			$start_time = $dataReceived['start_time'];
 			$duration = $dataReceived['duration'];
@@ -129,7 +129,7 @@ class ZoomController extends CI_Controller
 				$response_decode = 'tes';
 				$data_meeting = array(
 										'id' => 'zoommeeting_'.date('Ymdhisa'),
-										'response'	=> $response,
+										'response'	=> 'tesss',
 										'course_id'	=> $course_id,
 										'event_id'	=> $event_id,
 										'join_url'	=> 'tes',
