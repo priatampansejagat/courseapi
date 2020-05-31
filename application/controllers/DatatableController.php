@@ -451,6 +451,23 @@ class DatatableController extends CI_Controller
 				$this->success('success', $dbResult['join_url']);
 			}
 
+		}else if ($dataReceived['ihateapple'] == 'zoom_event_alldata') {
+
+			// prepare data
+			$event_id = $dataReceived['event_id'];
+
+			// cek
+			$zoom_cond = array(	
+								"event_id" => $event_id
+							);
+			$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
+
+			if ($dbResult == null) {
+				$this->failed('no data',$dbResult);
+			}else{
+				$this->success('success', $dbResult);
+			}
+
 		}
 
 		
