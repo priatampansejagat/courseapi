@@ -61,27 +61,58 @@ class ZoomController extends CI_Controller
 	}
 
 	function activate_token(){
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			  CURLOPT_URL => "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI,
-			  CURLOPT_RETURNTRANSFER => true,
-			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
-			  CURLOPT_TIMEOUT => 30,
-			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			  CURLOPT_CUSTOMREQUEST => "GET",
-			  CURLOPT_HTTPHEADER => array(
-			    "content-type: application/x-www-form-urlencoded\r\n"
-			  )
-			));
+		// $curl = curl_init();
+		// curl_setopt_array($curl, array(
+		// 	  CURLOPT_URL => "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI,
+		// 	  CURLOPT_RETURNTRANSFER => true,
+		// 	  CURLOPT_ENCODING => "",
+		// 	  CURLOPT_MAXREDIRS => 10,
+		// 	  CURLOPT_TIMEOUT => 30,
+		// 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		// 	  CURLOPT_CUSTOMREQUEST => "GET",
+		// 	  CURLOPT_HTTPHEADER => array(
+		// 	    "content-type: application/x-www-form-urlencoded\r\n"
+		// 	  )
+		// 	));
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
+		// $response = curl_exec($curl);
+		// $err = curl_error($curl);
 
-		curl_close($curl);
-		if ($err) {
-		  	echo "cURL Error #:" . $err;
-		} 
+		// curl_close($curl);
+		// if ($err) {
+		//   	echo "cURL Error #:" . $err;
+		// } 
+
+
+		// try {
+		//     $url = "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI;
+		//     // $data = array( 	"grant_type" => "authorization_code",
+		// 		  //           "code" => $_GET['code'],
+		// 		  //           "redirect_uri" => ZOOM_OAUTH_REDIRECT_URI);
+		 
+
+		//     $options = array(
+		// 	    'http' => array(
+		// 	        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+		// 	        'method'  => 'GET'
+		// 	    )
+		// 	);
+
+		// 	$context  = stream_context_create($options);
+		// 	$result = file_get_contents($url, false, $context);
+
+		// } catch(Exception $e) {
+		//     echo $e->getMessage();
+		// }	
+
+		// create a new cURL resource
+		$ch = curl_init();
+
+		// set URL and other appropriate options
+		curl_setopt($ch, CURLOPT_URL, "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_exec($ch);
+		curl_close($ch);
 	}
 
 	function create_meeting() {
