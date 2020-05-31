@@ -63,21 +63,16 @@ class ZoomController extends CI_Controller
 	function activate_token(){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			  CURLOPT_URL => "https://zoom.us/oauth/authorize",
+			  CURLOPT_URL => "https://zoom.us/oauth/authorize?response_type=code&client_id=".ZOOM_OAUTH_CLIENT_ID."&redirect_uri=".ZOOM_OAUTH_REDIRECT_URI,
 			  CURLOPT_RETURNTRANSFER => true,
 			  CURLOPT_ENCODING => "",
 			  CURLOPT_MAXREDIRS => 10,
 			  CURLOPT_TIMEOUT => 30,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => "GET",
-			  CURLOPT_POSTFIELDS => array(
-			  								'response_type'	=> 'code',
-			  								'client_id'		=> ZOOM_OAUTH_CLIENT_ID,
-			  								'redirect_uri'  => ZOOM_OAUTH_REDIRECT_URI
-			  								),
 			  CURLOPT_HTTPHEADER => array(
 			    "content-type: application/x-www-form-urlencoded\r\n"
-			  ),
+			  )
 			));
 
 		$response = curl_exec($curl);
