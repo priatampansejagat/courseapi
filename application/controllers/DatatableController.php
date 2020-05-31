@@ -460,7 +460,7 @@ class DatatableController extends CI_Controller
 			$zoom_cond = array(	
 								"event_id" => $event_id
 							);
-			$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
+			// $dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
 
 			if ($dbResult == null) {
 				$this->failed('no data',null);
