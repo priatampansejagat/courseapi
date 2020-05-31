@@ -445,7 +445,7 @@ class DatatableController extends CI_Controller
 							);
 
 			$cout_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
-			if (cout_zoom == 0) {
+			if ($cout_zoom == 0) {
 				$this->failed('no data',$dbResult);
 			}else{
 				$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
@@ -463,7 +463,7 @@ class DatatableController extends CI_Controller
 							);
 
 			$cout_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
-			if (cout_zoom == 0) {
+			if ($cout_zoom == 0) {
 				$this->failed('no data',null);
 			}else{
 				$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
