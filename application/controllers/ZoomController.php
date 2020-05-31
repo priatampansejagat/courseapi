@@ -141,7 +141,7 @@ class ZoomController extends CI_Controller
 										'status'	=> ACTIVE
 
 				);
-				$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data);
+				$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data_meeting);
 
 				if ($dbstat == true) {
 					$JSON_return = $this->globalfunction->return_JSON_success("Success",$data_meeting);
