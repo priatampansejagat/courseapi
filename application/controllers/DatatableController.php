@@ -446,7 +446,7 @@ class DatatableController extends CI_Controller
 			$dbResult = $this->BasicQuery->selectAll("zoom_meetings", $zoom_cond);
 
 			if ($dbResult == null) {
-				$this->failed('failed',$dbResult);
+				$this->failed('no data',$dbResult);
 			}else{
 				$this->success('success', $dbResult['join_url']);
 			}
