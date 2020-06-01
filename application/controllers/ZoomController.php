@@ -200,12 +200,12 @@ class ZoomController extends CI_Controller
 			$event_id = '';
 			$course_id = '';
 
-			// if (isset($dataReceived['course_id'])) {
-			// 	$course_id = $dataReceived['course_id'];
-			// }
-			// if (isset($dataReceived['event_id'])){
-			// 	$event_id = $dataReceived['event_id'];
-			// }
+			if (isset($dataReceived['course_id'])) {
+				$course_id = $dataReceived['course_id'];
+			}
+			if (isset($dataReceived['event_id'])) {
+				$event_id = $dataReceived['event_id'];
+			}
 
 			// $zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
 			// $response_fromdb = json_decode($zoomdata['response'],true);
