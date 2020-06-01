@@ -233,17 +233,17 @@ class ZoomController extends CI_Controller
 			curl_close($curl);
 
 			if ($err) {
-			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $zoomdata);
 				echo $JSON_return;
 			} else {
 				$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
 				$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
 
 				if ($dbstat == true) {
-					$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+					$JSON_return = $this->globalfunction->return_JSON_success("Success",$zoomdata);
 					echo $JSON_return;
 				}else{
-					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $zoomdata);
 					echo $JSON_return;
 				}
 			}
