@@ -133,7 +133,7 @@ class ZoomController extends CI_Controller
 				$count_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
 
 				$dbstat = false;
-				if (count_zoom == 0) {
+				if ($count_zoom == 0) {
 					// Simpan data ke DB
 					$response_decode = json_decode($response,true);
 					$data_meeting = array(
