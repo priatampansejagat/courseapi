@@ -195,7 +195,7 @@ class ZoomController extends CI_Controller
 
 	function delete_meeting(){
 
-		// try{
+		try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = '';
 			$course_id = '';
@@ -207,36 +207,37 @@ class ZoomController extends CI_Controller
 				$event_id = $dataReceived['event_id'];
 			}
 
+			$token = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+			$access_token = $token['access_token'];
+
 			$zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 	'event_id' => $event_id, 
-																				'course_id' => $course_id ));
-			// $response_fromdb = json_decode($zoomdata['response'],true);
-			$access_token = $zoomdata['access_token'];
-			// $meeting_id = $response_fromdb['id'];
+			$response_fromdb = json_decode($zoomdata['response'],true);
+			$meeting_id = $response_fromdb['id'];
 
-			// $curl = curl_init();
-			// curl_setopt_array($curl, array(
-			// 	  CURLOPT_URL => "https://api.zoom.us/v2/meetings/".$meeting_id,
-			// 	  CURLOPT_RETURNTRANSFER => true,
-			// 	  CURLOPT_ENCODING => "",
-			// 	  CURLOPT_MAXREDIRS => 10,
-			// 	  CURLOPT_TIMEOUT => 30,
-			// 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			// 	  CURLOPT_CUSTOMREQUEST => "DELETE",
-			// 	  CURLOPT_HTTPHEADER => array(
-			// 	    "authorization: Bearer ".$access_token,
-			// 	    "content-type: application/json"
-			// 	  ),
-			// 	));
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				  CURLOPT_URL => "https://api.zoom.us/v2/meetings/".$meeting_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "DELETE",
+				  CURLOPT_HTTPHEADER => array(
+				    "authorization: Bearer ".$access_token,
+				    "content-type: application/json"
+				  ),
+				));
 
-			// $response = curl_exec($curl);
-			// $err = curl_error($curl);
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
 
-			// curl_close($curl);
+			curl_close($curl);
 
 			
-			// $delCond = array('course_id' => $course_id, 'event_id' => $event_id);
-			// $dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
-			$dbstat = true;
+			$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
+			$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+			// $dbstat = true;
 
 			if ($dbstat == true) {
 				$JSON_return = $this->globalfunction->return_JSON_success("Success", $dataReceived);
@@ -246,13 +247,13 @@ class ZoomController extends CI_Controller
 				echo $JSON_return;
 			}
 		
-		// } catch(Exception $e) {
-	 //        if( 401 == $e->getCode() ) {
-	 //            $this->refresh_token();
-	 //            $this->create_meeting();
-	 //        }    
-	 //        echo $e->getMessage();
-	 //    }		
+		} catch(Exception $e) {
+	        if( 401 == $e->getCode() ) {
+	            $this->refresh_token();
+	            $this->create_meeting();
+	        }    
+	        echo $e->getMessage();
+	    }		
 	}
 
 
