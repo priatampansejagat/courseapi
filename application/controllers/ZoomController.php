@@ -125,24 +125,53 @@ class ZoomController extends CI_Controller
 			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
 				echo $JSON_return;
 			} else {
-				// Simpan data ke DB
-				$response_decode = json_decode($response,true);
-				$data_meeting = array(
-										'id' => 'zoommeeting_'.date('Ymdhisa'),
-										'response'	=> $response,
-										'course_id'	=> $course_id,
-										'event_id'	=> $event_id,
-										'join_url'	=> $response_decode['join_url'],
-										'start_url'	=> $response_decode['start_url'],
-										'topic'	 	=> $topic,
-										'start_time' => $start_time,
-										'duration' 	=> $duration,
-										'password' 	=> $password,
-										'type' 		=> 2,
-										'status'	=> ACTIVE
 
-				);
-				$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data_meeting);
+				$zoom_cond = array(	
+								"event_id" => $event_id
+							);
+
+				$count_zoom = $this->BasicQuery->countAllResult('zoom_meetings',$zoom_cond);
+
+				$dbstat = false;
+				if (count_zoom == 0) {
+					// Simpan data ke DB
+					$response_decode = json_decode($response,true);
+					$data_meeting = array(
+											'id' => 'zoommeeting_'.date('Ymdhisa'),
+											'response'	=> $response,
+											'course_id'	=> $course_id,
+											'event_id'	=> $event_id,
+											'join_url'	=> $response_decode['join_url'],
+											'start_url'	=> $response_decode['start_url'],
+											'topic'	 	=> $topic,
+											'start_time' => $start_time,
+											'duration' 	=> $duration,
+											'password' 	=> $password,
+											'type' 		=> 2,
+											'status'	=> ACTIVE
+
+					);
+					$dbstat = $this->BasicQuery->insert( 'zoom_meetings',$data_meeting);
+				}else{
+					// update data 
+					$data_meeting = array(
+											'response'	=> $response,
+											'course_id'	=> $course_id,
+											'event_id'	=> $event_id,
+											'join_url'	=> $response_decode['join_url'],
+											'start_url'	=> $response_decode['start_url'],
+											'topic'	 	=> $topic,
+											'start_time' => $start_time,
+											'duration' 	=> $duration,
+											'password' 	=> $password,
+											'type' 		=> 2,
+											'status'	=> ACTIVE
+
+					);
+					$dbStat = $this->BasicQuery->update('zoom_meetings','event_id',$event_id,$data_meeting);
+				}
+
+				
 
 				if ($dbstat == true) {
 					$JSON_return = $this->globalfunction->return_JSON_success("Success",$data_meeting);
@@ -179,7 +208,9 @@ class ZoomController extends CI_Controller
 			}
 
 			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+			$response_fromdb = json_decode($zoomdata['response'],true);
 			$access_token = $zoomdata['access_token'];
+			$meeting_id = $response_fromdb['id'];
 
 			$curl = curl_init();
 			curl_setopt_array($curl, array(
