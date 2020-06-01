@@ -195,7 +195,7 @@ class ZoomController extends CI_Controller
 
 	function delete_meeting(){
 
-		try{
+		// try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = '';
 			$course_id = '';
@@ -248,13 +248,13 @@ class ZoomController extends CI_Controller
 				echo $JSON_return;
 			}
 		
-		} catch(Exception $e) {
-	        if( 401 == $e->getCode() ) {
-	            $this->refresh_token();
-	            $this->create_meeting();
-	        }    
-	        echo $e->getMessage();
-	    }		
+		// } catch(Exception $e) {
+	 //        if( 401 == $e->getCode() ) {
+	 //            $this->refresh_token();
+	 //            $this->create_meeting();
+	 //        }    
+	 //        echo $e->getMessage();
+	 //    }		
 	}
 
 
