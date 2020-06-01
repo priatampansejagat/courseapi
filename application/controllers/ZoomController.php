@@ -200,17 +200,17 @@ class ZoomController extends CI_Controller
 			$event_id = '';
 			$course_id = '';
 
-			// if (isset($dataReceived['course_id'])) {
-			// 	$course_id = $dataReceived['course_id'];
-			// }
-			// if (isset($dataReceived['event_id'])){
-			// 	$event_id = $dataReceived['event_id'];
-			// }
+			if (isset($dataReceived['course_id'])) {
+				$course_id = $dataReceived['course_id'];
+			}
+			if (isset($dataReceived['event_id'])){
+				$event_id = $dataReceived['event_id'];
+			}
 
-			// $zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
-			// $response_fromdb = json_decode($zoomdata['response'],true);
-			// $access_token = $zoomdata['access_token'];
-			// $meeting_id = $response_fromdb['id'];
+			$zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
+			$response_fromdb = json_decode($zoomdata['response'],true);
+			$access_token = $zoomdata['access_token'];
+			$meeting_id = $response_fromdb['id'];
 
 			// $curl = curl_init();
 			// curl_setopt_array($curl, array(
@@ -232,22 +232,18 @@ class ZoomController extends CI_Controller
 
 			// curl_close($curl);
 
-			// if ($err) {
-			//   	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", 'anjaaay');
-			// 	echo $JSON_return;
-			// } else {
-				// $delCond = array('course_id' => $course_id, 'event_id' => $event_id);
-				// $dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
-				$dbstat = true;
+			
+			// $delCond = array('course_id' => $course_id, 'event_id' => $event_id);
+			// $dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+			$dbstat = true;
 
-				if ($dbstat == true) {
-					$JSON_return = $this->globalfunction->return_JSON_success("Success",'anjaaay');
-					echo $JSON_return;
-				}else{
-					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", 'anjaaay');
-					echo $JSON_return;
-				}
-			// }
+			if ($dbstat == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Success", $zoomdata);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $zoomdata);
+				echo $JSON_return;
+			}
 		
 		// } catch(Exception $e) {
 	 //        if( 401 == $e->getCode() ) {
