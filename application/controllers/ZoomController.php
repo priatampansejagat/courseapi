@@ -195,7 +195,7 @@ class ZoomController extends CI_Controller
 
 	function delete_meeting(){
 
-		// try{
+		try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = '';
 			$course_id = '';
@@ -207,7 +207,7 @@ class ZoomController extends CI_Controller
 				$event_id = $dataReceived['event_id'];
 			}
 
-			$zoomdata = $this->BasicQuery->selectAll('zoom', array( 'id' => 1 ));
+			$zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
 			$response_fromdb = json_decode($zoomdata['response'],true);
 			$access_token = $zoomdata['access_token'];
 			$meeting_id = $response_fromdb['id'];
@@ -232,29 +232,29 @@ class ZoomController extends CI_Controller
 
 			curl_close($curl);
 
-			// if ($err) {
-			//   	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
-			// 	echo $JSON_return;
-			// } else {
-			// 	$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
-			// 	$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+			if ($err) {
+			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+				echo $JSON_return;
+			} else {
+				$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
+				$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
 
-			// 	if ($dbstat == true) {
-			// 		$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
-			// 		echo $JSON_return;
-			// 	}else{
-			// 		$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
-			// 		echo $JSON_return;
-			// 	}
-			// }
+				if ($dbstat == true) {
+					$JSON_return = $this->globalfunction->return_JSON_success("Success",$dataReceived);
+					echo $JSON_return;
+				}else{
+					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
+					echo $JSON_return;
+				}
+			}
 		
-		// } catch(Exception $e) {
-	 //        if( 401 == $e->getCode() ) {
-	 //            $this->refresh_token();
-	 //            $this->create_meeting();
-	 //        }    
-	 //        echo $e->getMessage();
-	 //    }		
+		} catch(Exception $e) {
+	        if( 401 == $e->getCode() ) {
+	            $this->refresh_token();
+	            $this->create_meeting();
+	        }    
+	        echo $e->getMessage();
+	    }		
 	}
 
 
