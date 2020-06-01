@@ -195,7 +195,7 @@ class ZoomController extends CI_Controller
 
 	function delete_meeting(){
 
-		try{
+		// try{
 			$dataReceived = $this->globalfunction->JSON_POST_asArr();
 			$event_id = '';
 			$course_id = '';
@@ -236,8 +236,9 @@ class ZoomController extends CI_Controller
 			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $zoomdata);
 				echo $JSON_return;
 			} else {
-				$delCond = array('course_id' => $course_id, 'event_id' => $event_id);
-				$dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+				// $delCond = array('course_id' => $course_id, 'event_id' => $event_id);
+				// $dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
+				$dbstat = true;
 
 				if ($dbstat == true) {
 					$JSON_return = $this->globalfunction->return_JSON_success("Success",$zoomdata);
@@ -248,13 +249,13 @@ class ZoomController extends CI_Controller
 				}
 			}
 		
-		} catch(Exception $e) {
-	        if( 401 == $e->getCode() ) {
-	            $this->refresh_token();
-	            $this->create_meeting();
-	        }    
-	        echo $e->getMessage();
-	    }		
+		// } catch(Exception $e) {
+	 //        if( 401 == $e->getCode() ) {
+	 //            $this->refresh_token();
+	 //            $this->create_meeting();
+	 //        }    
+	 //        echo $e->getMessage();
+	 //    }		
 	}
 
 
