@@ -211,6 +211,7 @@ class ZoomController extends CI_Controller
 			$access_token = $token['access_token'];
 
 			$zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 	'event_id' => $event_id, 
+																				'course_id' => $course_id ));
 			$response_fromdb = json_decode($zoomdata['response'],true);
 			$meeting_id = $response_fromdb['id'];
 
