@@ -207,30 +207,30 @@ class ZoomController extends CI_Controller
 				$event_id = $dataReceived['event_id'];
 			}
 
-			$zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
-			$response_fromdb = json_decode($zoomdata['response'],true);
-			$access_token = $zoomdata['access_token'];
-			$meeting_id = $response_fromdb['id'];
+			// $zoomdata = $this->BasicQuery->selectAll('zoom_meetings', array( 'event_id' => $event_id, 'course_id' => $course_id ));
+			// $response_fromdb = json_decode($zoomdata['response'],true);
+			// $access_token = $zoomdata['access_token'];
+			// $meeting_id = $response_fromdb['id'];
 
-			$curl = curl_init();
-			curl_setopt_array($curl, array(
-				  CURLOPT_URL => "https://api.zoom.us/v2/meetings/".$meeting_id,
-				  CURLOPT_RETURNTRANSFER => true,
-				  CURLOPT_ENCODING => "",
-				  CURLOPT_MAXREDIRS => 10,
-				  CURLOPT_TIMEOUT => 30,
-				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				  CURLOPT_CUSTOMREQUEST => "DELETE",
-				  CURLOPT_HTTPHEADER => array(
-				    "authorization: Bearer ".$access_token,
-				    "content-type: application/json"
-				  ),
-				));
+			// $curl = curl_init();
+			// curl_setopt_array($curl, array(
+			// 	  CURLOPT_URL => "https://api.zoom.us/v2/meetings/".$meeting_id,
+			// 	  CURLOPT_RETURNTRANSFER => true,
+			// 	  CURLOPT_ENCODING => "",
+			// 	  CURLOPT_MAXREDIRS => 10,
+			// 	  CURLOPT_TIMEOUT => 30,
+			// 	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			// 	  CURLOPT_CUSTOMREQUEST => "DELETE",
+			// 	  CURLOPT_HTTPHEADER => array(
+			// 	    "authorization: Bearer ".$access_token,
+			// 	    "content-type: application/json"
+			// 	  ),
+			// 	));
 
-			$response = curl_exec($curl);
-			$err = curl_error($curl);
+			// $response = curl_exec($curl);
+			// $err = curl_error($curl);
 
-			curl_close($curl);
+			// curl_close($curl);
 
 			if ($err) {
 			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
