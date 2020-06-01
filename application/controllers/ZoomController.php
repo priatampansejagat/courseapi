@@ -232,10 +232,10 @@ class ZoomController extends CI_Controller
 
 			// curl_close($curl);
 
-			if ($err) {
-			  	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", 'anjaaay');
-				echo $JSON_return;
-			} else {
+			// if ($err) {
+			//   	$JSON_return = $this->globalfunction->return_JSON_failed("Failed", 'anjaaay');
+			// 	echo $JSON_return;
+			// } else {
 				// $delCond = array('course_id' => $course_id, 'event_id' => $event_id);
 				// $dbstat = $this->BasicQuery->delete( 'zoom_meetings', $delCond);
 				$dbstat = true;
@@ -247,7 +247,7 @@ class ZoomController extends CI_Controller
 					$JSON_return = $this->globalfunction->return_JSON_failed("Failed", 'anjaaay');
 					echo $JSON_return;
 				}
-			}
+			// }
 		
 		// } catch(Exception $e) {
 	 //        if( 401 == $e->getCode() ) {
