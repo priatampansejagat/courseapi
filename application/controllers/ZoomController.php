@@ -238,10 +238,10 @@ class ZoomController extends CI_Controller
 			$dbstat = true;
 
 			if ($dbstat == true) {
-				$JSON_return = $this->globalfunction->return_JSON_success("Success", $zoomdata);
+				$JSON_return = $this->globalfunction->return_JSON_success("Success", $dataReceived);
 				echo $JSON_return;
 			}else{
-				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $zoomdata);
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed", $dataReceived);
 				echo $JSON_return;
 			}
 		
