@@ -176,7 +176,7 @@ class RegisterController extends CI_Controller
 		$dataUpdate = $dataReceived['data_update'];
 
 		$update_user = false;
-		if ($action = 'biography') {
+		if ($action == 'biography') {
 			$update_user = $this->BasicQuery->update(
 														'detail_user',
 														'id_user',
@@ -185,7 +185,7 @@ class RegisterController extends CI_Controller
 															'biography' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'update_password') {
+		}else if ($action == 'update_password') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -194,7 +194,7 @@ class RegisterController extends CI_Controller
 															'password' => hash('sha3-512' , $dataUpdate)
 														)
 				); 
-		}else if ($action = 'fullname') {
+		}else if ($action == 'fullname') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -203,7 +203,7 @@ class RegisterController extends CI_Controller
 															'fullname' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'place_of_birth') {
+		}else if ($action == 'place_of_birth') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -212,7 +212,7 @@ class RegisterController extends CI_Controller
 															'place_of_birth' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'date_of_birth') {
+		}else if ($action == 'date_of_birth') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -221,7 +221,7 @@ class RegisterController extends CI_Controller
 															'date_of_birth' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'email') {
+		}else if ($action == 'email') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -230,7 +230,7 @@ class RegisterController extends CI_Controller
 															'email' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'institution') {
+		}else if ($action == 'institution') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -239,7 +239,7 @@ class RegisterController extends CI_Controller
 															'institution' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'country') {
+		}else if ($action == 'country') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -248,7 +248,7 @@ class RegisterController extends CI_Controller
 															'country' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'phone_number') {
+		}else if ($action == 'phone_number') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -257,7 +257,7 @@ class RegisterController extends CI_Controller
 															'phone_number' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'profesion') {
+		}else if ($action == 'profesion') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
@@ -266,7 +266,7 @@ class RegisterController extends CI_Controller
 															'profesion' => $dataUpdate
 														)
 				); 
-		}else if ($action = 'major_of_study') {
+		}else if ($action == 'major_of_study') {
 			$update_user = $this->BasicQuery->update(
 														'user',
 														'id',
