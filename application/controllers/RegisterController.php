@@ -185,6 +185,96 @@ class RegisterController extends CI_Controller
 															'biography' => $dataUpdate
 														)
 				); 
+		}else if ($action = 'update_password') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'password' => hash('sha3-512' , $dataUpdate)
+														)
+				); 
+		}else if ($action = 'fullname') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'fullname' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'place_of_birth') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'place_of_birth' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'date_of_birth') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'date_of_birth' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'email') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'email' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'institution') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'institution' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'country') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'country' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'phone_number') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'phone_number' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'profesion') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'profesion' => $dataUpdate
+														)
+				); 
+		}else if ($action = 'major_of_study') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'major_of_study' => $dataUpdate
+														)
+				); 
 		}
 
 		if ($update_user == true) {
@@ -194,6 +284,67 @@ class RegisterController extends CI_Controller
 			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
 			echo $JSON_return;
 		}
+	}
+
+	public function forgot_password(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		// prepare_data
+		$username = $dataReceived['username'];
+
+		// generate new password
+		$password = $this->generateRandomString(5);
+		$hashed_password = hash('sha3-512' , $password);
+
+		// user condition
+		$userCond = array('username' => $username);
+
+		// select user information
+		$userInfo =  $this->BasicQuery->selectAll('user',$userCond);
+
+		if ($userInfo == null) {
+			$JSON_return = $this->globalfunction->return_JSON_failed("Username not found", $dataReceived);
+			echo $JSON_return;
+		}else{
+			// update user password
+			$update_user = $this->BasicQuery->update(
+															'user',
+															'username',
+															$username,
+															array(
+																'password' =>$hashed_password
+															)
+					); 
+
+			// send email
+			// Mailing
+			$arrTo = array($userInfo['email']);
+			$subject = "Research Academy : Forgot Password";
+			$body = "<br><b>Dear ".$userInfo['fullname'].",</b><br><br>You recently requested to reset your password for your <b>Research Academy</b> account. Please, use this new password to access your account and we recommend to change your password immediately after accessing the system.<br><br><br><b>".$password."</b>";
+			
+
+			$mailing = $this->globalmail->simpleMail($arrTo, $subject, $body);
+
+			if ($update_user == true) {
+				$JSON_return = $this->globalfunction->return_JSON_success("Update Success...", $dataReceived);
+				echo $JSON_return;
+			}else{
+				$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
+				echo $JSON_return;
+			}
+		}
+		
+
+	}
+
+	function generateRandomString($length = 10) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
 	}
 
 	public function success($message, $content = null){

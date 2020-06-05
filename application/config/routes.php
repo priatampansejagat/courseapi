@@ -65,6 +65,7 @@ $route['regisupdate'] = 'RegisterController/update';
 $route['regisupdate_text'] = 'RegisterController/update_text'; 
 
 $route['forgpass'] = 'RegisterController/index'; // lupa password
+$route['forgot_password'] = 'RegisterController/forgot_password';
 
 
 // User
