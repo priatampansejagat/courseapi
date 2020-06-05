@@ -113,6 +113,6 @@ define('ZOOM_IM_CHAT_HISTORY', 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCcl9SNndqNVEwdVh
 
 define('ZOOM_OAUTH_CLIENT_ID', 'pewdqWT7SJSIc6oGfYAfOA');
 define('ZOOM_OAUTH_CLIENT_SECRET', 'ogurhDh4dfmZdtdN9HmMlP0Ee5sDxaBv');
-// define('ZOOM_OAUTH_REDIRECT_URI', 'http://temporaryapi.rumahpeneleh.or.id/zoomoauthtoken');
-define('ZOOM_OAUTH_REDIRECT_URI', 'http://api.research-academy.org/zoomoauthtoken');
+define('ZOOM_OAUTH_REDIRECT_URI', 'http://temporaryapi.rumahpeneleh.or.id/zoomoauthtoken');
+// define('ZOOM_OAUTH_REDIRECT_URI', 'http://api.research-academy.org/zoomoauthtoken');
 
