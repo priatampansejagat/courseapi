@@ -285,7 +285,50 @@ class RegisterController extends CI_Controller
 														)
 				); 
 		}
+		else if ($action == 'status') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'status' => $dataUpdate
+														)
+				); 
+		}
 
+
+		if ($update_user == true) {
+			$JSON_return = $this->globalfunction->return_JSON_success("Update Success...", $dataReceived);
+			echo $JSON_return;
+		}else{
+			$JSON_return = $this->globalfunction->return_JSON_failed("Failed to save data", $dataReceived);
+			echo $JSON_return;
+		}
+	}
+
+	public function update_text_ver2(){
+		$dataReceived = $this->globalfunction->JSON_POST_asArr();
+
+		$user_id = $dataReceived['user_id'];
+
+		$update_user = $this->BasicQuery->update(
+													'detail_user',
+													'id_user',
+													$user_id,
+													array(
+														'fullname' => $dataReceived['fullname'],
+														'password' => hash('sha3-512' , $dataReceived['password']),
+														'place_of_birth' => $dataReceived['place_of_birth'],
+														'date_of_birth' => $dataReceived['date_of_birth'],
+														'email' => $dataReceived['email'],
+														'institution' => $dataReceived['institution'],
+														'country' => $dataReceived['country'],
+														'phone_number' => $dataReceived['phone_number'],
+														'profesion' => $dataReceived['profesion'],
+														'major_of_study' => $dataReceived['major_of_study'],
+														'status' => $dataReceived['status']
+													)
+			); 
 
 		if ($update_user == true) {
 			$JSON_return = $this->globalfunction->return_JSON_success("Update Success...", $dataReceived);
