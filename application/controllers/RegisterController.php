@@ -275,7 +275,17 @@ class RegisterController extends CI_Controller
 															'major_of_study' => $dataUpdate
 														)
 				); 
+		}else if ($action == 'password') {
+			$update_user = $this->BasicQuery->update(
+														'user',
+														'id',
+														$user_id,
+														array(
+															'password' => hash('sha3-512' , $dataUpdate)
+														)
+				); 
 		}
+
 
 		if ($update_user == true) {
 			$JSON_return = $this->globalfunction->return_JSON_success("Update Success...", $dataReceived);
