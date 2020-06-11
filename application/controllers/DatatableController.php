@@ -185,6 +185,20 @@ class DatatableController extends CI_Controller
 				$this->failed('User not approved by admin',$dbResult);
 			}
 
+		}else if ($dataReceived['ihateapple'] == 'payment_incomplete_adm') {
+
+			$payCond = array('status' => 0);
+			$dbResult = $this->BasicQuery->selectAllResult('payment',$payCond);
+
+			$this->success('berhasil', $dbResult);
+
+		}else if ($dataReceived['ihateapple'] == 'payment_paid_adm') {
+
+			$payCond = array('status' => 1);
+			$dbResult = $this->BasicQuery->selectAllResult('payment',$payCond);
+
+			$this->success('berhasil', $dbResult);
+
 		}else if ($dataReceived['ihateapple'] == 'payment_unpaid') {
 
 			$payCond = array('status' => 0, 'id_user' => $dataReceived['id_user']);
