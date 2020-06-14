@@ -312,8 +312,8 @@ class RegisterController extends CI_Controller
 		$user_id = $dataReceived['user_id'];
 
 		$update_user = $this->BasicQuery->update(
-													'detail_user',
-													'id_user',
+													'user',
+													'id',
 													$user_id,
 													array(
 														'fullname' => $dataReceived['fullname'],
