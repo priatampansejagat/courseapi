@@ -317,7 +317,6 @@ class RegisterController extends CI_Controller
 													$user_id,
 													array(
 														'fullname' => $dataReceived['fullname'],
-														'password' => hash('sha3-512' , $dataReceived['password']),
 														'place_of_birth' => $dataReceived['place_of_birth'],
 														'date_of_birth' => $dataReceived['date_of_birth'],
 														'email' => $dataReceived['email'],
